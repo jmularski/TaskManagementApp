@@ -1,4 +1,4 @@
-import request from '../lib/api-handler';
+import request from '../helpers/api-handler';
 
 function login({emailText, passwordText}) {
     return request({
