@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Font } from 'expo';
 import { Button } from 'react-native-elements';
 
-export default class Home extends React.Component {
+export default class Entry extends React.Component {
 
   state = {
     fontLoaded: false,
@@ -11,7 +11,7 @@ export default class Home extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'lato-light': require('../../assets/fonts/Lato-Light.ttf'),
+      'lato-light': require('../../../assets/fonts/Lato-Light.ttf'),
     });
 
     this.setState({fontLoaded: true})

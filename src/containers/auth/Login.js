@@ -3,39 +3,25 @@ import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
 import Toast, {DURATION} from 'react-native-easy-toast';
-import AuthService from '../services/auth.service';
+import AuthService from '../../services/auth.service';
 const zxcvbn = require('zxcvbn');
 
-export default class Register extends React.Component {
-
+export default class Login extends React.Component {
+  
   state = {
     emailText: '',
     passwordText: '',
-    repeatPasswordText: '',
     loading: false
   }
 
-  checkPasswordStrength = (passwordText) => {
-    return zxcvbn(passwordText).score > 2; 
-  }
-
-  checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
-    if( passwordText != repeatPasswordText ) return 'Password and repeated password are not the same';
+  checkInputCorrectness = (emailText, passwordText) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!re.test(String(emailText).toLowerCase())) return 'You inserted wrong email';
-    if(!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
-  }
-
-  register = () => {
-    let {emailText, passwordText, repeatPasswordText} = this.state
-    let errors = this.checkInputCorrectness(emailText, passwordText, repeatPasswordText);
-    if (errors) this.refs.toast.show(errors);
-    else this.sendDataToServer(emailText, passwordText);
   }
 
   sendDataToServer = (emailText, passwordText) => {
     this.setState({loading: true});
-    AuthService.register({emailText, passwordText})
+    AuthService.login({emailText, passwordText})
       .then(response => {
         console.log(response);
       })
@@ -44,7 +30,15 @@ export default class Register extends React.Component {
       })
       .finally(() => {
         this.setState({loading: false});
-      })
+        this.props.navigation.navigate('Main');
+      });
+  }
+
+  login = () => {
+    let {emailText, passwordText} = this.state
+    let errors = this.checkInputCorrectness(emailText, passwordText);
+    if (errors) this.refs.toast.show(errors);
+    else this.sendDataToServer(emailText, passwordText)
   }
 
   render() {
@@ -52,7 +46,7 @@ export default class Register extends React.Component {
       <View style={styles.main}>
           <View style={styles.mainContainer}>
             <Image
-            source={require('../../assets/img/login/piggy-bank.png')}
+            source={require('../../../assets/img/login/piggy-bank.png')}
             />
             <Text style={{color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%'}}>Welcome back</Text>
             <Input
@@ -87,26 +81,10 @@ export default class Register extends React.Component {
               onChangeText = {(passwordText) => this.setState({passwordText})}
             />
 
-            <Input
-              placeholder={'Repeat password'}
-              placeholderTextColor = {'#4f4f4f'}
-              leftIcon = {
-                <Icon
-                  name='lock'
-                  size={18}
-                  color='#4f4f4f'
-                />
-              }
-              containerStyle = {[styles.inputContainerStyle, styles.raised]}
-              inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
-              onChangeText = {(repeatPasswordText) => this.setState({repeatPasswordText})}
-            />
-
             <View style={{marginTop: '7%'}}>
               <Button
                   loading = {this.state.loading}
-                  title="Register"
+                  title="Login"
                   titleProps={{fontFamily: 'lato-light'}}
                   ViewComponent={require('expo').LinearGradient}
                   linearGradientProps={{
@@ -120,7 +98,7 @@ export default class Register extends React.Component {
                     paddingTop: 3,
                     paddingBottom: 3,
                   }}
-                  onPress = {() => this.register()}
+                  onPress = {() => this.login()}
               />
             </View>
             <View style={{flex: 1, flexDirection: 'row', marginTop: '3%'}}>
@@ -167,7 +145,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     alignItems: 'center', 
-    paddingTop: '15%',
+    paddingTop: '25%',
     paddingLeft: '5%',
     paddingRight: '5%'
   },
