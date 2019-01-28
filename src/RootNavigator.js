@@ -1,13 +1,11 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import LoginScreen from './containers/Login';
-import HomeScreen from './containers/HomeScreen';
-import RegisterScreen from './containers/Register';
+import AuthNavigator from './containers/auth/AuthNavigator';
+import MainNavigator from "./containers/main/MainNavigator";
 
 const AppNavigator = createStackNavigator({
-  Home: HomeScreen,
-  Login: LoginScreen,
-  Register: RegisterScreen
+  Auth: AuthNavigator,
+  Main: MainNavigator
 }, {
   defaultNavigationOptions: {
     header: null
