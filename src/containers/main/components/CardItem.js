@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: '6%',
     marginLeft: '10%',
-    fontFamily: 'lato-light'
+    //fontFamily: 'lato-light'
   }
 })
