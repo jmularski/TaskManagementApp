@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, Icon } from 'react-native-elements';
-import CardItem from '../components/CardItem';
+import CardItem from './components/CardItem';
 
 export default class Card extends React.Component {
 

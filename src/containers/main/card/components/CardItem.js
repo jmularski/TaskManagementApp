@@ -6,7 +6,7 @@ export default class CardItem extends React.Component {
   render() {
     return (
       <View style = {styles.cardRow} >
-        <Image source = { require("../../../../assets/img/card/card-front.png")} style = { styles.cardImage }/>
+        <Image source = { require("../../../../../assets/img/card/card-front.png")} style = { styles.cardImage }/>
         <Text style = { styles.cardText }>{this.props.type} ●●●● {this.props.number} </Text>
       </View>
     )
