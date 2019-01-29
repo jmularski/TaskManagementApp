@@ -2,7 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from 'react-navigation';
 
-import CardScreen from './Card';
+import CardScreen from './card/CardNavigator';
 import StatisticsScreen from './Statistics';
 import OptionsScreen from './Options';
 
