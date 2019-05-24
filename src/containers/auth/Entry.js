@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Font } from 'expo';
 import { Button } from 'react-native-elements';
 
-export default class Entry extends React.Component {
+import { connect } from "react-redux";
+
+export default class Entry extends Component {
 
   state = {
     fontLoaded: false,

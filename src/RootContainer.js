@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -13,9 +12,8 @@ export const navMiddleware = createReactNavigationReduxMiddleware(
 );
 const App = createReduxContainer(RootNavigator);
 
-
 const mapStateToProps = state => ({
-  nav: state.nav,
+  state: state.nav,
 });
 
 export default connect(mapStateToProps)(App);
