@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-const BASE_URL = 'http://landing.wesale.pl'
+const BASE_URL = 'localhost:3000'
 
 const request = async (options, addAuthHeader = true) => {
     
@@ -15,17 +15,7 @@ const request = async (options, addAuthHeader = true) => {
         headers: { 'Authorization': authHeader }
     });
 
-    const onSuccess = (response) => {
-        return response.data;
-    };
-
-    const onFailure = (error) => {
-        return Promise.reject(error.response || error.message);
-    };
-
     return client(options)
-        .then(onSuccess)
-        .catch(onFailure)
 };
 
 export default request;

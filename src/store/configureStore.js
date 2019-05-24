@@ -5,6 +5,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware  from 'redux-saga';
 
 import { navMiddleware } from '../RootContainer';
+import rootSaga from '../sagas';
 import rootReducer from '../reducers';
 
 export default function configureStore() {
@@ -27,6 +28,7 @@ export default function configureStore() {
     undefined,
     compose(applyMiddleware(...middlewares))
   );
+  sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
     module.hot.accept(() => {
