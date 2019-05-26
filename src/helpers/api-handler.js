@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-const BASE_URL = 'localhost:3000'
+const BASE_URL = 'https://78ab880b.ngrok.io'
 
 const request = async (options, addAuthHeader = true) => {
     

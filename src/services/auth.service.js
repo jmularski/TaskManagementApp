@@ -1,12 +1,13 @@
 import request from '../helpers/api-handler';
 
-function login({emailText, passwordText}) {
+function login({username, password}) {
+    console.log(username, password)
     return request({
-        url: '/user/login',
+        url: '/api-token-auth/',
         method: 'POST',
         data: {
-            'Email': emailText,
-            'Password': passwordText
+            'username': username,
+            'password': password
         }
     }, false);
 };
