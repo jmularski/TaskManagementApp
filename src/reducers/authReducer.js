@@ -2,8 +2,8 @@ import { authActions } from '../types';
 
 const initialState = {
   userData: {
-    id: '',
-    cards: []
+    name: '',
+    token: ''
   }
 };
 
@@ -15,8 +15,8 @@ function userReducer(state = initialState, action) {
         ...state,
         userData: {
           ...state.userData,
-          id: action.payload.id,
-          cards: action.payload.cards
+          name: action.payload.name,
+          token: action.payload.token
         }
       };
     default:

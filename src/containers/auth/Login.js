@@ -84,7 +84,7 @@ class Login extends React.Component {
               }
               containerStyle = {[styles.inputContainerStyle, styles.raised]}
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
+              secureTextEntry = {true}
               onChangeText = {(passwordText) => this.setState({passwordText})}
             />
 
