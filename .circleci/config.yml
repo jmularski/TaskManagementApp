@@ -8,7 +8,6 @@ jobs:
     
     steps:
       - checkout
-      
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
@@ -39,3 +38,29 @@ jobs:
 
       - store_artifacts:
           path: test-results
+
+  publish_app:
+    working_directory: ~/paymentapp
+    docker:
+      image: circleci/node:8
+    steps:
+      - checkout
+      - run: 
+          name: Installing expo-cli
+          command: npm install -g expo-cli
+      - run: 
+          name: Publishing app
+          command: | 
+            expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
+            npm install
+            expo publish
+
+workflows:
+  version: 2
+  builds:
+    jobs:
+      - build
+      - publish_app:
+          filters:
+            branches:
+              only: master
