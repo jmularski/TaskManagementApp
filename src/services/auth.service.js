@@ -1,12 +1,16 @@
 import request from '../helpers/api-handler';
-
+import { APP_SECRET } from 'react-native-dotenv';
 function login({username, password}) {
     return request({
         custom_base_url: APP_URL,
         url: '/oauth/token',
         method: 'POST',
         data: {
+<<<<<<< HEAD
             'client_id': APP_ID,
+=======
+            'client_id': 'XFs8aMbXaOKlV679g2F1gw9vXLuF3MVP',
+>>>>>>> ed32183... feat(env): added env variables config
             'client_secret': APP_SECRET,
             'audience': 'https://bt-pay',
             'grant_type': 'client_credentials'
