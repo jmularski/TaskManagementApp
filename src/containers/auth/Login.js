@@ -2,17 +2,23 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
-import Toast, {DURATION} from 'react-native-easy-toast';
-import AuthService from '../../services/auth.service';
+import { connect } from 'react-redux';
+import { signIn } from '../../actions/authActions';
+import Toast from '../../utils/Toast';
 const zxcvbn = require('zxcvbn');
 
-export default class Login extends React.Component {
+class Login extends React.Component {
   
-  state = {
-    emailText: '',
-    passwordText: '',
-    loading: false
-  }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      emailText: '',
+      passwordText: '',
+      loading: false
+    };
+  };
+  
 
   checkInputCorrectness = (emailText, passwordText) => {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -20,7 +26,8 @@ export default class Login extends React.Component {
   }
 
   sendDataToServer = (emailText, passwordText) => {
-    this.setState({loading: true});
+    this.props.signIn(emailText, passwordText);
+    /* this.setState({loading: true});
     AuthService.login({emailText, passwordText})
       .then(response => {
         console.log(response);
@@ -31,13 +38,13 @@ export default class Login extends React.Component {
       .finally(() => {
         this.setState({loading: false});
         this.props.navigation.navigate('Main');
-      });
+      }); */
   }
 
   login = () => {
     let {emailText, passwordText} = this.state
     let errors = this.checkInputCorrectness(emailText, passwordText);
-    if (errors) this.refs.toast.show(errors);
+    if (errors) Toast(errors);
     else this.sendDataToServer(emailText, passwordText)
   }
 
@@ -77,7 +84,7 @@ export default class Login extends React.Component {
               }
               containerStyle = {[styles.inputContainerStyle, styles.raised]}
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
+              secureTextEntry = {true}
               onChangeText = {(passwordText) => this.setState({passwordText})}
             />
 
@@ -121,21 +128,24 @@ export default class Login extends React.Component {
                   style = {styles.socialIconStyle}
                 />
             </View>
-            <Toast 
-              ref="toast"
-              style={{backgroundColor:'red', bottom: -100, borderRadius: 70}}
-              position='bottom'
-              positionValue={200}
-              fadeInDuration={750}
-              fadeOutDuration={1000}
-              opacity={0.8}
-              textStyle = {{fontSize: 20, color: 'white'}}
-            />
           </View>
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  signIn: (email, password) => dispatch(signIn(email, password)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);
 
 const styles = StyleSheet.create({
   container: {

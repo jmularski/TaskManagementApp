@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
-import Toast, {DURATION} from 'react-native-easy-toast';
+import Toast from '../../utils/Toast';
 import AuthService from '../../services/auth.service';
 const zxcvbn = require('zxcvbn');
 
@@ -29,7 +29,7 @@ export default class Register extends React.Component {
   register = () => {
     let {emailText, passwordText, repeatPasswordText} = this.state
     let errors = this.checkInputCorrectness(emailText, passwordText, repeatPasswordText);
-    if (errors) this.refs.toast.show(errors);
+    if (errors) Toast(errors);
     else this.sendDataToServer(emailText, passwordText);
   }
 
@@ -40,7 +40,7 @@ export default class Register extends React.Component {
         console.log(response);
       })
       .catch(error => {
-        if(error.status == 404 || error.status > 500) this.refs.toast.show("Our server failed to process your request!");
+        if(error.status == 404 || error.status > 500) Toast("Our server failed to process your request!");
       })
       .finally(() => {
         this.setState({loading: false});

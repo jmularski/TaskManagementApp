@@ -15,3 +15,4 @@ const AuthNavigator = createStackNavigator({
 });
 
 export default AuthNavigator;
+

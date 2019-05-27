@@ -1,3 +1,17 @@
-import RootNavigator from './src/RootNavigator';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import configureStore from './src/store/configureStore';
+import RootContainer from './src/RootContainer';
 
-export default RootNavigator;
+const { store, persistor } = configureStore();
+
+const App = () => (
+  <Provider store = {store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <RootContainer />
+    </PersistGate>
+  </Provider>
+);
+
+export default App;
