@@ -6,17 +6,15 @@ import {authSuccess, authFailure} from '../actions/authActions';
 import Toast from '../utils/Toast';
 import { setToMainDrawer } from '../actions/navActions';
 function* signInUser({ payload }) {
-  console.log(payload);
   try {
     const response = yield call(AuthService.login, payload);
-    console.log(response);
     if (response.status === 200) {
-      yield put(authSuccess({name: 'Placeholder', token: response.data.token}));
+      yield put(authSuccess({name: 'Placeholder', token: response.data.access_token}));
     } else {
       yield put(authFailure(response.data));
     }
   } catch(e) {
-    yield put(authFailure(e.response.data.non_field_errors[0]));
+    yield put(authFailure(e.response.data));
   }
 }
 

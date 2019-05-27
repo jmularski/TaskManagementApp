@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from 'react-navigation';
+import { connect } from 'react-redux';
 
 import CardScreen from './card/CardNavigator';
 import StatisticsScreen from './Statistics';
@@ -37,4 +38,11 @@ const MainNavigator = createBottomTabNavigator({
   })
 });
 
-export default MainNavigator;
+const mapStateToProps = state => ({
+  user: state.user,
+  nav: state.nav
+});
+
+export default connect(
+  mapStateToProps,
+)(MainNavigator);
