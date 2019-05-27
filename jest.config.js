@@ -1,5 +1,6 @@
 module.exports = {
   preset: 'jest-expo',
+  testResultsProcessor: "jest-junit",
   transform: {
     '\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
   },
