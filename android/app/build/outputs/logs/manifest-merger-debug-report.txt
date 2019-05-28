@@ -5,6 +5,7 @@ INJECTED from /home/jmularski/react-native/paymentapp/android/app/src/main/Andro
 INJECTED from /home/jmularski/react-native/paymentapp/android/app/src/main/AndroidManifest.xml:1:1-26:12
 INJECTED from /home/jmularski/react-native/paymentapp/android/app/src/main/AndroidManifest.xml:1:1-26:12
 MERGED from /home/jmularski/react-native/paymentapp/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-linear-gradient] /home/jmularski/react-native/paymentapp/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] /home/jmularski/react-native/paymentapp/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-vector-icons] /home/jmularski/react-native/paymentapp/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-awesome-card-io] /home/jmularski/react-native/paymentapp/node_modules/react-native-awesome-card-io/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-24:12
@@ -135,6 +136,8 @@ uses-sdk
 INJECTED from /home/jmularski/react-native/paymentapp/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/jmularski/react-native/paymentapp/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/jmularski/react-native/paymentapp/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-linear-gradient] /home/jmularski/react-native/paymentapp/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-linear-gradient] /home/jmularski/react-native/paymentapp/node_modules/react-native-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/jmularski/react-native/paymentapp/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/jmularski/react-native/paymentapp/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /home/jmularski/react-native/paymentapp/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41

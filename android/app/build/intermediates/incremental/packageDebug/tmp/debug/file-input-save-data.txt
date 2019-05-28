@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue May 28 17:20:48 CEST 2019
+#Tue May 28 19:25:51 CEST 2019
 60.set=NATIVE_RESOURCE
 52.set=NATIVE_RESOURCE
 53.base=/home/jmularski/react-native/paymentapp/android/app/build/intermediates/transforms/mergeJniLibs/debug/0

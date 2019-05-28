@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { signIn } from '../../actions/authActions';
 import Toast from '../../utils/Toast';
@@ -93,6 +94,11 @@ class Login extends React.Component {
                   loading = {this.state.loading}
                   title="Login"
                   titleProps={{fontFamily: 'lato-light'}}
+                  ViewComponent={LinearGradient}
+                  linearGradientProps={{
+                    colors: ['#53F539', '#33ED30'],
+                    start: {x: 0.5, y: 0.5}
+                  }}
                   buttonStyle = {{
                     borderRadius: 20,
                     elevation: 3,

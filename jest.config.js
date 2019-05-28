@@ -2,10 +2,10 @@ module.exports = {
   preset: "react-native",
   testResultsProcessor: "jest-junit",
   transform: {
-    '\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
+    "^.+\\.(js|ts|tsx)$": "babel-jest",
   },
   transformIgnorePatterns: [
-    "<rootDir>/node_modules/(?!((jest-)?react-native|react-clone-referenced-element|react-test-renderer|static-container|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|sentry-expo|native-base))",
+    "<rootDir>/node_modules/(?!((jest-)?react-native|@react-native-community/async-storage|react-clone-referenced-element|react-navigation-redux-helpers|react-test-renderer|static-container|react-navigation|@?react-navigation|react-navigation-redux-helpers|sentry-expo|native-base))",
   ],
   testPathIgnorePatterns: [
     "e2e",
