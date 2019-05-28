@@ -93,11 +93,6 @@ class Login extends React.Component {
                   loading = {this.state.loading}
                   title="Login"
                   titleProps={{fontFamily: 'lato-light'}}
-                  ViewComponent={require('expo').LinearGradient}
-                  linearGradientProps={{
-                    colors: ['#53F539', '#33ED30'],
-                    start: [0.5, 0.5],
-                  }}
                   buttonStyle = {{
                     borderRadius: 20,
                     elevation: 3,

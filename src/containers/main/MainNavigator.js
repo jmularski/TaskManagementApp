@@ -1,5 +1,4 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
@@ -13,7 +12,7 @@ const MainNavigator = createBottomTabNavigator({
   Options: OptionsScreen
 }, {
   defaultNavigationOptions: ({navigation}) => ({
-    tabBarIcon: ({ focused, horizontal, tintColor }) => {
+/*     tabBarIcon: ({ focused, horizontal, tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
       
@@ -30,7 +29,7 @@ const MainNavigator = createBottomTabNavigator({
       }
       
       return <Ionicons name={iconName} size = {25} color = {tintColor} />
-    },
+    }, */
     tabBarOptions: {
       activeTintColor: 'black',
       inactiveTintColor: 'grey'
