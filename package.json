@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
+    "jest": "^24.8.0",
     "jest-junit": "^6.4.0",
     "metro-react-native-babel-preset": "^0.54.1",
     "react-native-dotenv": "^0.2.0",

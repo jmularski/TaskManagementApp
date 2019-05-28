@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import CardScreen from './card/CardNavigator';
 import StatisticsScreen from './Statistics';
@@ -12,7 +13,7 @@ const MainNavigator = createBottomTabNavigator({
   Options: OptionsScreen
 }, {
   defaultNavigationOptions: ({navigation}) => ({
-/*     tabBarIcon: ({ focused, horizontal, tintColor }) => {
+    tabBarIcon: ({ focused, horizontal, tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
       
@@ -28,8 +29,8 @@ const MainNavigator = createBottomTabNavigator({
           break;
       }
       
-      return <Ionicons name={iconName} size = {25} color = {tintColor} />
-    }, */
+      return <Icon name={iconName} size = {25} color = {tintColor} />
+    },
     tabBarOptions: {
       activeTintColor: 'black',
       inactiveTintColor: 'grey'
