@@ -28,18 +28,6 @@ class Login extends React.Component {
 
   sendDataToServer = (emailText, passwordText) => {
     this.props.signIn(emailText, passwordText);
-    /* this.setState({loading: true});
-    AuthService.login({emailText, passwordText})
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        if(error.status == 404 || error.status > 500) this.refs.toast.show("Our server failed to process your request!");
-      })
-      .finally(() => {
-        this.setState({loading: false});
-        this.props.navigation.navigate('Main');
-      }); */
   }
 
   login = () => {

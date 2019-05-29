@@ -2,7 +2,7 @@ import { authActions } from '../types';
 
 export const signIn = (email, password) => ({
   type: authActions.SIGN_IN,
-  payload: { username: email, password }
+  payload: { email, password }
 });
 
 export const signUp = (email, password) => ({

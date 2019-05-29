@@ -1,27 +1,35 @@
 import request from '../helpers/api-handler';
-import { APP_URL, APP_ID, APP_SECRET } from 'react-native-dotenv';
-function login({username, password}) {
-    console.log(APP_URL, APP_ID, APP_SECRET);
+import { APP_URL, APP_ID } from 'react-native-dotenv';
+function login({email, password}) {
+    console.log(APP_URL, APP_ID);
     return request({
-        custom_base_url: APP_URL,
+        custom_base_url: "https://" + APP_URL,
         url: '/oauth/token',
         method: 'POST',
         data: {
-            'client_id': APP_ID,
-            'client_secret': APP_SECRET,
-            'audience': 'https://bt-pay',
-            'grant_type': 'client_credentials'
+            client_id: APP_ID,
+            username: email,
+            password,
+            realm: 'Username-Password-Authentication',
+            audience: 'https://db_test',
+            grant_type: 'password',
+            scope: 'read:sample'
         }
     }, false);
 };
 
-function register({emailText, passwordText}) {
+function register({email, password}) {
+    console.log(APP_URL, APP_ID);
     return request({
-        url: '/user/create',
+        custom_base_url: "https://" + APP_URL,
+        url: '/dbconnections/signup',
         method: 'POST',
         data: {
-            'Email': emailText,
-            'Password': passwordText
+            client_id: APP_ID,
+            email,
+            password,
+            scope: 'read:sample',
+            connection: 'Username-Password-Authentication'
         }
     }, false);
 };

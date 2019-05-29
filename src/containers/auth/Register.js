@@ -3,18 +3,23 @@ import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import { connect } from 'react-redux';
+import { signUp } from '../../actions/authActions';
 import Toast from '../../utils/Toast';
 import AuthService from '../../services/auth.service';
 const zxcvbn = require('zxcvbn');
 
-export default class Register extends React.Component {
+class Register extends React.Component {
 
-  state = {
-    emailText: '',
-    passwordText: '',
-    repeatPasswordText: '',
-    loading: false
-  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      emailText: '',
+      passwordText: '',
+      repeatPasswordText: '',
+      loading: false
+    }
+  };
 
   checkPasswordStrength = (passwordText) => {
     return zxcvbn(passwordText).score > 2; 
@@ -35,18 +40,7 @@ export default class Register extends React.Component {
   }
 
   sendDataToServer = (emailText, passwordText) => {
-    this.setState({loading: true});
-    AuthService.register({emailText, passwordText})
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        if(error.status == 404 || error.status > 500) Toast("Our server failed to process your request!");
-      })
-      .finally(() => {
-        this.setState({loading: false});
-        this.props.navigation.navigate('Main');
-      });
+    this.props.signUp(emailText, passwordText);
   }
 
   render() {
@@ -111,15 +105,9 @@ export default class Register extends React.Component {
                   title="Register"
                   titleProps={{fontFamily: 'lato-light'}}
                   ViewComponent={LinearGradient}
-                  // linearGradientProps={{
-                  //   colors: ['#53F539', '#33ED30'],
-                  //   start: {x: 0.5, y: 0.5},
-                  //   end: {x: 0.0, y: 0.0}
-                  // }}
                   linearGradientProps={{
-                    colors: ["#FF9800", "#F44336"],
-                    start: { x: 0, y: 0.5 },
-                    end: { x: 1, y: 0.5 },
+                    colors: ['#53F539', '#33ED30'],
+                    start: {x: 0.5, y: 0.5},
                   }}
                   buttonStyle = {{
                     borderRadius: 20,
@@ -151,21 +139,24 @@ export default class Register extends React.Component {
                   style = {styles.socialIconStyle}
                 />
             </View>
-            <Toast 
-              ref="toast"
-              style={{backgroundColor:'red', bottom: -100, borderRadius: 70}}
-              position='bottom'
-              positionValue={200}
-              fadeInDuration={750}
-              fadeOutDuration={1000}
-              opacity={0.8}
-              textStyle = {{fontSize: 20, color: 'white'}}
-            />
           </View>
       </View>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  signUp: (email, password) => dispatch(signUp(email, password)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Register);
 
 const styles = StyleSheet.create({
   container: {
