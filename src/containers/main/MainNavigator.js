@@ -1,7 +1,7 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import CardScreen from './card/CardNavigator';
 import StatisticsScreen from './Statistics';
@@ -29,7 +29,7 @@ const MainNavigator = createBottomTabNavigator({
           break;
       }
       
-      return <Ionicons name={iconName} size = {25} color = {tintColor} />
+      return <Icon name={iconName} size = {25} color = {tintColor} />
     },
     tabBarOptions: {
       activeTintColor: 'black',

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 import Toast from '../../utils/Toast';
 import AuthService from '../../services/auth.service';
 const zxcvbn = require('zxcvbn');
@@ -109,10 +110,16 @@ export default class Register extends React.Component {
                   loading = {this.state.loading}
                   title="Register"
                   titleProps={{fontFamily: 'lato-light'}}
-                  ViewComponent={require('expo').LinearGradient}
+                  ViewComponent={LinearGradient}
+                  // linearGradientProps={{
+                  //   colors: ['#53F539', '#33ED30'],
+                  //   start: {x: 0.5, y: 0.5},
+                  //   end: {x: 0.0, y: 0.0}
+                  // }}
                   linearGradientProps={{
-                    colors: ['#53F539', '#33ED30'],
-                    start: [0.5, 0.5],
+                    colors: ["#FF9800", "#F44336"],
+                    start: { x: 0, y: 0.5 },
+                    end: { x: 1, y: 0.5 },
                   }}
                   buttonStyle = {{
                     borderRadius: 20,

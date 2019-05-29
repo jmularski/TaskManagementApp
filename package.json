@@ -1,23 +1,23 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.4.2",
     "axios": "^0.18.0",
-    "expo": "^31.0.2",
-    "expokit": "^31.0.2",
     "react": "16.5.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native": "^0.59.8",
     "react-native-awesome-card-io": "^0.8.1",
     "react-native-credit-card": "^0.1.9",
     "react-native-elements": "1.0.0-beta5",
+    "react-native-gesture-handler": "^1.2.1",
+    "react-native-linear-gradient": "^2.5.4",
     "react-native-redux-toast": "^1.0.3",
     "react-native-root-toast": "^3.0.2",
+    "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.0.9",
     "react-navigation-redux-helpers": "^3.0.2",
     "react-redux": "6.0.0",
@@ -28,12 +28,19 @@
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "babel-jest": "^24.8.0",
     "babel-preset-expo": "^5.0.0",
-    "jest-expo": "^32.0.1",
+    "jest": "^24.8.0",
     "jest-junit": "^6.4.0",
     "metro-react-native-babel-preset": "^0.54.1",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "^16.8.6"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
   },
   "private": true
 }

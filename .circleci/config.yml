@@ -39,28 +39,9 @@ jobs:
       - store_artifacts:
           path: test-results
 
-  publish_app:
-    working_directory: ~/paymentapp
-    docker:
-      - image: circleci/node:8
-    steps:
-      - checkout
-      - run: 
-          name: Installing expo-cli
-          command: sudo npm install -g --unsafe-perm expo-cli
-      - run: 
-          name: Publishing app
-          command: | 
-            expo login -u $EXPO_USERNAME -p $EXPO_PASSWORD --non-interactive
-            npm install
-            expo publish --non-interactive
 
 workflows:
   version: 2
   builds:
     jobs:
       - build
-      - publish_app:
-          filters:
-            branches:
-              only: master

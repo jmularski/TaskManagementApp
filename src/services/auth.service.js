@@ -1,6 +1,7 @@
 import request from '../helpers/api-handler';
 import { APP_URL, APP_ID, APP_SECRET } from 'react-native-dotenv';
 function login({username, password}) {
+    console.log(APP_URL, APP_ID, APP_SECRET);
     return request({
         custom_base_url: APP_URL,
         url: '/oauth/token',

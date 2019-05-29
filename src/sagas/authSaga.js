@@ -8,13 +8,14 @@ import { setToMainDrawer } from '../actions/navActions';
 function* signInUser({ payload }) {
   try {
     const response = yield call(AuthService.login, payload);
+    console.log(response);
     if (response.status === 200) {
       yield put(authSuccess({name: 'Placeholder', token: response.data.access_token}));
     } else {
       yield put(authFailure(response.data));
     }
   } catch(e) {
-    yield put(authFailure(e.response.data));
+    yield put(authFailure(e.message));
   }
 }
 
