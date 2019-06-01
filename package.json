@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.4.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "react": "16.5.0",
     "react-native": "^0.59.8",
     "react-native-awesome-card-io": "^0.8.1",
