@@ -26,6 +26,7 @@ class Register extends React.Component {
   }
 
   checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
+    if (emailText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
     if( passwordText != repeatPasswordText ) return 'Password and repeated password are not the same';
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!re.test(String(emailText).toLowerCase())) return 'You inserted wrong email';

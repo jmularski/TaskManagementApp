@@ -15,6 +15,9 @@ function* signInUser({ payload }) {
       yield put(authFailure(response.data));
     }
   } catch(e) {
+    if(e.message.includes('403')) {
+      yield put(authFailure('You have inserted wrong email or password.'));
+    }
     yield put(authFailure(e.message));
   }
 }
