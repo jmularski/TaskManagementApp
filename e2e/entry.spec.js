@@ -3,7 +3,7 @@ import {
 } from 'detox';
 
 describe('Entry', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await device.reloadReactNative();
   });
 
@@ -17,15 +17,18 @@ describe('Entry', () => {
   });
   
   describe('Usage', () => {
+    beforeEach(async () => {
+      await device.reloadReactNative();
+    });
     it('sign in button should lead to Login page', async () => {
       await element(by.id('signInButton')).tap();
-      await waitFor(element(by.id('LoginView'))).toBeVisible().withTimeout(20000);
-      await expect(element(by.id('LoginView'))).toBeVisible();
+      await waitFor(element(by.text('Login'))).toBeVisible().withTimeout(20000);
+      await expect(element(by.text('Login'))).toBeVisible();
     });
     it('sign up button should lead to Register page', async () => {
       await element(by.id('signUpButton')).tap();
-      await waitFor(element(by.id('RegisterView'))).toBeVisible().withTimeout(20000);
-      await expect(element(by.id('RegisterView'))).toBeVisible();
+      await waitFor(element(by.text('Register'))).toBeVisible().withTimeout(20000);
+      await expect(element(by.text('Register'))).toBeVisible();
     });
   });
   
