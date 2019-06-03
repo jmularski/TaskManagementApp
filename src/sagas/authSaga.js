@@ -15,7 +15,7 @@ function* signInUser({ payload }) {
       yield put(authFailure(response.data));
     }
   } catch(e) {
-    yield put(authFailure(e.message));
+    yield put(authFailure(e.response.data.error_description));
   }
 }
 
@@ -28,7 +28,7 @@ function* signUpUser({ payload }) {
       yield put(authFailure(response.status));
     }
   } catch(e) {
-    yield put(authFailure(e.message));
+    yield put(authFailure(e.response.data.description));
   }
 }
 

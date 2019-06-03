@@ -26,9 +26,10 @@ class Register extends React.Component {
   }
 
   checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
+    if (emailText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
     if( passwordText != repeatPasswordText ) return 'Password and repeated password are not the same';
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!re.test(String(emailText).toLowerCase())) return 'You inserted wrong email';
+    if(!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
     if(!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
   }
 
@@ -49,8 +50,13 @@ class Register extends React.Component {
           <View style={styles.mainContainer}>
             <Image
             source={require('../../../assets/img/login/piggy-bank.png')}
+            testID="registerImage"
             />
-            <Text style={{color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%'}}>Welcome back</Text>
+            <Text
+              testID="registerText"
+              style={{color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%'}} >
+              Welcome back
+            </Text>
             <Input
               placeholder='Email'
               placeholderTextColor = {'#4f4f4f'}
@@ -63,8 +69,8 @@ class Register extends React.Component {
               }
               containerStyle = {[styles.inputContainerStyle, styles.raised]}
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
               onChangeText = {(emailText) => this.setState({emailText})}
+              testID="registerEmailInput"
             />
 
             <Input
@@ -79,8 +85,8 @@ class Register extends React.Component {
               }
               containerStyle = {[styles.inputContainerStyle, styles.raised]}
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
               onChangeText = {(passwordText) => this.setState({passwordText})}
+              testID="registerPasswordInput"
             />
 
             <Input
@@ -95,8 +101,8 @@ class Register extends React.Component {
               }
               containerStyle = {[styles.inputContainerStyle, styles.raised]}
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
               onChangeText = {(repeatPasswordText) => this.setState({repeatPasswordText})}
+              testID="registerRepeatPasswordInput"
             />
 
             <View style={{marginTop: '7%'}}>
@@ -117,6 +123,7 @@ class Register extends React.Component {
                     paddingBottom: 3,
                   }}
                   onPress = {() => this.register()}
+                  testID="registerButton"
               />
             </View>
             <View style={{flex: 1, flexDirection: 'row', marginTop: '3%'}}>
@@ -125,18 +132,21 @@ class Register extends React.Component {
                   light
                   type="facebook"
                   style = {[styles.socialIconStyle, { marginRight: 40}]}
+                  testID="registerFacebookButton"
                 />
                 <SocialIcon
                   button
                   light
                   type="google-plus-official"
                   style = {[styles.socialIconStyle, { marginRight: 40}]}
+                  testID="registerGoogleButton"
                 />
                 <SocialIcon
                   button
                   light
                   type="twitter"
                   style = {styles.socialIconStyle}
+                  testID="registerTwitterButton"
                 />
             </View>
           </View>

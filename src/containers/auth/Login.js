@@ -22,8 +22,9 @@ class Login extends React.Component {
   
 
   checkInputCorrectness = (emailText, passwordText) => {
+    if (emailText === '' || passwordText === '') return 'You have to fill up all fields.';
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!re.test(String(emailText).toLowerCase())) return 'You inserted wrong email';
+    if(!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
   }
 
   sendDataToServer = (emailText, passwordText) => {
@@ -31,7 +32,7 @@ class Login extends React.Component {
   }
 
   login = () => {
-    let {emailText, passwordText} = this.state
+    let {emailText, passwordText} = this.state;
     let errors = this.checkInputCorrectness(emailText, passwordText);
     if (errors) Toast(errors);
     else this.sendDataToServer(emailText, passwordText)
@@ -43,8 +44,13 @@ class Login extends React.Component {
           <View style={styles.mainContainer}>
             <Image
             source={require('../../../assets/img/login/piggy-bank.png')}
+            testID="loginImage"
             />
-            <Text style={{color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%'}}>Welcome back</Text>
+            <Text 
+              testID="loginText"
+              style={{color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%'}} >
+              Welcome back
+            </Text>
             <Input
               placeholder='Email'
               placeholderTextColor = {'#4f4f4f'}
@@ -57,8 +63,8 @@ class Login extends React.Component {
               }
               containerStyle = {[styles.inputContainerStyle, styles.raised]}
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-            
               onChangeText = {(emailText) => this.setState({emailText})}
+              testID="loginEmailInput"
             />
 
             <Input
@@ -75,26 +81,28 @@ class Login extends React.Component {
               inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
               secureTextEntry = {true}
               onChangeText = {(passwordText) => this.setState({passwordText})}
+              testID="loginPasswordInput"
             />
 
             <View style={{marginTop: '7%'}}>
               <Button
-                  loading = {this.state.loading}
-                  title="Login"
-                  titleProps={{fontFamily: 'lato-light'}}
-                  ViewComponent={LinearGradient}
-                  linearGradientProps={{
-                    colors: ['#53F539', '#33ED30'],
-                    start: {x: 0.5, y: 0.5}
-                  }}
-                  buttonStyle = {{
-                    borderRadius: 20,
-                    elevation: 3,
-                    width: 330,
-                    paddingTop: 3,
-                    paddingBottom: 3,
-                  }}
-                  onPress = {() => this.login()}
+                loading = {this.state.loading}
+                title="Login"
+                titleProps={{fontFamily: 'lato-light'}}
+                ViewComponent={LinearGradient}
+                linearGradientProps={{
+                  colors: ['#53F539', '#33ED30'],
+                  start: {x: 0.5, y: 0.5}
+                }}
+                buttonStyle = {{
+                  borderRadius: 20,
+                  elevation: 3,
+                  width: 330,
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                }}
+                onPress = {() => this.login()}
+                testID="loginButton"
               />
             </View>
             <View style={{flex: 1, flexDirection: 'row', marginTop: '3%'}}>
@@ -103,18 +111,21 @@ class Login extends React.Component {
                   light
                   type="facebook"
                   style = {[styles.socialIconStyle, { marginRight: 40}]}
+                  testID="loginFacebookButton"
                 />
                 <SocialIcon
                   button
                   light
                   type="google-plus-official"
                   style = {[styles.socialIconStyle, { marginRight: 40}]}
+                  testID="loginGoogleButton"
                 />
                 <SocialIcon
                   button
                   light
                   type="twitter"
                   style = {styles.socialIconStyle}
+                  testID="loginTwitterButton"
                 />
             </View>
           </View>

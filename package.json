@@ -31,9 +31,11 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "babel-jest": "^24.8.0",
     "babel-preset-expo": "^5.0.0",
+    "detox": "^12.10.2",
     "jest": "^24.8.0",
     "jest-junit": "^6.4.0",
     "metro-react-native-babel-preset": "^0.54.1",
+    "randomstring": "^1.1.5",
     "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "^16.8.6"
   },
@@ -41,6 +43,23 @@
     "assets": [
       "./assets/fonts"
     ]
+  },
+  "detox": {
+    "configurations": {
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "name": "Pixel_2_API_28"
+      },
+      "android.emu.release": {
+        "binaryPath": "./android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "type": "android.emulator",
+        "name": "emulator"
+      }
+    },
+    "test-runner": "jest"
   },
   "private": true
 }

@@ -15,7 +15,7 @@ export default class Card extends React.Component {
   
   render() {
     return (
-      <View style = { styles.mainContainer } >
+      <View style = { styles.mainContainer }>
         <View style = { styles.cardContainer} >
           {/*<Text style={{color: '#232323', fontFamily: 'lato-light', fontSize: 25, alignSelf: 'center' }}>Cards</Text>*/}
           
