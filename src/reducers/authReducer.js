@@ -3,8 +3,8 @@ import { authActions } from '../types';
 const initialState = {
   userData: {
     name: '',
-    token: ''
-  }
+    token: '',
+  },
 };
 
 
@@ -16,8 +16,8 @@ function userReducer(state = initialState, action) {
         userData: {
           ...state.userData,
           name: action.payload.name,
-          token: action.payload.token
-        }
+          token: action.payload.token,
+        },
       };
     default:
       return state;

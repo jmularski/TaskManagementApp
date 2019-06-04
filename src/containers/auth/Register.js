@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
+import {
+  StyleSheet, Text, View, Image, Platform,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, SocialIcon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,35 +9,33 @@ import { connect } from 'react-redux';
 import { signUp } from '../../actions/authActions';
 import Toast from '../../utils/Toast';
 import AuthService from '../../services/auth.service';
+
 const zxcvbn = require('zxcvbn');
 
 class Register extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       emailText: '',
       passwordText: '',
       repeatPasswordText: '',
-      loading: false
-    }
-  };
-
-  checkPasswordStrength = (passwordText) => {
-    return zxcvbn(passwordText).score > 2; 
+      loading: false,
+    };
   }
+
+  checkPasswordStrength = passwordText => zxcvbn(passwordText).score > 2
 
   checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
     if (emailText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
-    if( passwordText != repeatPasswordText ) return 'Password and repeated password are not the same';
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if(!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
-    if(!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
+    if (passwordText != repeatPasswordText) return 'Password and repeated password are not the same';
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
+    if (!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
   }
 
   register = () => {
-    let {emailText, passwordText, repeatPasswordText} = this.state
-    let errors = this.checkInputCorrectness(emailText, passwordText, repeatPasswordText);
+    const { emailText, passwordText, repeatPasswordText } = this.state;
+    const errors = this.checkInputCorrectness(emailText, passwordText, repeatPasswordText);
     if (errors) Toast(errors);
     else this.sendDataToServer(emailText, passwordText);
   }
@@ -45,118 +45,121 @@ class Register extends React.Component {
   }
 
   render() {
-    return (  
+    return (
       <View style={styles.main}>
-          <View style={styles.mainContainer}>
-            <Image
+        <View style={styles.mainContainer}>
+          <Image
             source={require('../../../assets/img/login/piggy-bank.png')}
             testID="registerImage"
-            />
-            <Text
-              testID="registerText"
-              style={{color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%'}} >
+          />
+          <Text
+            testID="registerText"
+            style={{
+              color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%',
+            }}
+          >
               Welcome back
-            </Text>
-            <Input
-              placeholder='Email'
-              placeholderTextColor = {'#4f4f4f'}
-              leftIcon = {
-                <Icon
-                  name='user'
-                  size={18}
-                  color='#4f4f4f'
-                />
-              }
-              containerStyle = {[styles.inputContainerStyle, styles.raised]}
-              inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-              onChangeText = {(emailText) => this.setState({emailText})}
-              testID="registerEmailInput"
-            />
-
-            <Input
-              placeholder={'Password'}
-              placeholderTextColor = {'#4f4f4f'}
-              leftIcon = {
-                <Icon
-                  name='lock'
-                  size={18}
-                  color='#4f4f4f'
-                />
-              }
-              containerStyle = {[styles.inputContainerStyle, styles.raised]}
-              inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-              onChangeText = {(passwordText) => this.setState({passwordText})}
-              testID="registerPasswordInput"
-            />
-
-            <Input
-              placeholder={'Repeat password'}
-              placeholderTextColor = {'#4f4f4f'}
-              leftIcon = {
-                <Icon
-                  name='lock'
-                  size={18}
-                  color='#4f4f4f'
-                />
-              }
-              containerStyle = {[styles.inputContainerStyle, styles.raised]}
-              inputContainerStyle = {{borderBottomColor: 'rgba(255, 255, 255, 0)'}}
-              onChangeText = {(repeatPasswordText) => this.setState({repeatPasswordText})}
-              testID="registerRepeatPasswordInput"
-            />
-
-            <View style={{marginTop: '7%'}}>
-              <Button
-                  loading = {this.state.loading}
-                  title="Register"
-                  titleProps={{fontFamily: 'lato-light'}}
-                  ViewComponent={LinearGradient}
-                  linearGradientProps={{
-                    colors: ['#53F539', '#33ED30'],
-                    start: {x: 0.5, y: 0.5},
-                  }}
-                  buttonStyle = {{
-                    borderRadius: 20,
-                    elevation: 3,
-                    width: 330,
-                    paddingTop: 3,
-                    paddingBottom: 3,
-                  }}
-                  onPress = {() => this.register()}
-                  testID="registerButton"
+          </Text>
+          <Input
+            placeholder="Email"
+            placeholderTextColor="#4f4f4f"
+            leftIcon={(
+              <Icon
+                name="user"
+                size={18}
+                color="#4f4f4f"
               />
-            </View>
-            <View style={{flex: 1, flexDirection: 'row', marginTop: '3%'}}>
-                <SocialIcon
-                  button
-                  light
-                  type="facebook"
-                  style = {[styles.socialIconStyle, { marginRight: 40}]}
-                  testID="registerFacebookButton"
-                />
-                <SocialIcon
-                  button
-                  light
-                  type="google-plus-official"
-                  style = {[styles.socialIconStyle, { marginRight: 40}]}
-                  testID="registerGoogleButton"
-                />
-                <SocialIcon
-                  button
-                  light
-                  type="twitter"
-                  style = {styles.socialIconStyle}
-                  testID="registerTwitterButton"
-                />
-            </View>
+)}
+            containerStyle={[styles.inputContainerStyle, styles.raised]}
+            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            onChangeText={emailText => this.setState({ emailText })}
+            testID="registerEmailInput"
+          />
+
+          <Input
+            placeholder="Password"
+            placeholderTextColor="#4f4f4f"
+            leftIcon={(
+              <Icon
+                name="lock"
+                size={18}
+                color="#4f4f4f"
+              />
+)}
+            containerStyle={[styles.inputContainerStyle, styles.raised]}
+            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            onChangeText={passwordText => this.setState({ passwordText })}
+            testID="registerPasswordInput"
+          />
+
+          <Input
+            placeholder="Repeat password"
+            placeholderTextColor="#4f4f4f"
+            leftIcon={(
+              <Icon
+                name="lock"
+                size={18}
+                color="#4f4f4f"
+              />
+)}
+            containerStyle={[styles.inputContainerStyle, styles.raised]}
+            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            onChangeText={repeatPasswordText => this.setState({ repeatPasswordText })}
+            testID="registerRepeatPasswordInput"
+          />
+
+          <View style={{ marginTop: '7%' }}>
+            <Button
+              loading={this.state.loading}
+              title="Register"
+              titleProps={{ fontFamily: 'lato-light' }}
+              ViewComponent={LinearGradient}
+              linearGradientProps={{
+                colors: ['#53F539', '#33ED30'],
+                start: { x: 0.5, y: 0.5 },
+              }}
+              buttonStyle={{
+                borderRadius: 20,
+                elevation: 3,
+                width: 330,
+                paddingTop: 3,
+                paddingBottom: 3,
+              }}
+              onPress={() => this.register()}
+              testID="registerButton"
+            />
           </View>
+          <View style={{ flex: 1, flexDirection: 'row', marginTop: '3%' }}>
+            <SocialIcon
+              button
+              light
+              type="facebook"
+              style={[styles.socialIconStyle, { marginRight: 40 }]}
+              testID="registerFacebookButton"
+            />
+            <SocialIcon
+              button
+              light
+              type="google-plus-official"
+              style={[styles.socialIconStyle, { marginRight: 40 }]}
+              testID="registerGoogleButton"
+            />
+            <SocialIcon
+              button
+              light
+              type="twitter"
+              style={styles.socialIconStyle}
+              testID="registerTwitterButton"
+            />
+          </View>
+        </View>
       </View>
-    )
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -171,26 +174,26 @@ export default connect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FAFA",
+    backgroundColor: '#F5FAFA',
   },
   mainContainer: {
     flex: 1,
-    alignItems: 'center', 
+    alignItems: 'center',
     paddingTop: '15%',
     paddingLeft: '5%',
-    paddingRight: '5%'
+    paddingRight: '5%',
   },
   inputContainerStyle: {
-    paddingTop: 3, 
-    paddingBottom: 3, 
+    paddingTop: 3,
+    paddingBottom: 3,
     marginTop: '7%',
-    borderRadius: 20, 
-    borderColor: '#fff', 
+    borderRadius: 20,
+    borderColor: '#fff',
   },
   socialIconStyle: {
     width: 60,
-    height: 60, 
-    borderRadius: 50
+    height: 60,
+    borderRadius: 50,
   },
   raised: {
     ...Platform.select({
@@ -204,5 +207,5 @@ const styles = StyleSheet.create({
         elevation: 1,
       },
     }),
-  }
+  },
 });

@@ -1,15 +1,15 @@
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator } from 'react-navigation';
 
 import CardScreen from './Card';
 import CardScanner from './CardScanner';
 
 const CardNavigator = createStackNavigator({
   Card: CardScreen,
-  Scanner: CardScanner
+  Scanner: CardScanner,
 }, {
   defaultNavigationOptions: {
-    header: null
-  }
+    header: null,
+  },
 });
 
 CardNavigator.navigationOptions = ({ navigation }) => {

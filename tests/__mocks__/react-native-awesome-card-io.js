@@ -1,9 +1,9 @@
 jest.mock('react-native-awesome-card-io', () => {
-  let CardIOModule = {
-    scanCard: () => { return null }
-  }
+  const CardIOModule = {
+    scanCard: () => null,
+  };
 
-  let CardIOUtilities = { }
+  const CardIOUtilities = { };
 
-  return {CardIOModule, CardIOUtilities};
+  return { CardIOModule, CardIOUtilities };
 });

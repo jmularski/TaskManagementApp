@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import logger from 'redux-logger';
-import createSagaMiddleware  from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 
 import { navMiddleware } from '../RootContainer';
 import rootSaga from '../sagas';
@@ -13,20 +13,20 @@ export default function configureStore() {
   const persistConfig = {
     key: 'root',
     blacklist: ['nav'],
-    storage: AsyncStorage
+    storage: AsyncStorage,
   };
 
   const persistedReducer = persistReducer(persistConfig, rootReducer);
 
   const middlewares = [navMiddleware, sagaMiddleware];
-  if(process.env.NODE_ENV === 'development'){
-      middlewares.push(logger);
+  if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger);
   }
 
   const store = createStore(
     persistedReducer,
     undefined,
-    compose(applyMiddleware(...middlewares))
+    compose(applyMiddleware(...middlewares)),
   );
   sagaMiddleware.run(rootSaga);
 
@@ -36,7 +36,7 @@ export default function configureStore() {
       store.replaceReducer(nextRootReducer);
     });
   }
-  
+
   const persistor = persistStore(store);
-  return { store, persistor }
+  return { store, persistor };
 }

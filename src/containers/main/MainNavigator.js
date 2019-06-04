@@ -10,37 +10,37 @@ import OptionsScreen from './Options';
 const MainNavigator = createBottomTabNavigator({
   Card: CardScreen,
   Statistics: StatisticsScreen,
-  Options: OptionsScreen
+  Options: OptionsScreen,
 }, {
-  defaultNavigationOptions: ({navigation}) => ({
+  defaultNavigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
       const { routeName } = navigation.state;
       let iconName;
-      
-      switch(routeName){
+
+      switch (routeName) {
         case 'Card':
           iconName = 'md-card';
           break;
-        case 'Statistics': 
+        case 'Statistics':
           iconName = 'md-analytics';
           break;
         case 'Options':
-          iconName = 'md-settings'
+          iconName = 'md-settings';
           break;
       }
-      
-      return <Icon name={iconName} size = {25} color = {tintColor} />
+
+      return <Icon name={iconName} size={25} color={tintColor} />;
     },
     tabBarOptions: {
       activeTintColor: 'black',
-      inactiveTintColor: 'grey'
-    }
-  })
+      inactiveTintColor: 'grey',
+    },
+  }),
 });
 
 const mapStateToProps = state => ({
   user: state.user,
-  nav: state.nav
+  nav: state.nav,
 });
 
 export default connect(

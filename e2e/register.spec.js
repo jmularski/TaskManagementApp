@@ -1,5 +1,5 @@
 import {
-	device, expect, element, by, waitFor
+  expect, element, by, waitFor,
 } from 'detox';
 import { navigateToRegister } from './helpers/navigate';
 import data from './data';
@@ -25,7 +25,7 @@ describe('Register', () => {
     });
     it('should have repeat password input', async () => {
       await expect(element(by.id('registerRepeatPasswordInput'))).toBeVisible();
-    })
+    });
     it('should have register button', async () => {
       await expect(element(by.id('registerButton'))).toBeVisible();
     });
@@ -48,14 +48,14 @@ describe('Register', () => {
     });
     it('should throw error when password is empty', async () => {
       await element(by.id('registerEmailInput')).replaceText(data.registerEmail);
-			await element(by.id('registerButton')).tap();
+      await element(by.id('registerButton')).tap();
       await waitFor(element(by.text('You have to fill up all fields.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('You have to fill up all fields.'))).toBeVisible();
     });
     it('should throw error when email is empty', async () => {
       await element(by.id('registerPasswordInput')).replaceText(data.password);
       await element(by.id('registerRepeatPasswordInput')).replaceText(data.password);
-			await element(by.id('registerButton')).tap();
+      await element(by.id('registerButton')).tap();
       await waitFor(element(by.text('You have to fill up all fields.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('You have to fill up all fields.'))).toBeVisible();
     });
@@ -63,7 +63,7 @@ describe('Register', () => {
       await element(by.id('registerEmailInput')).replaceText('wrong_format');
       await element(by.id('registerPasswordInput')).replaceText(data.password);
       await element(by.id('registerRepeatPasswordInput')).replaceText(data.password);
-			await element(by.id('registerButton')).tap();
+      await element(by.id('registerButton')).tap();
       await waitFor(element(by.text('Your email was in wrong format.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('Your email was in wrong format.'))).toBeVisible();
     });
@@ -79,10 +79,9 @@ describe('Register', () => {
       await element(by.id('registerEmailInput')).replaceText(data.email);
       await element(by.id('registerPasswordInput')).replaceText(data.password);
       await element(by.id('registerRepeatPasswordInput')).replaceText(data.password);
-			await element(by.id('registerButton')).tap();
+      await element(by.id('registerButton')).tap();
       await waitFor(element(by.text('The user already exists.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('The user already exists.'))).toBeVisible();
-
     });
     it('should direct to card page when is successful', async () => {
       await element(by.id('registerEmailInput')).replaceText(data.registerEmail);

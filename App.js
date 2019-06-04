@@ -7,7 +7,7 @@ import RootContainer from './src/RootContainer';
 const { store, persistor } = configureStore();
 
 const App = () => (
-  <Provider store = {store}>
+  <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <RootContainer />
     </PersistGate>
