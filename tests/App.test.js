@@ -9,5 +9,5 @@ describe('<App />', () => {
   it('renders correctly', async () => {
     const tree = await renderer.create(<App />).toJSON();
     expect(tree).toMatchSnapshot();
-  })
-})
+  });
+});

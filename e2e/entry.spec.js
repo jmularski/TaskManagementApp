@@ -1,5 +1,5 @@
 import {
-	device, expect, element, by, waitFor
+  device, expect, element, by, waitFor,
 } from 'detox';
 
 describe('Entry', () => {
@@ -15,7 +15,7 @@ describe('Entry', () => {
       await expect(element(by.id('signUpButton'))).toBeVisible();
     });
   });
-  
+
   describe('Usage', () => {
     beforeEach(async () => {
       await device.reloadReactNative();
@@ -31,5 +31,4 @@ describe('Entry', () => {
       await expect(element(by.text('Register'))).toBeVisible();
     });
   });
-  
-})
+});

@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 
 import {
   createReduxContainer,
-  createReactNavigationReduxMiddleware
+  createReactNavigationReduxMiddleware,
 } from 'react-navigation-redux-helpers';
 
 import RootNavigator from './RootNavigator';
 
 export const navMiddleware = createReactNavigationReduxMiddleware(
-  state => state.nav
+  state => state.nav,
 );
 const App = createReduxContainer(RootNavigator);
 

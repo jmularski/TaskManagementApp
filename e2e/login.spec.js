@@ -1,5 +1,5 @@
 import {
-	device, expect, element, by, waitFor
+  expect, element, by, waitFor,
 } from 'detox';
 import { navigateToLogin } from './helpers/navigate';
 import data from './data';
@@ -45,33 +45,30 @@ describe('Login', () => {
     });
 
     it('should throw error when email is empty', async () => {
-			await element(by.id('loginPasswordInput')).replaceText(data.password);
-			await element(by.id('loginButton')).tap();
+      await element(by.id('loginPasswordInput')).replaceText(data.password);
+      await element(by.id('loginButton')).tap();
       await waitFor(element(by.text('You have to fill up all fields.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('You have to fill up all fields.'))).toBeVisible();
-
     });
     it('should throw error when password is empty', async () => {
       await element(by.id('loginEmailInput')).replaceText(data.email);
-			await element(by.id('loginButton')).tap();
+      await element(by.id('loginButton')).tap();
       await waitFor(element(by.text('You have to fill up all fields.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('You have to fill up all fields.'))).toBeVisible();
-
     });
     it('should throw error when email is in bad format', async () => {
       await element(by.id('loginEmailInput')).replaceText('wrong_format');
       await element(by.id('loginPasswordInput')).replaceText(data.password);
-			await element(by.id('loginButton')).tap();
+      await element(by.id('loginButton')).tap();
       await waitFor(element(by.text('Your email was in wrong format.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('Your email was in wrong format.'))).toBeVisible();
     });
     it('should throw error when password is wrong', async () => {
       await element(by.id('loginEmailInput')).replaceText(data.email);
-      await element(by.id('loginPasswordInput')).replaceText("wrong");
-			await element(by.id('loginButton')).tap();
+      await element(by.id('loginPasswordInput')).replaceText('wrong');
+      await element(by.id('loginButton')).tap();
       await waitFor(element(by.text('Wrong email or password.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('Wrong email or password.'))).toBeVisible();
-
     });
     it('should direct to card page when is successful', async () => {
       await element(by.id('loginEmailInput')).replaceText(data.email);
