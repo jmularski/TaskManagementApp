@@ -4,7 +4,7 @@ import { Text, Button, Icon } from 'react-native-elements';
 import CardItem from './components/CardItem';
 import { connect } from 'react-redux';
 
-class Card extends React.Component {
+export default class Card extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -15,7 +15,7 @@ class Card extends React.Component {
                 name="plus"
                 type="font-awesome"
                 containerStyle={styles.iconStyle}
-                onPress={() => { this.props.navigation.navigate('Scanner'); }} />
+                onPress={() => { this.props.navigation.navigate('Form'); }} />
           </View>
           <CardItem type="Visa" number="3467" />
         </View>
@@ -26,14 +26,6 @@ class Card extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  navigation: state.nav,
-});
-
-export default connect(
-  mapStateToProps,
-)(Card);
 
 const styles = StyleSheet.create({
   mainContainer: {

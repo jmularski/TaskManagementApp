@@ -2,16 +2,15 @@ import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
 
-const request = async (options, addAuthHeader = true) => {
-  let BASE_URL = 'https://ec754389.ngrok.io';
+const request = async (options) => {
+  let BASE_URL = 'http://localhost:5000';
 
   if (options.custom_base_url) {
     BASE_URL = options.custom_base_url;
   }
 
-  let authHeader = null;
-  if (addAuthHeader) {
-    authHeader = await AsyncStorage.getItem('Auth');
+  if (options.authHeader) {
+    authHeader = options.authHeader
   }
 
   const client = axios.create({

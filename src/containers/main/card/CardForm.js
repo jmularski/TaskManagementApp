@@ -3,8 +3,49 @@ import { StyleSheet, View } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
+import { addCard } from '../../../actions/cardActions';
 
 class CardForm extends React.Component {
+  
+  constructor(props){
+    super(props);
+
+    this.state = {
+      nameText: '',
+      numberText: '',
+      expirationText: '',
+      cvcText: '',
+    };
+  };
+
+  sendDataToServer = (payload) => {
+    this.props.addCard(payload);
+  };
+
+  structurisePayload = () => {
+    expiration = this.state.expirationText.split('/');
+    return {
+      token: this.props.auth.userData.token,
+      number: this.state.numberText,
+      expiration: {
+        month: expiration[0],
+        year: expiration[1]
+      },
+      cvc: this.state.cvcText,
+    };
+  };
+
+  addCard = () => {
+    //add error handling
+    payload = this.structurisePayload();
+    this.sendDataToServer(payload);
+  };
+
+  handleExpiration = (expirationText) => {
+    if (expirationText.length == 2) this.setState({ expirationText: expirationText + "/"});
+    else this.setState({ expirationText });
+  };
+
   render() {
     return(
       <View style={styles.mainContainer}>
@@ -13,19 +54,24 @@ class CardForm extends React.Component {
           <Input
             placeholder="Name on card"
             placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} />
+            containerStyle={styles.input} 
+            onChangeText={nameText => this.setState({ nameText })} />
           <Input
             placeholder="Card number"
             placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} />
+            containerStyle={styles.input} 
+            onChangeText={numberText => this.setState({ numberText })} />
           <Input
             placeholder="Expiration eg. MM/YY"
             placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} />
+            containerStyle={styles.input} 
+            value={this.state.expirationText}
+            onChangeText={expirationText => this.handleExpiration( expirationText )} />
           <Input
-            placeholder="CVV"
+            placeholder="CVC"
             placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} />
+            containerStyle={styles.input} 
+            onChangeText={cvcText => this.setState({ cvcText })} />
           <Button
             title="Add a new card"
             ViewComponent={LinearGradient}
@@ -39,7 +85,8 @@ class CardForm extends React.Component {
               width: 330,
               paddingTop: 3,
               paddingBottom: 3,
-            }} />
+            }} 
+            onPress={() => this.addCard()}/>
           <Text
             style={styles.scannerText}
             onPress={() => {this.props.navigation.navigate("Scanner")}}>
@@ -52,11 +99,16 @@ class CardForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  navigation: state.nav,
+  auth: state.auth,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addCard: (cardData) => dispatch(addCard(cardData)),
 });
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(CardForm);
 
 const styles = StyleSheet.create({
@@ -93,6 +145,5 @@ const styles = StyleSheet.create({
   scannerText: {
     margin: '2%',
     color: 'blue',
-    textDecorationLine: 'underline',
   },
 })

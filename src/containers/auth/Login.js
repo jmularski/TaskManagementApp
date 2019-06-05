@@ -12,7 +12,7 @@ import Toast from '../../utils/Toast';
 const zxcvbn = require('zxcvbn');
 
 class Login extends React.Component {
-  
+
   constructor(props) {
     super(props);
 
@@ -53,8 +53,7 @@ class Login extends React.Component {
             testID="loginText"
             style={{
               color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%',
-            }}
-          >
+            }} >
               Welcome back
           </Text>
           <Input

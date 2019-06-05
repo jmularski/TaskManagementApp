@@ -5,8 +5,8 @@ import CardForm from './CardForm';
 import CardScanner from './CardScanner';
 
 const CardNavigator = createStackNavigator({
-  Form: CardForm,
   Card: CardScreen,
+  Form: CardForm,
   Scanner: CardScanner,
 }, {
   defaultNavigationOptions: {
