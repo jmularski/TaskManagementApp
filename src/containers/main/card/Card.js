@@ -2,37 +2,38 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, Icon } from 'react-native-elements';
 import CardItem from './components/CardItem';
+import { connect } from 'react-redux';
 
-export default class Card extends React.Component {
-  state = {
-    cards: [{
-      type: 'Visa',
-      number: '3467',
-    }],
-  }
-
-
+class Card extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <View style={styles.cardContainer}>
-          {/* <Text style={{color: '#232323', fontFamily: 'lato-light', fontSize: 25, alignSelf: 'center' }}>Cards</Text> */}
-
+        <View style={styles.cardContainer}>  
+          <View style={styles.span}>
+              <Text style={styles.textStyle}>Cards</Text>
+              <Icon
+                name="plus"
+                type="font-awesome"
+                containerStyle={styles.iconStyle}
+                onPress={() => { this.props.navigation.navigate('Scanner'); }} />
+          </View>
           <CardItem type="Visa" number="3467" />
         </View>
-
-
-        <View style={styles.addCardButton}>
-          <Button
-            title="+"
-            onPress={() => { this.props.navigation.navigate('Scanner'); }}
-            buttonStyle={styles.roundedButton}
-          />
-        </View>
+        <Button
+            title="Create payment request"
+            containerStyle={styles.paymentButton} />
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  navigation: state.nav,
+});
+
+export default connect(
+  mapStateToProps,
+)(Card);
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1F3F4',
   },
   cardContainer: {
-    paddingTop: '10%',
+    paddingTop: '5%',
     paddingLeft: '5%',
     paddingRight: '5%',
     backgroundColor: 'white',
@@ -48,16 +49,24 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#BDC1C6',
   },
-  addCardButton: {
+  span: {
+    flexDirection: 'row',
+    marginLeft: '5%',
+    marginRight: '5%',
+  },
+  iconStyle: {
     position: 'absolute',
-    right: '5%',
-    bottom: '3%',
+    right: 0,
+    marginTop: '2%'
   },
-  roundedButton: {
-    height: 40,
-    width: 40,
-    borderRadius: 20,
-    elevation: 3,
+  textStyle: {
+    fontFamily: 'Lato-Light',
+    fontSize: 30,
+    color: 'black',
   },
-
+  paymentButton: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+  },
 });

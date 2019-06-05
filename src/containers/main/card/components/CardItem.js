@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   cardRow: {
     flexDirection: 'row',
     marginTop: '10%',
-    paddingLeft: '10%',
+    marginLeft: '7%',
   },
   cardImage: {
     width: 100,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   cardText: {
     fontSize: 18,
     marginTop: '6%',
-    marginLeft: '10%',
+    marginLeft: '20%',
     // fontFamily: 'lato-light'
   },
 });

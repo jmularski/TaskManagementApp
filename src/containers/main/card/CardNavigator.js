@@ -1,9 +1,11 @@
 import { createStackNavigator } from 'react-navigation';
 
 import CardScreen from './Card';
+import CardForm from './CardForm';
 import CardScanner from './CardScanner';
 
 const CardNavigator = createStackNavigator({
+  Form: CardForm,
   Card: CardScreen,
   Scanner: CardScanner,
 }, {

@@ -12,6 +12,7 @@ import Toast from '../../utils/Toast';
 const zxcvbn = require('zxcvbn');
 
 class Login extends React.Component {
+  
   constructor(props) {
     super(props);
 
@@ -65,7 +66,7 @@ class Login extends React.Component {
                 size={18}
                 color="#4f4f4f"
               />
-)}
+            )}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
             inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
             onChangeText={emailText => this.setState({ emailText })}
@@ -81,7 +82,7 @@ class Login extends React.Component {
                 size={18}
                 color="#4f4f4f"
               />
-)}
+            )}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
             inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
             secureTextEntry
@@ -93,7 +94,7 @@ class Login extends React.Component {
             <Button
               loading={this.state.loading}
               title="Login"
-              titleProps={{ fontFamily: 'lato-light' }}
+              titleProps={{ fontFamily: 'Lato-Light' }}
               ViewComponent={LinearGradient}
               linearGradientProps={{
                 colors: ['#53F539', '#33ED30'],
