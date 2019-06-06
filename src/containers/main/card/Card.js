@@ -2,26 +2,27 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, Icon } from 'react-native-elements';
 import CardItem from './components/CardItem';
-import { connect } from 'react-redux';
 
 export default class Card extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <View style={styles.cardContainer}>  
+        <View style={styles.cardContainer}>
           <View style={styles.span}>
-              <Text style={styles.textStyle}>Cards</Text>
-              <Icon
-                name="plus"
-                type="font-awesome"
-                containerStyle={styles.iconStyle}
-                onPress={() => { this.props.navigation.navigate('Form'); }} />
+            <Text style={styles.textStyle}>Cards</Text>
+            <Icon
+              name="plus"
+              type="font-awesome"
+              containerStyle={styles.iconStyle}
+              onPress={() => { this.props.navigation.navigate('Form'); }}
+            />
           </View>
           <CardItem type="Visa" number="3467" />
         </View>
         <Button
-            title="Create payment request"
-            containerStyle={styles.paymentButton} />
+          title="Create payment request"
+          containerStyle={styles.paymentButton}
+        />
       </View>
     );
   }
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   iconStyle: {
     position: 'absolute',
     right: 0,
-    marginTop: '2%'
+    marginTop: '2%',
   },
   textStyle: {
     fontFamily: 'Lato-Light',
@@ -57,8 +58,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   paymentButton: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    width: "100%",
+    width: '100%',
   },
 });

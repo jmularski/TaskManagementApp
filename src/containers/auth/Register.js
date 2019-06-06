@@ -8,7 +8,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { signUp } from '../../actions/authActions';
 import Toast from '../../utils/Toast';
-import AuthService from '../../services/auth.service';
 
 const zxcvbn = require('zxcvbn');
 
@@ -27,8 +26,8 @@ class Register extends React.Component {
 
   checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
     if (emailText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
-    if (passwordText != repeatPasswordText) return 'Password and repeated password are not the same';
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (passwordText !== repeatPasswordText) return 'Password and repeated password are not the same';
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
     if (!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
   }

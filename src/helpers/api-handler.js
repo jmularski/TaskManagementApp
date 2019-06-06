@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
-
 
 const request = async (options) => {
   let BASE_URL = 'http://localhost:5000';
@@ -9,8 +7,9 @@ const request = async (options) => {
     BASE_URL = options.custom_base_url;
   }
 
+  let authHeader;
   if (options.authHeader) {
-    authHeader = options.authHeader
+    authHeader = options.authHeader;
   }
 
   const client = axios.create({

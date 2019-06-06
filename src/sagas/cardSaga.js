@@ -10,30 +10,28 @@ import Toast from '../utils/Toast';
 function* addCard({ payload }) {
   try {
     const response = yield call(CardService.addCard, payload);
-    console.log("Hello")
     if (response.status === 200) {
       yield put(addCardSuccess(payload));
     } else {
       yield put(addCardFailure(response.data));
     }
   } catch (e) {
-    console.log('error');
-    yield put(addCardFailure("Error when adding card."))
+    yield put(addCardFailure('Error when adding card.'));
   }
-};
+}
 
 function* recryptCard({ payload }) {
 
-};
+}
 
 function* handleAddCardSuccess({ payload }) {
   yield put(setToMainDrawer());
-  yield call(Toast, "Your card has been successfully added!");
-};
+  yield call(Toast, payload.message);
+}
 
 function* handleAddCardFailure({ payload }) {
   yield call(Toast, payload);
-};
+}
 
 export default function* cardSaga() {
   yield all([
@@ -42,4 +40,4 @@ export default function* cardSaga() {
     takeEvery(cardActions.ADD_CARD_SUCCESS, handleAddCardSuccess),
     takeEvery(cardActions.ADD_CARD_FAILURE, handleAddCardFailure),
   ]);
-};
+}

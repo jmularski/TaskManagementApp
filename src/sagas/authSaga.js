@@ -10,7 +10,6 @@ import { setToMainDrawer } from '../actions/navActions';
 
 function* signInUser({ payload }) {
   try {
-    console.log(payload);
     const response = yield call(AuthService.login, payload);
     if (response.status === 200) {
       yield put(authSuccess({ name: 'Placeholder', token: response.data.access_token }));

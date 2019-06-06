@@ -2,22 +2,22 @@ import { cardActions } from '../types';
 
 const initialState = {
   cardData: {
-    cards: []
-  }
+    cards: [],
+  },
 };
 
 
 function cardReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case cardActions.ADD_CARD_SUCCESS:
       return {
         ...state,
         cardData: {
-          cards: [...state.cards, action.payload]
-        }
-      }
+          cards: [...state.cards, action.payload],
+        },
+      };
     default:
-      return state;  
+      return state;
   }
 }
 

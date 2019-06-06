@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 
-import { connect } from 'react-redux';
-
 export default class Entry extends Component {
   render() {
     return (

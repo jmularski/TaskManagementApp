@@ -7,8 +7,7 @@ import { addCard } from '../../../actions/cardActions';
 import Toast from '../../../utils/Toast';
 
 class CardForm extends React.Component {
-  
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -17,10 +16,10 @@ class CardForm extends React.Component {
       expirationText: '',
       cvcText: '',
     };
-  };
+  }
 
   checkInputCorrectness = (payload) => {
-    const { number, expiration, cvc } = payload; 
+    const { number, expiration, cvc } = payload;
     const expirationDate = new Date().setFullYear(expiration.year, expiration.month, 1);
     if (number === '' || expiration.month === '' || expiration.year === '' || cvc === '') return 'You have to fill out all fields';
     if (expirationDate < new Date()) return 'Your card has expired!';
@@ -31,62 +30,71 @@ class CardForm extends React.Component {
   };
 
   structurisePayload = () => {
-    expiration = this.state.expirationText.split('/');
+    const { numberText, expirationText, cvcText } = this.state;
+    const { userData } = this.props.auth;
+    const expiration = expirationText.split('/');
     return {
-      token: this.props.auth.userData.token,
-      number: this.state.numberText,
+      token: userData.token,
+      number: numberText,
       expiration: {
         month: expiration[0],
-        year: expiration[1]
+        year: expiration[1],
       },
-      cvc: this.state.cvcText,
+      cvc: cvcText,
     };
   };
 
   addCard = () => {
-    payload = this.structurisePayload();
+    const payload = this.structurisePayload();
     const errors = this.checkInputCorrectness(payload);
     if (errors) Toast(errors);
     this.sendDataToServer(payload);
   };
 
   handleExpiration = (expirationText) => {
-    if (expirationText.length == 2) this.setState({ expirationText: expirationText + "/"});
+    if (expirationText.length === 2) this.setState({ expirationText: `${expirationText}/` });
     else this.setState({ expirationText });
   };
 
   render() {
-    return(
+    return (
       <View style={styles.mainContainer}>
         <Text style={styles.bigText}>Add new card</Text>
         <View style={styles.form}>
           <Input
             placeholder="Name on card"
-            placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} 
-            onChangeText={nameText => this.setState({ nameText })} />
+            placeholderTextColor="#4f4f4f"
+            value={this.state.nameText}
+            containerStyle={styles.input}
+            onChangeText={nameText => this.setState({ nameText })}
+          />
           <Input
             placeholder="Card number"
-            placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} 
+            placeholderTextColor="#4f4f4f"
+            containerStyle={styles.input}
+            value={this.state.numberText}
             maxLength={16}
-            keyboardType='numeric'
-            onChangeText={numberText => this.setState({ numberText })} />
+            keyboardType="numeric"
+            onChangeText={numberText => this.setState({ numberText })}
+          />
           <Input
             placeholder="Expiration eg. MM/YY"
-            placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} 
+            placeholderTextColor="#4f4f4f"
+            containerStyle={styles.input}
             value={this.state.expirationText}
             maxLength={5}
-            keyboardType='numeric'
-            onChangeText={expirationText => this.handleExpiration( expirationText )} />
+            keyboardType="numeric"
+            onChangeText={expirationText => this.handleExpiration(expirationText)}
+          />
           <Input
             placeholder="CVC"
-            placeholderTextColor="#4f4f4f" 
-            containerStyle={styles.input} 
+            placeholderTextColor="#4f4f4f"
+            containerStyle={styles.input}
+            value={this.state.cvcText}
             maxLength={3}
-            keyboardType='numeric'
-            onChangeText={cvcText => this.setState({ cvcText })} />
+            keyboardType="numeric"
+            onChangeText={cvcText => this.setState({ cvcText })}
+          />
           <Button
             title="Add a new card"
             ViewComponent={LinearGradient}
@@ -100,16 +108,18 @@ class CardForm extends React.Component {
               width: 330,
               paddingTop: 3,
               paddingBottom: 3,
-            }} 
-            onPress={() => this.addCard()}/>
+            }}
+            onPress={() => this.addCard()}
+          />
           <Text
             style={styles.scannerText}
-            onPress={() => {this.props.navigation.navigate("Scanner")}}>
+            onPress={() => { this.props.navigation.navigate('Scanner'); }}
+          >
             Or use a card scanner instead
           </Text>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -118,7 +128,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addCard: (cardData) => dispatch(addCard(cardData)),
+  addCard: cardData => dispatch(addCard(cardData)),
 });
 
 export default connect(
@@ -161,4 +171,4 @@ const styles = StyleSheet.create({
     margin: '2%',
     color: 'blue',
   },
-})
+});

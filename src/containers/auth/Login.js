@@ -9,10 +9,7 @@ import { connect } from 'react-redux';
 import { signIn } from '../../actions/authActions';
 import Toast from '../../utils/Toast';
 
-const zxcvbn = require('zxcvbn');
-
 class Login extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -26,7 +23,7 @@ class Login extends React.Component {
 
   checkInputCorrectness = (emailText, passwordText) => {
     if (emailText === '' || passwordText === '') return 'You have to fill up all fields.';
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
   }
 
@@ -53,7 +50,8 @@ class Login extends React.Component {
             testID="loginText"
             style={{
               color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%',
-            }} >
+            }}
+          >
               Welcome back
           </Text>
           <Input

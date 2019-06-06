@@ -1,5 +1,5 @@
 import {
-  device, expect, element, by, waitFor,
+  device, element, by, waitFor,
 } from 'detox';
 
 export async function navigateToLogin() {

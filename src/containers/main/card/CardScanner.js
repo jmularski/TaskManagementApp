@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, TouchableOpacity, Text, Platform,
+  Platform,
 } from 'react-native';
 import { CardIOModule, CardIOUtilities } from 'react-native-awesome-card-io';
 
@@ -12,9 +12,7 @@ export default class ScannerScreen extends React.Component {
 
     try {
       const card = await CardIOModule.scanCard();
-      console.log(card);
     } catch (err) {
-      console.log(err);
     }
   }
 

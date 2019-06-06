@@ -1,6 +1,8 @@
 import request from '../helpers/api-handler';
 
-function addCard({token, name, number, expiration, cvc}) {
+function addCard({
+  token, number, expiration, cvc,
+}) {
   return request({
     url: '/api/private/payments/card/add/',
     authHeader: token,
@@ -12,21 +14,21 @@ function addCard({token, name, number, expiration, cvc}) {
       cvc,
     },
   });
-};
+}
 
-function recryptCard({token, encryptedCard}) {
+function recryptCard({ token, encryptedCard }) {
   return request({
     url: '/api/private/payments/card/update',
     authHeader: token,
     type: 'POST',
     data: {
       encrypted_card: encryptedCard,
-    }
+    },
   });
-};
+}
 
 const CardService = {
-  addCard, recryptCard
+  addCard, recryptCard,
 };
 
 export default CardService;
