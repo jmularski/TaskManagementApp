@@ -8,7 +8,7 @@ import { signIn, authSuccess, authFailure } from '../actions/authActions';
 import Toast from '../utils/Toast';
 import { setToMainDrawer } from '../actions/navActions';
 
-function* signInUser({ payload }) {
+export function* signInUser({ payload }) {
   try {
     const response = yield call(AuthService.login, payload);
     if (response.status === 200) {
@@ -21,7 +21,7 @@ function* signInUser({ payload }) {
   }
 }
 
-function* signUpUser({ payload }) {
+export function* signUpUser({ payload }) {
   try {
     const response = yield call(AuthService.register, payload);
     if (response.status === 200) {
@@ -34,11 +34,11 @@ function* signUpUser({ payload }) {
   }
 }
 
-function* handleAuthSuccess({ payload }) {
+export function* handleAuthSuccess({ payload }) {
   yield put(setToMainDrawer());
 }
 
-function* handleAuthFailure({ payload }) {
+export function* handleAuthFailure({ payload }) {
   yield call(Toast, payload);
 }
 
