@@ -4,6 +4,7 @@ import { Text, Input, Button } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { addCard } from '../../../actions/cardActions';
+import Toast from '../../../utils/Toast';
 
 class CardForm extends React.Component {
   
@@ -17,6 +18,13 @@ class CardForm extends React.Component {
       cvcText: '',
     };
   };
+
+  checkInputCorrectness = (payload) => {
+    const { number, expiration, cvc } = payload; 
+    const expirationDate = new Date().setFullYear(expiration.year, expiration.month, 1);
+    if (number === '' || expiration.month === '' || expiration.year === '' || cvc === '') return 'You have to fill out all fields';
+    if (expirationDate < new Date()) return 'Your card has expired!';
+  }
 
   sendDataToServer = (payload) => {
     this.props.addCard(payload);
@@ -36,8 +44,9 @@ class CardForm extends React.Component {
   };
 
   addCard = () => {
-    //add error handling
     payload = this.structurisePayload();
+    const errors = this.checkInputCorrectness(payload);
+    if (errors) Toast(errors);
     this.sendDataToServer(payload);
   };
 
@@ -60,17 +69,23 @@ class CardForm extends React.Component {
             placeholder="Card number"
             placeholderTextColor="#4f4f4f" 
             containerStyle={styles.input} 
+            maxLength={16}
+            keyboardType='numeric'
             onChangeText={numberText => this.setState({ numberText })} />
           <Input
             placeholder="Expiration eg. MM/YY"
             placeholderTextColor="#4f4f4f" 
             containerStyle={styles.input} 
             value={this.state.expirationText}
+            maxLength={5}
+            keyboardType='numeric'
             onChangeText={expirationText => this.handleExpiration( expirationText )} />
           <Input
             placeholder="CVC"
             placeholderTextColor="#4f4f4f" 
             containerStyle={styles.input} 
+            maxLength={3}
+            keyboardType='numeric'
             onChangeText={cvcText => this.setState({ cvcText })} />
           <Button
             title="Add a new card"
