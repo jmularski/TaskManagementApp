@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Text, Button, Icon } from 'react-native-elements';
 import CardItem from './components/CardItem';
 
-export default class Card extends React.Component {
+class Card extends React.Component {
   render() {
     return (
       <View style={styles.mainContainer}>
@@ -17,6 +17,7 @@ export default class Card extends React.Component {
               onPress={() => { this.props.navigation.navigate('Form'); }}
             />
           </View>
+
           <CardItem type="Visa" number="3467" />
         </View>
         <Button
@@ -27,6 +28,14 @@ export default class Card extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  cards: state.card,
+});
+
+export default connect(
+  mapStateToProps,
+)(Card);
 
 const styles = StyleSheet.create({
   mainContainer: {
