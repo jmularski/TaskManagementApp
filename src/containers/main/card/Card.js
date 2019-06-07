@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Button, Icon } from 'react-native-elements';
 import CardItem from './components/CardItem';
+import { connect } from 'react-redux';
 
 class Card extends React.Component {
   render() {
