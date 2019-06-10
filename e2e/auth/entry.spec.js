@@ -22,12 +22,16 @@ describe('Entry', () => {
     });
     it('sign in button should lead to Login page', async () => {
       await element(by.id('signInButton')).tap();
-      await waitFor(element(by.text('Login'))).toBeVisible().withTimeout(20000);
+      await waitFor(element(by.text('Login')))
+        .toBeVisible()
+        .withTimeout(20000);
       await expect(element(by.text('Login'))).toBeVisible();
     });
     it('sign up button should lead to Register page', async () => {
       await element(by.id('signUpButton')).tap();
-      await waitFor(element(by.text('Register'))).toBeVisible().withTimeout(20000);
+      await waitFor(element(by.text('Register')))
+        .toBeVisible()
+        .withTimeout(20000);
       await expect(element(by.text('Register'))).toBeVisible();
     });
   });

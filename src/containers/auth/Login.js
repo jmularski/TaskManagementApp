@@ -22,23 +22,22 @@ class Login extends React.Component {
     };
   }
 
-
   checkInputCorrectness = (emailText, passwordText) => {
     if (emailText === '' || passwordText === '') return 'You have to fill up all fields.';
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
-  }
+  };
 
   sendDataToServer = (emailText, passwordText) => {
     this.props.signIn(emailText, passwordText);
-  }
+  };
 
   login = () => {
     const { emailText, passwordText } = this.state;
     const errors = this.checkInputCorrectness(emailText, passwordText);
     if (errors) Toast(errors);
     else this.sendDataToServer(emailText, passwordText);
-  }
+  };
 
   render() {
     return (
@@ -51,23 +50,22 @@ class Login extends React.Component {
           <Text
             testID="loginText"
             style={{
-              color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%',
+              color: '#232323',
+              fontFamily: 'lato-light',
+              fontSize: 40,
+              paddingTop: '7%',
             }}
           >
-              Welcome back
+            Welcome back
           </Text>
           <Input
             placeholder="Email"
             placeholderTextColor="#4f4f4f"
-            leftIcon={(
-              <Icon
-                name="user"
-                size={18}
-                color="#4f4f4f"
-              />
-)}
+            leftIcon={<Icon name="user" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
-            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            inputContainerStyle={{
+              borderBottomColor: 'rgba(255, 255, 255, 0)',
+            }}
             onChangeText={emailText => this.setState({ emailText })}
             testID="loginEmailInput"
           />
@@ -75,15 +73,11 @@ class Login extends React.Component {
           <Input
             placeholder="Password"
             placeholderTextColor="#4f4f4f"
-            leftIcon={(
-              <Icon
-                name="lock"
-                size={18}
-                color="#4f4f4f"
-              />
-)}
+            leftIcon={<Icon name="lock" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
-            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            inputContainerStyle={{
+              borderBottomColor: 'rgba(255, 255, 255, 0)',
+            }}
             secureTextEntry
             onChangeText={passwordText => this.setState({ passwordText })}
             testID="loginPasswordInput"

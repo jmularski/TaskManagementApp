@@ -13,7 +13,9 @@ function* signInUser({ payload }) {
     console.log(payload);
     const response = yield call(AuthService.login, payload);
     if (response.status === 200) {
-      yield put(authSuccess({ name: 'Placeholder', token: response.data.access_token }));
+      yield put(
+        authSuccess({ name: 'Placeholder', token: response.data.access_token }),
+      );
     } else {
       yield put(authFailure(response.data));
     }

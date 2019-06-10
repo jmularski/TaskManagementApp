@@ -23,7 +23,7 @@ class Register extends React.Component {
     };
   }
 
-  checkPasswordStrength = passwordText => zxcvbn(passwordText).score > 2
+  checkPasswordStrength = passwordText => zxcvbn(passwordText).score > 2;
 
   checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
     if (emailText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
@@ -31,18 +31,22 @@ class Register extends React.Component {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
     if (!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
-  }
+  };
 
   register = () => {
     const { emailText, passwordText, repeatPasswordText } = this.state;
-    const errors = this.checkInputCorrectness(emailText, passwordText, repeatPasswordText);
+    const errors = this.checkInputCorrectness(
+      emailText,
+      passwordText,
+      repeatPasswordText,
+    );
     if (errors) Toast(errors);
     else this.sendDataToServer(emailText, passwordText);
-  }
+  };
 
   sendDataToServer = (emailText, passwordText) => {
     this.props.signUp(emailText, passwordText);
-  }
+  };
 
   render() {
     return (
@@ -55,23 +59,22 @@ class Register extends React.Component {
           <Text
             testID="registerText"
             style={{
-              color: '#232323', fontFamily: 'lato-light', fontSize: 40, paddingTop: '7%',
+              color: '#232323',
+              fontFamily: 'lato-light',
+              fontSize: 40,
+              paddingTop: '7%',
             }}
           >
-              Welcome back
+            Welcome back
           </Text>
           <Input
             placeholder="Email"
             placeholderTextColor="#4f4f4f"
-            leftIcon={(
-              <Icon
-                name="user"
-                size={18}
-                color="#4f4f4f"
-              />
-)}
+            leftIcon={<Icon name="user" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
-            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            inputContainerStyle={{
+              borderBottomColor: 'rgba(255, 255, 255, 0)',
+            }}
             onChangeText={emailText => this.setState({ emailText })}
             testID="registerEmailInput"
           />
@@ -79,15 +82,11 @@ class Register extends React.Component {
           <Input
             placeholder="Password"
             placeholderTextColor="#4f4f4f"
-            leftIcon={(
-              <Icon
-                name="lock"
-                size={18}
-                color="#4f4f4f"
-              />
-)}
+            leftIcon={<Icon name="lock" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
-            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
+            inputContainerStyle={{
+              borderBottomColor: 'rgba(255, 255, 255, 0)',
+            }}
             onChangeText={passwordText => this.setState({ passwordText })}
             testID="registerPasswordInput"
           />
@@ -95,16 +94,13 @@ class Register extends React.Component {
           <Input
             placeholder="Repeat password"
             placeholderTextColor="#4f4f4f"
-            leftIcon={(
-              <Icon
-                name="lock"
-                size={18}
-                color="#4f4f4f"
-              />
-)}
+            leftIcon={<Icon name="lock" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
-            inputContainerStyle={{ borderBottomColor: 'rgba(255, 255, 255, 0)' }}
-            onChangeText={repeatPasswordText => this.setState({ repeatPasswordText })}
+            inputContainerStyle={{
+              borderBottomColor: 'rgba(255, 255, 255, 0)',
+            }}
+            onChangeText={repeatPasswordText => this.setState({ repeatPasswordText })
+            }
             testID="registerRepeatPasswordInput"
           />
 

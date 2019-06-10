@@ -1,8 +1,8 @@
 import {
   expect, element, by, waitFor,
 } from 'detox';
-import { navigateToLogin } from './helpers/navigate';
-import data from './data';
+import { navigateToLogin } from '../helpers/navigate';
+import data from '../data';
 
 
 describe('Login', () => {
