@@ -6,8 +6,8 @@ import AuthNavigator from './containers/auth/AuthNavigator';
 
 const AppNavigator = createStackNavigator(
   {
-    Auth: AuthNavigator,
     Main: MainNavigator,
+    Auth: AuthNavigator,
   },
   {
     defaultNavigationOptions: {

@@ -51,7 +51,7 @@ class Login extends React.Component {
             testID="loginText"
             style={{
               color: '#232323',
-              fontFamily: 'lato-light',
+              fontFamily: 'Lato-Light',
               fontSize: 40,
               paddingTop: '7%',
             }}
@@ -61,7 +61,7 @@ class Login extends React.Component {
           <Input
             placeholder="Email"
             placeholderTextColor="#4f4f4f"
-            leftIcon={<Icon name="user" size={18} color="#4f4f4f" />}
+            leftIcon={<Icon name="envelope" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
             inputContainerStyle={{
               borderBottomColor: 'rgba(255, 255, 255, 0)',

@@ -14,7 +14,6 @@ function userReducer(state = initialState, action) {
         ...state,
         userData: {
           ...state.userData,
-          name: action.payload.name,
           token: action.payload.token,
         },
       };

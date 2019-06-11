@@ -1,43 +1,31 @@
-import { APP_URL, APP_ID } from 'react-native-dotenv';
 import request from '../helpers/api-handler';
 
 function login({ email, password }) {
-  console.log(APP_URL, APP_ID);
   return request(
     {
-      custom_base_url: `https://${APP_URL}`,
-      url: '/oauth/token',
+      url: '/api-token-auth/',
       method: 'POST',
       data: {
-        client_id: APP_ID,
-        username: email,
+        email,
         password,
-        realm: 'Username-Password-Authentication',
-        audience: 'https://db_test',
-        grant_type: 'password',
-        scope: 'read:sample',
       },
     },
-    false,
   );
 }
 
-function register({ email, password }) {
-  console.log(APP_URL, APP_ID);
+function register({ email, fullName, password }) {
+  fullName = fullName.split(' ');
   return request(
     {
-      custom_base_url: `https://${APP_URL}`,
-      url: '/dbconnections/signup',
+      url: '/user/',
       method: 'POST',
       data: {
-        client_id: APP_ID,
         email,
+        first_name: fullName[0],
+        last_name: fullName[1],
         password,
-        scope: 'read:sample',
-        connection: 'Username-Password-Authentication',
       },
     },
-    false,
   );
 }
 

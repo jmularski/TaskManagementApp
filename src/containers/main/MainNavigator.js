@@ -1,38 +1,18 @@
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
 
-import StatisticsScreen from './Statistics';
+import ProjectsScreen from './Projects';
 import OptionsScreen from './Options';
 
-const MainNavigator = createBottomTabNavigator(
+const MainNavigator = createStackNavigator(
   {
-    Statistics: StatisticsScreen,
+    Projects: ProjectsScreen,
     Options: OptionsScreen,
   },
   {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
-        const { routeName } = navigation.state;
-        let iconName;
-
-        switch (routeName) {
-          case 'Statistics':
-            iconName = 'md-analytics';
-            break;
-          case 'Options':
-            iconName = 'md-settings';
-            break;
-        }
-
-        return <Icon name={iconName} size={25} color={tintColor} />;
-      },
-      tabBarOptions: {
-        activeTintColor: 'black',
-        inactiveTintColor: 'grey',
-      },
-    }),
+    defaultNavigationOptions: {
+      header: null,
+    },
   },
 );
 

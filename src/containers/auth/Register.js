@@ -8,7 +8,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 import { signUp } from '../../actions/authActions';
 import Toast from '../../utils/Toast';
-import AuthService from '../../services/auth.service';
 
 const zxcvbn = require('zxcvbn');
 
@@ -25,52 +24,50 @@ class Register extends React.Component {
 
   checkPasswordStrength = passwordText => zxcvbn(passwordText).score > 2;
 
-  checkInputCorrectness = (emailText, passwordText, repeatPasswordText) => {
-    if (emailText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
-    if (passwordText != repeatPasswordText) return 'Password and repeated password are not the same';
+  checkInputCorrectness = (emailText, fullNameText, passwordText, repeatPasswordText) => {
+    if (emailText === '' || fullNameText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
+    if (fullNameText.indexOf(' ') === 0) return 'Full name is in wrong format';
+    if (passwordText != repeatPasswordText) return 'Password and repeated password are not the same';
     if (!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
   };
 
   register = () => {
-    const { emailText, passwordText, repeatPasswordText } = this.state;
+    const { emailText, fullNameText, passwordText, repeatPasswordText } = this.state;
     const errors = this.checkInputCorrectness(
       emailText,
+      fullNameText,
       passwordText,
       repeatPasswordText,
     );
     if (errors) Toast(errors);
-    else this.sendDataToServer(emailText, passwordText);
+    else this.sendDataToServer(emailText, fullNameText, passwordText);
   };
 
-  sendDataToServer = (emailText, passwordText) => {
-    this.props.signUp(emailText, passwordText);
+  sendDataToServer = (emailText, fullNameText, passwordText) => {
+    this.props.signUp(emailText, fullNameText, passwordText);
   };
 
   render() {
     return (
       <View style={styles.main}>
         <View style={styles.mainContainer}>
-          <Image
-            source={require('../../../assets/img/login/piggy-bank.png')}
-            testID="registerImage"
-          />
           <Text
             testID="registerText"
             style={{
               color: '#232323',
-              fontFamily: 'lato-light',
+              fontFamily: 'Lato-Light',
               fontSize: 40,
               paddingTop: '7%',
             }}
           >
-            Welcome back
+            Create new account
           </Text>
           <Input
             placeholder="Email"
             placeholderTextColor="#4f4f4f"
-            leftIcon={<Icon name="user" size={18} color="#4f4f4f" />}
+            leftIcon={<Icon name="envelope" size={18} color="#4f4f4f" />}
             containerStyle={[styles.inputContainerStyle, styles.raised]}
             inputContainerStyle={{
               borderBottomColor: 'rgba(255, 255, 255, 0)',
@@ -78,7 +75,17 @@ class Register extends React.Component {
             onChangeText={emailText => this.setState({ emailText })}
             testID="registerEmailInput"
           />
-
+          <Input
+            placeholder="Full name"
+            placeholderTextColor="#4f4f4f"
+            leftIcon={<Icon name="user" size={18} color="#4f4f4f" />}
+            containerStyle={[styles.inputContainerStyle, styles.raised]}
+            inputContainerStyle={{
+              borderBottomColor: 'rgba(255, 255, 255, 0)',
+            }}
+            onChangeText={fullNameText => this.setState({ fullNameText })}
+            testID="registerFullNameInput"
+          />
           <Input
             placeholder="Password"
             placeholderTextColor="#4f4f4f"
@@ -159,7 +166,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  signUp: (email, password) => dispatch(signUp(email, password)),
+  signUp: (email, fullName, password) => dispatch(signUp(email, fullName, password)),
 });
 
 export default connect(

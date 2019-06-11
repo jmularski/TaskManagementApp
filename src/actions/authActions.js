@@ -5,9 +5,9 @@ export const signIn = (email, password) => ({
   payload: { email, password },
 });
 
-export const signUp = (email, password) => ({
+export const signUp = (email, fullName, password) => ({
   type: authActions.SIGN_UP,
-  payload: { email, password },
+  payload: { email, fullName, password },
 });
 
 export const authSuccess = userData => ({
