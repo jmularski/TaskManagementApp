@@ -1,4 +1,3 @@
-import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import MainNavigator from './containers/main/MainNavigator';
@@ -6,8 +5,8 @@ import AuthNavigator from './containers/auth/AuthNavigator';
 
 const AppNavigator = createStackNavigator(
   {
-    Main: MainNavigator,
     Auth: AuthNavigator,
+    Main: MainNavigator,
   },
   {
     defaultNavigationOptions: {

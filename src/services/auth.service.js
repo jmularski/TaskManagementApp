@@ -29,9 +29,7 @@ function register({ email, fullName, password }) {
   );
 }
 
-const AuthService = {
+export default AuthService = {
   login,
   register,
 };
-
-export default AuthService;

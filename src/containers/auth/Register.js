@@ -34,7 +34,9 @@ class Register extends React.Component {
   };
 
   register = () => {
-    const { emailText, fullNameText, passwordText, repeatPasswordText } = this.state;
+    const {
+      emailText, fullNameText, passwordText, repeatPasswordText,
+    } = this.state;
     const errors = this.checkInputCorrectness(
       emailText,
       fullNameText,

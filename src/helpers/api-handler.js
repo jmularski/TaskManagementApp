@@ -1,19 +1,21 @@
 import axios from 'axios';
 
 const request = async (options) => {
-  let BASE_URL = 'https://74aef9e9.ngrok.io';
+  const BASE_URL = 'https://20ea5e9b.ngrok.io';
+
+  let headers = {
+    'Content-Type': 'application/json',
+  };
 
   let authHeader = null;
   if (options.authHeader) {
     authHeader = options.authHeader;
+    headers.Authorization = "JWT " + authHeader;
   }
 
   const client = axios.create({
     baseURL: BASE_URL,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: authHeader,
-    },
+    headers
   });
 
   return client(options);
