@@ -5,6 +5,10 @@ import {
 import { Card, Icon, ListItem } from 'react-native-elements';
 
 export default class Projects extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
   constructor(props) {
     super(props);
 

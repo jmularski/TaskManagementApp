@@ -8,11 +8,6 @@ const MainNavigator = createStackNavigator(
     Projects: ProjectsScreen,
     Options: OptionsScreen,
   },
-  {
-    defaultNavigationOptions: {
-      header: null,
-    },
-  },
 );
 
 export default MainNavigator;
