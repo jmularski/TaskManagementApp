@@ -7,12 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fec881e-5197-45ba-afe6-f85ddc24aa3d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/actions/userActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/containers/main/Options/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/main/Options/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/userReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sagas/userSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sagas/userSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.dev.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../junit.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/RootNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/RootNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/containers/main/Projects/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/main/Projects/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

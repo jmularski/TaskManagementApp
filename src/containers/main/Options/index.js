@@ -2,10 +2,10 @@ import React from 'react';
 import {
   View, StyleSheet, ActivityIndicator, Image,
 } from 'react-native';
-import { Input, CheckBox, Button } from 'react-native-elements';
+import { Input, CheckBox } from 'react-native-elements';
 import { connect } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
 import { getSelfInfo, updateUser } from '../../../actions/userActions';
+import Button from '../../../utils/Button';
 import Toast from '../../../utils/Toast';
 
 const _ = require('lodash');
@@ -120,14 +120,6 @@ class Options extends React.Component {
           />
           <Button
             title="Update profile"
-            titleProps={{ fontFamily: 'Lato-Light' }}
-            ViewComponent={LinearGradient}
-            linearGradientProps={{
-              colors: ['#53F539', '#33ED30'],
-              start: { x: 0.5, y: 0.5 },
-            }}
-            buttonStyle={styles.buttonStyle}
-            disabledStyle={styles.buttonStyle}
             disabled={this.isChanged()}
             onPress={() => this.updateProfile()}
             testID="optionsUpdateProfile"
@@ -186,11 +178,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonStyle: {
-    borderRadius: 20,
-    elevation: 3,
-    width: 330,
-    paddingTop: 3,
-    paddingBottom: 3,
-  },
+  
 });

@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  FlatList, View, Text, StyleSheet,
+  FlatList, View, Text, StyleSheet, TouchableWithoutFeedback
 } from 'react-native';
-import { Card, Icon, ListItem } from 'react-native-elements';
+import { Card, Icon, ListItem, Input } from 'react-native-elements';
+import RBSheet from 'react-native-raw-bottom-sheet';
+import Button from '../../../utils/Button';
 
 export default class Projects extends React.Component {
   static navigationOptions = {
@@ -13,13 +15,7 @@ export default class Projects extends React.Component {
     super(props);
 
     this.state = {
-      notif: [
-        {
-          id: '123',
-          avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-          title: 'Notifka',
-        },
-      ],
+      
     };
   }
 
@@ -44,12 +40,14 @@ export default class Projects extends React.Component {
           />
         </View>
         <View style={styles.span}>
-          <Card
-            title="Add new project"
-            containerStyle={styles.roundCard}
-            dividerStyle={{ display: 'none' }}
-            titleStyle={{ justifyContent: 'center' }}
-          />
+          <TouchableWithoutFeedback onPress={() => this.RBSheet.open()}>
+            <Card
+              title="Add new project"
+              containerStyle={styles.roundCard}
+              dividerStyle={{ display: 'none' }}
+              titleStyle={{ justifyContent: 'center' }}
+            />
+          </TouchableWithoutFeedback>
         </View>
         <Text style={styles.subheaderText}>Notifications feed</Text>
         <FlatList
@@ -57,6 +55,27 @@ export default class Projects extends React.Component {
           data={this.state.notif}
           renderItem={this.renderItem}
         />
+        <RBSheet
+          ref={ref => {
+            this.RBSheet = ref;
+          }}
+          height={300}
+        >
+          <View style = {{ justifyContent: "center", alignItems: "center" }}>
+            <Text style={[styles.margin, {fontSize: 22}]}>Add new project</Text>
+            <Input
+              label="Project name"
+              containerStyle = {styles.margin}
+            />
+            <Input
+              label="Description"
+              containerStyle = {styles.margin}
+            />
+            <Button
+              title="Add new project"
+            />
+          </View>
+        </RBSheet>
       </View>
     );
   }
@@ -94,4 +113,14 @@ const styles = StyleSheet.create({
     marginTop: '-15%',
     fontSize: 23,
   },
+  buttonStyle: {
+    borderRadius: 20,
+    elevation: 3,
+    width: 330,
+    paddingTop: 3,
+    paddingBottom: 3,
+  },
+  margin: {
+    margin: 15
+  }
 });
