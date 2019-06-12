@@ -67,15 +67,15 @@ describe('Login', () => {
       await element(by.id('loginEmailInput')).replaceText(data.email);
       await element(by.id('loginPasswordInput')).replaceText('wrong');
       await element(by.id('loginButton')).tap();
-      await waitFor(element(by.text('Wrong email or password.'))).toBeVisible().withTimeout(10000);
-      await expect(element(by.text('Wrong email or password.'))).toBeVisible();
+      await waitFor(element(by.text('Unable to log in with provided credentials.'))).toBeVisible().withTimeout(10000);
+      await expect(element(by.text('Unable to log in with provided credentials.'))).toBeVisible();
     });
-    it('should direct to card page when is successful', async () => {
+    it('should direct to projects page when is successful', async () => {
       await element(by.id('loginEmailInput')).replaceText(data.email);
       await element(by.id('loginPasswordInput')).replaceText(data.password);
       await element(by.id('loginButton')).tap();
-      await waitFor(element(by.text('Card'))).toBeVisible().withTimeout(20000);
-      await expect(element(by.text('Card'))).toBeVisible();
+      await waitFor(element(by.text('Projects'))).toBeVisible().withTimeout(20000);
+      await expect(element(by.text('Projects'))).toBeVisible();
     });
   });
 });

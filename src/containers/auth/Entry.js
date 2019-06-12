@@ -4,17 +4,18 @@ import { Button } from 'react-native-elements';
 
 export default class Entry extends Component {
   render() {
+    const { navigation } = this.props;
     return (
       <View testID="WelcomeView">
         <View>
           <Button
             title="Sign in"
-            onPress={() => this.props.navigation.navigate('Login')}
+            onPress={() => navigation.navigate('Login')}
             testID="signInButton"
           />
           <Button
             title="Sign up"
-            onPress={() => this.props.navigation.navigate('Register')}
+            onPress={() => navigation.navigate('Register')}
             testID="signUpButton"
           />
         </View>

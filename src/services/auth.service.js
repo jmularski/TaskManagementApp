@@ -29,7 +29,7 @@ function register({ email, fullName, password }) {
   );
 }
 
-export default AuthService = {
+export default {
   login,
   register,
 };

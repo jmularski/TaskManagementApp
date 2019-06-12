@@ -35,7 +35,7 @@ function* signUpUser({ payload }) {
   }
 }
 
-function* handleAuthSuccess({ payload }) {
+function* handleAuthSuccess() {
   yield put(setToMainDrawer());
 }
 
