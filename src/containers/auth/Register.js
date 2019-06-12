@@ -16,6 +16,7 @@ class Register extends React.Component {
     super(props);
     this.state = {
       emailText: '',
+      fullNameText: '',
       passwordText: '',
       repeatPasswordText: '',
       loading: false,
@@ -26,15 +27,17 @@ class Register extends React.Component {
 
   checkInputCorrectness = (emailText, fullNameText, passwordText, repeatPasswordText) => {
     if (emailText === '' || fullNameText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
-    if (fullNameText.indexOf(' ') === 0) return 'Full name is in wrong format';
-    if (passwordText != repeatPasswordText) return 'Password and repeated password are not the same';
+    if (fullNameText.indexOf(' ') === -1) return 'Full name is in wrong format';
+    if (passwordText !== repeatPasswordText) return 'Password and repeated password are not the same';
     if (!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
   };
 
   register = () => {
-    const { emailText, fullNameText, passwordText, repeatPasswordText } = this.state;
+    const {
+      emailText, fullNameText, passwordText, repeatPasswordText,
+    } = this.state;
     const errors = this.checkInputCorrectness(
       emailText,
       fullNameText,
