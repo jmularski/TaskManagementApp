@@ -54,3 +54,8 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+# other stuff
+.dev.env
+.env
+junit.xml
