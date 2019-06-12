@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, Image, Platform, TouchableWithoutFeedback
+  StyleSheet, Text, View, Image, Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, SocialIcon } from 'react-native-elements';
