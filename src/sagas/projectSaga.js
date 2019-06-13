@@ -11,6 +11,7 @@ import Toast from '../utils/Toast';
 function* addProject({ payload }) {
   try {
     payload.token = yield select(getToken);
+    console.log(payload);
     const response = yield call(ProjectService.addProject, payload);
     if (response.status === 200 || response.status === 201) {
       yield put(addProjectSuccess(response.data));
@@ -18,6 +19,7 @@ function* addProject({ payload }) {
       yield put(addProjectFailure());
     }
   } catch (e) {
+    console.log(e.message);
     yield put(addProjectFailure());
   }
 };
@@ -32,7 +34,7 @@ function* addProjectFailureSaga() {
 
 function* getProjects() {
   try {
-    const token = select(getToken);
+    const token = yield select(getToken);
     const response = yield call(ProjectService.getProject, token);
     if (response.status === 200 || response.status === 201) {
       yield put(getProjectsSuccess(response.data));
@@ -44,7 +46,7 @@ function* getProjects() {
   };
 };
 
-function getProjectsFailureSaga() {
+function* getProjectsFailureSaga() {
   yield call(Toast, 'Failed to fetch your projects!');
 };
 

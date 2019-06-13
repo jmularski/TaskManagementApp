@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   nav: navReducer,
   auth: authReducer,
   user: userReducer,
-  project: projectReducer
+  projects: projectReducer
 });
 
 export default rootReducer;

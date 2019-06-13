@@ -1,22 +1,30 @@
 import React from 'react';
 import {
-  FlatList, View, Text, StyleSheet, TouchableWithoutFeedback
+  FlatList, View, Text, StyleSheet, TouchableWithoutFeedback, ActivityIndicator
 } from 'react-native';
 import { Card, Icon, ListItem, Input } from 'react-native-elements';
+import { addProject, getProjects } from '../../../actions/projectActions';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import Button from '../../../utils/Button';
+import { connect } from 'react-redux';
+import Toast from 'react-native-root-toast';
 
-export default class Projects extends React.Component {
+class Projects extends React.Component {
   static navigationOptions = {
     header: null
   };
 
   constructor(props) {
     super(props);
-
     this.state = {
-      
-    };
+      notif: [],
+      projectName: '',
+      projectDesc: '',
+    }
+  }
+
+  componentDidMount() {
+    this.props.getProjects();
   }
 
   renderItem = ({ item }) => (
@@ -25,6 +33,34 @@ export default class Projects extends React.Component {
       leftAvatar={{ source: { uri: item.avatar } }}
     />
   )
+
+  renderCard = ({ item }) => (
+    <TouchableWithoutFeedback onPress={() => this.handleCardClick(item.id)}>
+      <Card
+        title={item.project_name}
+        containerStyle={styles.roundCardList}
+        dividerStyle={{ display: 'none' }}
+        titleStyle={{ justifyContent: 'center' }}
+      />
+    </TouchableWithoutFeedback>
+  );
+
+  handleCardClick = (key) => {
+    if (key == 0) {
+      this.RBSheet.open();
+    }
+  }
+
+  addProject = () => {
+    const { projectName, projectDesc } = this.state;
+    console.log(projectName, projectDesc);
+    if ( projectName === '' || projectDesc === '' ) { Toast('You need to fill all fields'); }
+    else {
+      this.RBSheet.close();
+      this.props.addProject(projectName, projectDesc);
+    }
+  }
+
 
   render() {
     return (
@@ -39,16 +75,19 @@ export default class Projects extends React.Component {
             testID="optionsButton"
           />
         </View>
-        <View style={styles.span}>
-          <TouchableWithoutFeedback onPress={() => this.RBSheet.open()}>
-            <Card
-              title="Add new project"
-              containerStyle={styles.roundCard}
-              dividerStyle={{ display: 'none' }}
-              titleStyle={{ justifyContent: 'center' }}
+        {
+          this.props.projects.isFetching
+          ? <ActivityIndicator size="large" color="#0000ff" />
+          :
+          <View style={{height: '15%'}}>
+            <FlatList
+                horizontal = {true}
+                keyExtractor = {item => item.id.toString()}
+                data = {this.props.projects.projects}
+                renderItem = {this.renderCard}
             />
-          </TouchableWithoutFeedback>
-        </View>
+          </View>
+        }
         <Text style={styles.subheaderText}>Notifications feed</Text>
         <FlatList
           keyExtractor={item => item.id}
@@ -66,13 +105,16 @@ export default class Projects extends React.Component {
             <Input
               label="Project name"
               containerStyle = {styles.margin}
+              onChangeText = {projectName => this.setState({projectName})}
             />
             <Input
               label="Description"
               containerStyle = {styles.margin}
+              onChangeText = {projectDesc => this.setState({projectDesc})}
             />
             <Button
               title="Add new project"
+              onPress={() => this.addProject()}
             />
           </View>
         </RBSheet>
@@ -80,6 +122,21 @@ export default class Projects extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  projects: state.projects 
+});
+
+const mapDispatchToProps = dispatch => ({
+  addProject: (title, description) => dispatch(addProject({title, description})),
+  getProjects: () => dispatch(getProjects()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Projects);
+
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -99,18 +156,16 @@ const styles = StyleSheet.create({
   iconStyle: {
     marginTop: '1%',
   },
-  roundCard: {
+  roundCardList: {
     borderRadius: 15,
-    marginLeft: '-1%',
-    height: '50%',
-    width: '50%',
     justifyContent: 'center',
+    width: 150,
     alignItems: 'center',
     backgroundColor: '#d3d3d3',
   },
   subheaderText: {
     fontFamily: 'Lato-Light',
-    marginTop: '-15%',
+    marginTop: '5%',
     fontSize: 23,
   },
   buttonStyle: {

@@ -7,7 +7,7 @@ function addProject({ title, description, token }) {
       method: 'POST',
       authHeader: token,
       data: {
-        title,
+        project_name: title,
         description,
       },
     },
