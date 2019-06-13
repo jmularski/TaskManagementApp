@@ -18,9 +18,19 @@ class Options extends React.Component {
   constructor(props) {
     super(props);
 
+    this.startObj = {};
+
+    this.state = this.startObj;
+  }
+
+  componentDidMount() {
+    this.props.getSelfInfo();
+  }
+
+  componentWillReceiveProps(props){
     const {
       email, first_name, last_name, profile_img, settings,
-    } = this.props.user.userData;
+    } = props.user.userData;
 
     this.startObj = {
       email,
@@ -30,10 +40,6 @@ class Options extends React.Component {
     };
 
     this.state = this.startObj;
-  }
-
-  componentDidMount() {
-    this.props.getSelfInfo();
   }
 
   isChanged = () => _.isEqual(this.startObj, this.state);

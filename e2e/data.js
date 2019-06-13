@@ -6,4 +6,6 @@ export default {
   password: '123aaaAA31!',
   registerEmail: `${randomstring.generate()}@test.hello`,
   optionsName: `${randomstring.generate()} ${randomstring.generate()}`,
+  projectName: `${randomstring.generate()}`,
+  projectDesc: `${randomstring.generate()}`,
 };

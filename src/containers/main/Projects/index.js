@@ -25,7 +25,11 @@ class Projects extends React.Component {
 
   componentDidMount() {
     this.props.getProjects();
-  }
+  };
+
+  componentWillUnmount() {
+    this.RBSheet.close()
+  };
 
   renderItem = ({ item }) => (
     <ListItem
@@ -35,7 +39,10 @@ class Projects extends React.Component {
   )
 
   renderCard = ({ item }) => (
-    <TouchableWithoutFeedback onPress={() => this.handleCardClick(item.id)}>
+    <TouchableWithoutFeedback 
+      onPress={() => this.handleCardClick(item.id)}
+      testID={`card${item.id}`}
+    >
       <Card
         title={item.project_name}
         containerStyle={styles.roundCardList}
@@ -85,6 +92,7 @@ class Projects extends React.Component {
                 keyExtractor = {item => item.id.toString()}
                 data = {this.props.projects.projects}
                 renderItem = {this.renderCard}
+                testID="projectList"
             />
           </View>
         }
@@ -93,12 +101,15 @@ class Projects extends React.Component {
           keyExtractor={item => item.id}
           data={this.state.notif}
           renderItem={this.renderItem}
+          testID='notificationsList'
         />
         <RBSheet
           ref={ref => {
             this.RBSheet = ref;
           }}
           height={300}
+          duration={250}
+          testID='projectBottomDrawer'
         >
           <View style = {{ justifyContent: "center", alignItems: "center" }}>
             <Text style={[styles.margin, {fontSize: 22}]}>Add new project</Text>
@@ -106,15 +117,18 @@ class Projects extends React.Component {
               label="Project name"
               containerStyle = {styles.margin}
               onChangeText = {projectName => this.setState({projectName})}
+              testID="projectNameInput"
             />
             <Input
               label="Description"
               containerStyle = {styles.margin}
               onChangeText = {projectDesc => this.setState({projectDesc})}
+              testID="projectDescInput"
             />
             <Button
               title="Add new project"
               onPress={() => this.addProject()}
+              testID="addNewProjectButton"
             />
           </View>
         </RBSheet>

@@ -25,7 +25,7 @@ function* addProject({ payload }) {
 };
 
 function* addProjectSuccessSaga() {
-  yield call(Toast, 'Added project successfully');
+  yield call(Toast, 'Added project successfully!');
 };
 
 function* addProjectFailureSaga() {

@@ -17,7 +17,7 @@ function projectReducer(state = initialState, action) {
       }
     case projectActions.ADD_PROJECT_SUCCESS:
       return {
-        projects: [...state.projects, ...action.payload]
+        projects: [...state.projects, action.payload]
       };
     case projectActions.GET_PROJECTS_SUCCESS:
       return {
