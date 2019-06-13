@@ -7,7 +7,7 @@ import data from '../data';
 describe('Projects screen', () => {
   beforeAll(async () => {
     await login();
-  })
+  });
   describe('Render', () => {
     it('has options icon', () => {
       expect(element(by.id('optionsButton'))).toBeVisible();

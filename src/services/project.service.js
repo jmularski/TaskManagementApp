@@ -12,7 +12,7 @@ function addProject({ title, description, token }) {
       },
     },
   );
-};
+}
 
 function getProject(token) {
   return request(
@@ -22,7 +22,7 @@ function getProject(token) {
       authHeader: token,
     },
   );
-};
+}
 
 export default {
   addProject,

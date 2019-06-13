@@ -12,7 +12,7 @@ const _ = require('lodash');
 
 class Options extends React.Component {
   static navigationOptions = {
-    title: "Options"
+    title: 'Options',
   }
 
   constructor(props) {
@@ -27,7 +27,7 @@ class Options extends React.Component {
     this.props.getSelfInfo();
   }
 
-  componentWillReceiveProps(props){
+  componentWillReceiveProps(props) {
     const {
       email, first_name, last_name, profile_img, settings,
     } = props.user.userData;
@@ -184,5 +184,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  
+
 });

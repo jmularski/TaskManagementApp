@@ -10,7 +10,7 @@ export default class CustomButton extends React.Component {
 
   render() {
     return (
-      <Button 
+      <Button
         titleProps={{ fontFamily: 'Lato-Light' }}
         ViewComponent={LinearGradient}
         linearGradientProps={{
@@ -20,13 +20,13 @@ export default class CustomButton extends React.Component {
         buttonStyle={styles.buttonStyle}
         disabledStyle={styles.buttonStyle}
 
-        title = {this.props.title}
-        testID = {this.props.testID}
-        onPress = {this.props.onPress}
-        disabled = {this.props.disabled}
+        title={this.props.title}
+        testID={this.props.testID}
+        onPress={this.props.onPress}
+        disabled={this.props.disabled}
 
       />
-    )
+    );
   }
 }
 
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     paddingBottom: 3,
   },
-})
+});

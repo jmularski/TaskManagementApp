@@ -1,17 +1,19 @@
 import React from 'react';
 import {
-  FlatList, View, Text, StyleSheet, TouchableWithoutFeedback, ActivityIndicator
+  FlatList, View, Text, StyleSheet, TouchableWithoutFeedback, ActivityIndicator,
 } from 'react-native';
-import { Card, Icon, ListItem, Input } from 'react-native-elements';
-import { addProject, getProjects } from '../../../actions/projectActions';
+import {
+  Card, Icon, ListItem, Input,
+} from 'react-native-elements';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import Button from '../../../utils/Button';
 import { connect } from 'react-redux';
 import Toast from 'react-native-root-toast';
+import Button from '../../../utils/Button';
+import { addProject, getProjects } from '../../../actions/projectActions';
 
 class Projects extends React.Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   constructor(props) {
@@ -20,16 +22,16 @@ class Projects extends React.Component {
       notif: [],
       projectName: '',
       projectDesc: '',
-    }
+    };
   }
 
   componentDidMount() {
     this.props.getProjects();
-  };
+  }
 
   componentWillUnmount() {
-    this.RBSheet.close()
-  };
+    this.RBSheet.close();
+  }
 
   renderItem = ({ item }) => (
     <ListItem
@@ -39,7 +41,7 @@ class Projects extends React.Component {
   )
 
   renderCard = ({ item }) => (
-    <TouchableWithoutFeedback 
+    <TouchableWithoutFeedback
       onPress={() => this.handleCardClick(item.id)}
       testID={`card${item.id}`}
     >
@@ -61,8 +63,7 @@ class Projects extends React.Component {
   addProject = () => {
     const { projectName, projectDesc } = this.state;
     console.log(projectName, projectDesc);
-    if ( projectName === '' || projectDesc === '' ) { Toast('You need to fill all fields'); }
-    else {
+    if (projectName === '' || projectDesc === '') { Toast('You need to fill all fields'); } else {
       this.RBSheet.close();
       this.props.addProject(projectName, projectDesc);
     }
@@ -84,45 +85,46 @@ class Projects extends React.Component {
         </View>
         {
           this.props.projects.isFetching
-          ? <ActivityIndicator size="large" color="#0000ff" />
-          :
-          <View style={{height: '15%'}}>
-            <FlatList
-                horizontal = {true}
-                keyExtractor = {item => item.id.toString()}
-                data = {this.props.projects.projects}
-                renderItem = {this.renderCard}
-                testID="projectList"
-            />
-          </View>
+            ? <ActivityIndicator size="large" color="#0000ff" />
+            : (
+              <View style={{ height: '15%' }}>
+                <FlatList
+                  horizontal
+                  keyExtractor={item => item.id.toString()}
+                  data={this.props.projects.projects}
+                  renderItem={this.renderCard}
+                  testID="projectList"
+                />
+              </View>
+            )
         }
         <Text style={styles.subheaderText}>Notifications feed</Text>
         <FlatList
           keyExtractor={item => item.id}
           data={this.state.notif}
           renderItem={this.renderItem}
-          testID='notificationsList'
+          testID="notificationsList"
         />
         <RBSheet
-          ref={ref => {
+          ref={(ref) => {
             this.RBSheet = ref;
           }}
           height={300}
           duration={250}
-          testID='projectBottomDrawer'
+          testID="projectBottomDrawer"
         >
-          <View style = {{ justifyContent: "center", alignItems: "center" }}>
-            <Text style={[styles.margin, {fontSize: 22}]}>Add new project</Text>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <Text style={[styles.margin, { fontSize: 22 }]}>Add new project</Text>
             <Input
               label="Project name"
-              containerStyle = {styles.margin}
-              onChangeText = {projectName => this.setState({projectName})}
+              containerStyle={styles.margin}
+              onChangeText={projectName => this.setState({ projectName })}
               testID="projectNameInput"
             />
             <Input
               label="Description"
-              containerStyle = {styles.margin}
-              onChangeText = {projectDesc => this.setState({projectDesc})}
+              containerStyle={styles.margin}
+              onChangeText={projectDesc => this.setState({ projectDesc })}
               testID="projectDescInput"
             />
             <Button
@@ -138,17 +140,17 @@ class Projects extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  projects: state.projects 
+  projects: state.projects,
 });
 
 const mapDispatchToProps = dispatch => ({
-  addProject: (title, description) => dispatch(addProject({title, description})),
+  addProject: (title, description) => dispatch(addProject({ title, description })),
   getProjects: () => dispatch(getProjects()),
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Projects);
 
 
@@ -190,6 +192,6 @@ const styles = StyleSheet.create({
     paddingBottom: 3,
   },
   margin: {
-    margin: 15
-  }
+    margin: 15,
+  },
 });
