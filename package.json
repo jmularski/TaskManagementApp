@@ -15,6 +15,7 @@
     "react-native": "^0.59.8",
     "react-native-elements": "1.0.0-beta5",
     "react-native-gesture-handler": "^1.2.1",
+    "react-native-image-crop-picker": "^0.24.1",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-raw-bottom-sheet": "^2.0.2",
     "react-native-root-toast": "^3.0.2",

@@ -17,11 +17,22 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../e2e/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/../e2e/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/paymentappejected/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/paymentappejected/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ios/paymentappejected.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../ios/paymentappejected.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/actions/userActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/containers/main/Options/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/main/Options/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/containers/main/Projects/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/main/Projects/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/reducers/projectReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/projectReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sagas/projectSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sagas/projectSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/helpers/api-handler.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/helpers/api-handler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/userReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sagas/userSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sagas/userSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/types/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/types/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

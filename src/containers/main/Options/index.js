@@ -1,14 +1,15 @@
 import React from 'react';
 import {
-  View, StyleSheet, ActivityIndicator, Image,
+  View, StyleSheet, ActivityIndicator, Image, TouchableWithoutFeedback,
 } from 'react-native';
 import { Input, CheckBox } from 'react-native-elements';
+import ImagePicker from 'react-native-image-crop-picker';
 import { connect } from 'react-redux';
-import { getSelfInfo, updateUser } from '../../../actions/userActions';
+import { getSelfInfo, updateUser, updateImage } from '../../../actions/userActions';
 import Button from '../../../utils/Button';
 import Toast from '../../../utils/Toast';
 
-const _ = require('lodash');
+import {isEqual, transform, isObject} from 'lodash';
 
 class Options extends React.Component {
   static navigationOptions = {
@@ -42,15 +43,15 @@ class Options extends React.Component {
     this.state = this.startObj;
   }
 
-  isChanged = () => _.isEqual(this.startObj, this.state);
+  isChanged = () => isEqual(this.startObj, this.state);
 
   deepComparison = () => {
     // derived from gist https://gist.github.com/Yimiprod/7ee176597fef230d1451
 
     function changes(object, base) {
-      return _.transform(object, (result, value, key) => {
-        if (!_.isEqual(value, base[key])) {
-          result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+      return transform(object, (result, value, key) => {
+        if (!isEqual(value, base[key])) {
+          result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
         }
       });
     }
@@ -90,6 +91,15 @@ class Options extends React.Component {
     }
   };
 
+  updateImage = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+    }).then(image => {
+      this.props.updateImage(image);
+    })
+  }
+
   renderUpdateForm = () => {
     const {
       email, full_name, profile_img, email_notifications_on_events,
@@ -98,13 +108,15 @@ class Options extends React.Component {
     return (
       <View>
         <View style={styles.topBar}>
-          <Image
-            source={{ uri: profile_img }}
-            style={{
-              width: 100, height: 100, borderRadius: 400, borderWidth: 1, marginTop: '2%',
-            }}
-            testID="optionsImage"
-          />
+          <TouchableWithoutFeedback onPress = {() => this.updateImage()}>
+            <Image
+              source={{ uri: profile_img }}
+              style={{
+                width: 100, height: 100, borderRadius: 400, borderWidth: 1, marginTop: '2%',
+              }}
+              testID="optionsImage"
+            />
+          </TouchableWithoutFeedback>
           <Input
             value={full_name}
             onChangeText={fullNameText => this.setState({ full_name: fullNameText })}
@@ -154,6 +166,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSelfInfo: () => dispatch(getSelfInfo()),
   updateUser: data => dispatch(updateUser(data)),
+  updateImage: image => dispatch(updateImage({image})),
 });
 
 export default connect(

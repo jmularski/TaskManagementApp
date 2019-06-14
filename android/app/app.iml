@@ -179,6 +179,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-core:3.1.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.wix:detox:12.10.2@aar" level="project" />
     <orderEntry type="module" module-name="react-native-linear-gradient" />
+    <orderEntry type="module" module-name="react-native-image-crop-picker" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
     <orderEntry type="module" module-name="@react-native-community_async-storage" />
     <orderEntry type="module" module-name="react-native-gesture-handler" />

@@ -47,6 +47,14 @@ function userReducer(state = initialState, action) {
           ...action.payload,
         },
       };
+    case userActions.UPDATE_IMAGE_SUCCESS:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          profile_img: payload.profile_img
+        }
+      }
     case userActions.REQUEST_FAILURE:
       return {
         ...state,
