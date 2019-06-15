@@ -10,7 +10,16 @@ import { signUp } from '../../actions/authActions';
 import Button from '../../utils/Button';
 import Toast from '../../utils/Toast';
 
-class Register extends React.Component {
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  signUp: (email, fullName, password) => dispatch(signUp(email, fullName, password)),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -157,19 +166,6 @@ class Register extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  signUp: (email, fullName, password) => dispatch(signUp(email, fullName, password)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Register);
 
 const styles = StyleSheet.create({
   container: {

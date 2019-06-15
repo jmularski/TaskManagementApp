@@ -8,12 +8,23 @@ import { Input, CheckBox } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
 import { connect } from 'react-redux';
 import { isEqual, transform, isObject } from 'lodash';
+import * as yup from 'yup';
 import { getSelfInfo, updateUser, updateImage } from '../../../actions/userActions';
 import Button from '../../../utils/Button';
 import Toast from '../../../utils/Toast';
-import * as yup from 'yup';
 
-class Options extends React.Component {
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getSelfInfo: () => dispatch(getSelfInfo()),
+  updateUser: data => dispatch(updateUser(data)),
+  updateImage: image => dispatch(updateImage({ image })),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Options extends React.Component {
   static navigationOptions = {
     title: 'Options',
   }
@@ -26,8 +37,8 @@ class Options extends React.Component {
     this.state = this.startObj;
 
     this.schema = yup.object().shape({
-      email: yup.string().required("You have to fill up all fields.").email("Your email was in wrong format."),
-      fullName: yup.string().required("You have to fill up all fields.").matches(/\s/, "Full name is in wrong format"),
+      email: yup.string().required('You have to fill up all fields.').email('Your email was in wrong format.'),
+      fullName: yup.string().required('You have to fill up all fields.').matches(/\s/, 'Full name is in wrong format'),
     });
   }
 
@@ -66,14 +77,14 @@ class Options extends React.Component {
     return changes(this.state, this.startObj);
   };
 
-  checkInputCorrectness = (emailText, fullNameText) => {
+  checkInputCorrectness = async (emailText, fullNameText) => {
     try {
-      await this.schema.validate({ email: emailText, fullName: fullNameText })
+      await this.schema.validate({ email: emailText, fullName: fullNameText });
       return true;
-    } catch(e) {
+    } catch (e) {
       Toast(e.message);
       return false;
-    };
+    }
   };
 
   transform_full_name = (diff) => {
@@ -91,11 +102,11 @@ class Options extends React.Component {
     this.props.updateUser(diff);
   }
 
-  updateProfile = () => {
+  updateProfile = async () => {
     const { email, full_name } = this.state;
 
     let diff = this.deepComparison();
-    const isValid = this.checkInputCorrectness(email, full_name);
+    const isValid = await this.checkInputCorrectness(email, full_name);
     if (isValid) {
       if (diff.full_name) diff = this.transform_full_name(diff);
       this.sendDataToServer(diff);
@@ -171,21 +182,6 @@ class Options extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getSelfInfo: () => dispatch(getSelfInfo()),
-  updateUser: data => dispatch(updateUser(data)),
-  updateImage: image => dispatch(updateImage({ image })),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Options);
 
 const styles = StyleSheet.create({
   container: {

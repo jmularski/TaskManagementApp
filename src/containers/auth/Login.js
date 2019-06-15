@@ -10,7 +10,16 @@ import { signIn } from '../../actions/authActions';
 import Button from '../../utils/Button';
 import Toast from '../../utils/Toast';
 
-class Login extends React.Component {
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  signIn: (email, password) => dispatch(signIn(email, password)),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Login extends React.Component {
   constructor(props) {
     super(props);
 
@@ -124,19 +133,6 @@ class Login extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = dispatch => ({
-  signIn: (email, password) => dispatch(signIn(email, password)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Login);
 
 const styles = StyleSheet.create({
   container: {

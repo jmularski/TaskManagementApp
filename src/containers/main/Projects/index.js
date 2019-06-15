@@ -8,11 +8,20 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { connect } from 'react-redux';
 import Toast from 'react-native-root-toast';
-import * as yup from 'yup';
 import Button from '../../../utils/Button';
 import { addProject, getProjects } from '../../../actions/projectActions';
 
-class Projects extends React.Component {
+const mapStateToProps = state => ({
+  projects: state.projects,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addProject: (title, description) => dispatch(addProject({ title, description })),
+  getProjects: () => dispatch(getProjects()),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Projects extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -141,21 +150,6 @@ class Projects extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  projects: state.projects,
-});
-
-const mapDispatchToProps = dispatch => ({
-  addProject: (title, description) => dispatch(addProject({ title, description })),
-  getProjects: () => dispatch(getProjects()),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Projects);
-
 
 const styles = StyleSheet.create({
   containerStyle: {

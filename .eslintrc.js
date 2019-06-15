@@ -12,5 +12,10 @@ module.exports = {
   },
   'globals': {
     "fetch": false
+  },
+  'parserOptions': {
+    'ecmaFeatures': {
+      'legacyDecorators': true
+    }
   }
 }
