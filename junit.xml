@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" time="18.252">
-  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2019-06-12T15:54:14" time="17.238" tests="1">
-    <testcase classname="&lt;App /&gt; renders correctly" name="&lt;App /&gt; renders correctly" time="0.544">
-    </testcase>
-  </testsuite>
-</testsuites>

@@ -7,12 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fec881e-5197-45ba-afe6-f85ddc24aa3d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/actions/userActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/containers/main/Options/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/main/Options/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/userReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sagas/userSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sagas/userSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/RootNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/RootNavigator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/containers/task/Options.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/task/Options.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/containers/task/Tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/task/Tasks.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,8 +46,8 @@
     <panes>
       <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -182,7 +179,7 @@
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25235197" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25235197" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Captures" order="2" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="3" />
@@ -201,9 +198,9 @@
       <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Logcat" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5013835" side_tool="true" visible="true" weight="0.32937366" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.50249034" side_tool="true" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Build" order="12" sideWeight="0.4986165" visible="true" weight="0.32937366" />
+      <window_info anchor="bottom" id="Build" order="12" sideWeight="0.4975097" visible="true" weight="0.32937366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />

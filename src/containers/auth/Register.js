@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, Image, Platform,
+  StyleSheet, Text, View, Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input, Button, SocialIcon } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import { Input, SocialIcon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { signUp } from '../../actions/authActions';
+import Button from '../../utils/Button';
 import Toast from '../../utils/Toast';
 
 const zxcvbn = require('zxcvbn');
@@ -19,7 +19,6 @@ class Register extends React.Component {
       fullNameText: '',
       passwordText: '',
       repeatPasswordText: '',
-      loading: false,
     };
   }
 
@@ -116,21 +115,7 @@ class Register extends React.Component {
 
           <View style={{ marginTop: '7%' }}>
             <Button
-              loading={this.state.loading}
               title="Register"
-              titleProps={{ fontFamily: 'lato-light' }}
-              ViewComponent={LinearGradient}
-              linearGradientProps={{
-                colors: ['#53F539', '#33ED30'],
-                start: { x: 0.5, y: 0.5 },
-              }}
-              buttonStyle={{
-                borderRadius: 20,
-                elevation: 3,
-                width: 330,
-                paddingTop: 3,
-                paddingBottom: 3,
-              }}
               onPress={() => this.register()}
               testID="registerButton"
             />

@@ -36,8 +36,26 @@ function* updateUser({ payload }) {
   }
 }
 
-function* updateUserSuccessSaga({ payload }) {
+function* updateUserSuccessSaga() {
   yield call(Toast, 'Successful update!');
+}
+
+function* updateImage({ payload }) {
+  try {
+    const token = yield select(getToken);
+    const response = yield call(UserService.updateImage, payload.image, token);
+    if (response.status === 200) {
+      yield put(updateUserSuccess(response.data));
+    } else {
+      yield put(requestFailure(response.data));
+    }
+  } catch (e) {
+    yield put(requestFailure(Object.values(e.response.data)[0]));
+  }
+}
+
+function* updateImageSuccessSaga() {
+  yield call(Toast, 'Successfully updated image!');
 }
 
 function* requestFailureSaga({ payload }) {
@@ -49,6 +67,8 @@ export default function* userSaga() {
     takeEvery(userActions.GET_SELF_INFO, getSelfInfo),
     takeEvery(userActions.UPDATE_USER, updateUser),
     takeEvery(userActions.UPDATE_USER_SUCCESS, updateUserSuccessSaga),
+    takeEvery(userActions.UPDATE_IMAGE, updateImage),
+    takeEvery(userActions.UPDATE_IMAGE_SUCCESS, updateImageSuccessSaga),
     takeEvery(userActions.REQUEST_FAILURE, requestFailureSaga),
   ]);
 }

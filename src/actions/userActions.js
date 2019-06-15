@@ -19,6 +19,16 @@ export const updateUserSuccess = payload => ({
   payload,
 });
 
+export const updateImage = payload => ({
+  type: userActions.UPDATE_IMAGE,
+  payload,
+});
+
+export const updateImageSuccess = payload => ({
+  type: userActions.UPDATE_IMAGE_SUCCESS,
+  payload,
+});
+
 export const requestFailure = errorMsg => ({
   type: userActions.REQUEST_FAILURE,
   payload: errorMsg,

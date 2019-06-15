@@ -1,26 +1,39 @@
+/* eslint camelcase: 0 */
+
 import React from 'react';
 import {
-  View, StyleSheet, ActivityIndicator, Image,
+  View, StyleSheet, ActivityIndicator, Image, TouchableWithoutFeedback,
 } from 'react-native';
-import { Input, CheckBox, Button } from 'react-native-elements';
+import { Input, CheckBox } from 'react-native-elements';
+import ImagePicker from 'react-native-image-crop-picker';
 import { connect } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
-import { getSelfInfo, updateUser } from '../../../actions/userActions';
+import { isEqual, transform, isObject } from 'lodash';
+import { getSelfInfo, updateUser, updateImage } from '../../../actions/userActions';
+import Button from '../../../utils/Button';
 import Toast from '../../../utils/Toast';
 
-const _ = require('lodash');
 
 class Options extends React.Component {
   static navigationOptions = {
-    title: "Options"
+    title: 'Options',
   }
 
   constructor(props) {
     super(props);
 
+    this.startObj = {};
+
+    this.state = this.startObj;
+  }
+
+  componentDidMount() {
+    this.props.getSelfInfo();
+  }
+
+  componentWillReceiveProps(props) {
     const {
       email, first_name, last_name, profile_img, settings,
-    } = this.props.user.userData;
+    } = props.user.userData;
 
     this.startObj = {
       email,
@@ -32,19 +45,15 @@ class Options extends React.Component {
     this.state = this.startObj;
   }
 
-  componentDidMount() {
-    this.props.getSelfInfo();
-  }
-
-  isChanged = () => _.isEqual(this.startObj, this.state);
+  isChanged = () => isEqual(this.startObj, this.state);
 
   deepComparison = () => {
     // derived from gist https://gist.github.com/Yimiprod/7ee176597fef230d1451
 
     function changes(object, base) {
-      return _.transform(object, (result, value, key) => {
-        if (!_.isEqual(value, base[key])) {
-          result[key] = (_.isObject(value) && _.isObject(base[key])) ? changes(value, base[key]) : value;
+      return transform(object, (result, value, key) => {
+        if (!isEqual(value, base[key])) {
+          result[key] = (isObject(value) && isObject(base[key])) ? changes(value, base[key]) : value;
         }
       });
     }
@@ -75,14 +84,25 @@ class Options extends React.Component {
   }
 
   updateProfile = () => {
+    const { email, full_name } = this.state;
+
     let diff = this.deepComparison();
-    const errors = this.checkInputCorrectness(this.state.email, this.state.full_name);
+    const errors = this.checkInputCorrectness(email, full_name);
     if (errors) Toast(errors);
     else {
       if (diff.full_name) diff = this.transform_full_name(diff);
       this.sendDataToServer(diff);
     }
   };
+
+  updateImage = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+    }).then((image) => {
+      this.props.updateImage(image);
+    });
+  }
 
   renderUpdateForm = () => {
     const {
@@ -92,13 +112,15 @@ class Options extends React.Component {
     return (
       <View>
         <View style={styles.topBar}>
-          <Image
-            source={{ uri: profile_img }}
-            style={{
-              width: 100, height: 100, borderRadius: 400, borderWidth: 1, marginTop: '2%',
-            }}
-            testID="optionsImage"
-          />
+          <TouchableWithoutFeedback onPress={() => this.updateImage()}>
+            <Image
+              source={{ uri: profile_img }}
+              style={{
+                width: 100, height: 100, borderRadius: 400, borderWidth: 1, marginTop: '2%',
+              }}
+              testID="optionsImage"
+            />
+          </TouchableWithoutFeedback>
           <Input
             value={full_name}
             onChangeText={fullNameText => this.setState({ full_name: fullNameText })}
@@ -115,19 +137,13 @@ class Options extends React.Component {
           <CheckBox
             title="Do you want to receive notifications on email?"
             checked={email_notifications_on_events}
-            onPress={() => this.setState({ email_notifications_on_events: !this.state.email_notifications_on_events })}
+            onPress={() => this.setState(prevState => ({
+              email_notifications_on_events: !prevState.email_notifications_on_events,
+            }))}
             testID="optionsNotifCheckbox"
           />
           <Button
             title="Update profile"
-            titleProps={{ fontFamily: 'Lato-Light' }}
-            ViewComponent={LinearGradient}
-            linearGradientProps={{
-              colors: ['#53F539', '#33ED30'],
-              start: { x: 0.5, y: 0.5 },
-            }}
-            buttonStyle={styles.buttonStyle}
-            disabledStyle={styles.buttonStyle}
             disabled={this.isChanged()}
             onPress={() => this.updateProfile()}
             testID="optionsUpdateProfile"
@@ -156,6 +172,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSelfInfo: () => dispatch(getSelfInfo()),
   updateUser: data => dispatch(updateUser(data)),
+  updateImage: image => dispatch(updateImage({ image })),
 });
 
 export default connect(
@@ -186,11 +203,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonStyle: {
-    borderRadius: 20,
-    elevation: 3,
-    width: 330,
-    paddingTop: 3,
-    paddingBottom: 3,
-  },
+
 });
