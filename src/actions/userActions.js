@@ -21,12 +21,12 @@ export const updateUserSuccess = payload => ({
 
 export const updateImage = payload => ({
   type: userActions.UPDATE_IMAGE,
-  payload
+  payload,
 });
 
 export const updateImageSuccess = payload => ({
   type: userActions.UPDATE_IMAGE_SUCCESS,
-  payload
+  payload,
 });
 
 export const requestFailure = errorMsg => ({

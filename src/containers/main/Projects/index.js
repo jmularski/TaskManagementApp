@@ -18,6 +18,7 @@ class Projects extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       notif: [],
       projectName: '',
@@ -55,14 +56,14 @@ class Projects extends React.Component {
   );
 
   handleCardClick = (key) => {
-    if (key == 0) {
+    if (key === 0) {
       this.RBSheet.open();
     }
   }
 
   addProject = () => {
     const { projectName, projectDesc } = this.state;
-    console.log(projectName, projectDesc);
+
     if (projectName === '' || projectDesc === '') { Toast('You need to fill all fields'); } else {
       this.RBSheet.close();
       this.props.addProject(projectName, projectDesc);
@@ -71,6 +72,8 @@ class Projects extends React.Component {
 
 
   render() {
+    const { navigation, projects } = this.props;
+
     return (
       <View style={styles.containerStyle}>
         <View style={[styles.span, styles.spaceBetween]}>
@@ -79,19 +82,19 @@ class Projects extends React.Component {
             name="cog"
             type="font-awesome"
             containerStyle={styles.iconStyle}
-            onPress={() => this.props.navigation.navigate('Options')}
+            onPress={() => navigation.navigate('Options')}
             testID="optionsButton"
           />
         </View>
         {
-          this.props.projects.isFetching
+          projects.isFetching
             ? <ActivityIndicator size="large" color="#0000ff" />
             : (
               <View style={{ height: '15%' }}>
                 <FlatList
                   horizontal
                   keyExtractor={item => item.id.toString()}
-                  data={this.props.projects.projects}
+                  data={projects.projects}
                   renderItem={this.renderCard}
                   testID="projectList"
                 />
@@ -110,7 +113,6 @@ class Projects extends React.Component {
             this.RBSheet = ref;
           }}
           height={300}
-          duration={250}
           testID="projectBottomDrawer"
         >
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>

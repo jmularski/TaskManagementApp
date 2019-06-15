@@ -52,15 +52,15 @@ function* updateImage({ payload }) {
   } catch (e) {
     yield put(requestFailure(Object.values(e.response.data)[0]));
   }
-};
+}
 
 function* updateImageSuccessSaga() {
   yield call(Toast, 'Successfully updated image!');
-};
+}
 
 function* requestFailureSaga({ payload }) {
   yield call(Toast, payload);
-};
+}
 
 export default function* userSaga() {
   yield all([

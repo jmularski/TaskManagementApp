@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+
 import React from 'react';
 import {
   View, StyleSheet, ActivityIndicator, Image, TouchableWithoutFeedback,
@@ -5,11 +7,11 @@ import {
 import { Input, CheckBox } from 'react-native-elements';
 import ImagePicker from 'react-native-image-crop-picker';
 import { connect } from 'react-redux';
+import { isEqual, transform, isObject } from 'lodash';
 import { getSelfInfo, updateUser, updateImage } from '../../../actions/userActions';
 import Button from '../../../utils/Button';
 import Toast from '../../../utils/Toast';
 
-import {isEqual, transform, isObject} from 'lodash';
 
 class Options extends React.Component {
   static navigationOptions = {
@@ -82,8 +84,10 @@ class Options extends React.Component {
   }
 
   updateProfile = () => {
+    const { email, full_name } = this.state;
+
     let diff = this.deepComparison();
-    const errors = this.checkInputCorrectness(this.state.email, this.state.full_name);
+    const errors = this.checkInputCorrectness(email, full_name);
     if (errors) Toast(errors);
     else {
       if (diff.full_name) diff = this.transform_full_name(diff);
@@ -95,9 +99,9 @@ class Options extends React.Component {
     ImagePicker.openPicker({
       width: 300,
       height: 300,
-    }).then(image => {
+    }).then((image) => {
       this.props.updateImage(image);
-    })
+    });
   }
 
   renderUpdateForm = () => {
@@ -108,7 +112,7 @@ class Options extends React.Component {
     return (
       <View>
         <View style={styles.topBar}>
-          <TouchableWithoutFeedback onPress = {() => this.updateImage()}>
+          <TouchableWithoutFeedback onPress={() => this.updateImage()}>
             <Image
               source={{ uri: profile_img }}
               style={{
@@ -133,7 +137,9 @@ class Options extends React.Component {
           <CheckBox
             title="Do you want to receive notifications on email?"
             checked={email_notifications_on_events}
-            onPress={() => this.setState({ email_notifications_on_events: !this.state.email_notifications_on_events })}
+            onPress={() => this.setState(prevState => ({
+              email_notifications_on_events: !prevState.email_notifications_on_events,
+            }))}
             testID="optionsNotifCheckbox"
           />
           <Button
@@ -166,7 +172,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getSelfInfo: () => dispatch(getSelfInfo()),
   updateUser: data => dispatch(updateUser(data)),
-  updateImage: image => dispatch(updateImage({image})),
+  updateImage: image => dispatch(updateImage({ image })),
 });
 
 export default connect(

@@ -52,9 +52,9 @@ function userReducer(state = initialState, action) {
         ...state,
         userData: {
           ...state.userData,
-          profile_img: payload.profile_img
-        }
-      }
+          profile_img: action.payload.profile_img,
+        },
+      };
     case userActions.REQUEST_FAILURE:
       return {
         ...state,

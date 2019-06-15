@@ -19,20 +19,20 @@ function updateUser(payload, token) {
   });
 }
 
-function updateImage(image, token){
+function updateImage(image, token) {
   return request({
     url: '/user/upload_image/',
     method: 'POST',
     authHeader: token,
     customContentType: 'multipart/form-data',
     data: {
-      profile_image: image
-    }
+      profile_image: image,
+    },
   });
 }
 
 export default {
   getSelfData,
   updateUser,
-  updateImage
+  updateImage,
 };

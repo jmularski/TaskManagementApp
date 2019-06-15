@@ -11,7 +11,7 @@ const request = async (options) => {
     headers.Authorization = `JWT ${options.authHeader}`;
   }
 
-  if(options.customContentType) {
+  if (options.customContentType) {
     headers['Content-Type'] = options.customContentType;
   }
 

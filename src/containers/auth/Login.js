@@ -9,8 +9,6 @@ import { signIn } from '../../actions/authActions';
 import Button from '../../utils/Button';
 import Toast from '../../utils/Toast';
 
-const zxcvbn = require('zxcvbn');
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +16,6 @@ class Login extends React.Component {
     this.state = {
       emailText: '',
       passwordText: '',
-      loading: false,
     };
   }
 

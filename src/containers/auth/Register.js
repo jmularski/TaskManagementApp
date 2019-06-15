@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, Image, Platform,
+  StyleSheet, Text, View, Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, SocialIcon } from 'react-native-elements';
@@ -19,7 +19,6 @@ class Register extends React.Component {
       fullNameText: '',
       passwordText: '',
       repeatPasswordText: '',
-      loading: false,
     };
   }
 

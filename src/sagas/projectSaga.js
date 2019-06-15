@@ -13,7 +13,6 @@ import Toast from '../utils/Toast';
 function* addProject({ payload }) {
   try {
     payload.token = yield select(getToken);
-    console.log(payload);
     const response = yield call(ProjectService.addProject, payload);
     if (response.status === 200 || response.status === 201) {
       yield put(addProjectSuccess(response.data));
@@ -21,7 +20,6 @@ function* addProject({ payload }) {
       yield put(addProjectFailure());
     }
   } catch (e) {
-    console.log(e.message);
     yield put(addProjectFailure());
   }
 }

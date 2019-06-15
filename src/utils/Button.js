@@ -4,11 +4,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Button } from 'react-native-elements';
 
 export default class CustomButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const {
+      title, testID, onPress, disabled, style,
+    } = this.props;
+
     return (
       <Button
         titleProps={{ fontFamily: 'Lato-Light' }}
@@ -17,13 +17,13 @@ export default class CustomButton extends React.Component {
           colors: ['#53F539', '#33ED30'],
           start: { x: 0.5, y: 0.5 },
         }}
-        buttonStyle={styles.buttonStyle}
+        buttonStyle={[styles.buttonStyle, style]}
         disabledStyle={styles.buttonStyle}
 
-        title={this.props.title}
-        testID={this.props.testID}
-        onPress={this.props.onPress}
-        disabled={this.props.disabled}
+        title={title}
+        testID={testID}
+        onPress={onPress}
+        disabled={disabled}
 
       />
     );
