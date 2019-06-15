@@ -5,6 +5,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, SocialIcon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import * as yup from 'yup';
 import { signIn } from '../../actions/authActions';
 import Button from '../../utils/Button';
 import Toast from '../../utils/Toast';
@@ -17,23 +18,31 @@ class Login extends React.Component {
       emailText: '',
       passwordText: '',
     };
+
+    this.schema = yup.object().shape({
+      email: yup.string().required('You have to fill up all fields.').email('Your email was in wrong format.'),
+      password: yup.string().required('You have to fill up all fields.').min(8, 'Password is too weak!'),
+    });
   }
 
-  checkInputCorrectness = (emailText, passwordText) => {
-    if (emailText === '' || passwordText === '') return 'You have to fill up all fields.';
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
+  checkInputCorrectness = async (emailText, passwordText) => {
+    try {
+      await this.schema.validate({ email: emailText, password: passwordText });
+      return true;
+    } catch (e) {
+      Toast(e.message);
+      return false;
+    }
   };
 
   sendDataToServer = (emailText, passwordText) => {
     this.props.signIn(emailText, passwordText);
   };
 
-  login = () => {
+  login = async () => {
     const { emailText, passwordText } = this.state;
-    const errors = this.checkInputCorrectness(emailText, passwordText);
-    if (errors) Toast(errors);
-    else this.sendDataToServer(emailText, passwordText);
+    const isValid = await this.checkInputCorrectness(emailText, passwordText);
+    if (isValid) this.sendDataToServer(emailText, passwordText);
   };
 
   render() {

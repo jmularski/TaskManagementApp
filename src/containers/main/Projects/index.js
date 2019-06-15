@@ -8,6 +8,7 @@ import {
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { connect } from 'react-redux';
 import Toast from 'react-native-root-toast';
+import * as yup from 'yup';
 import Button from '../../../utils/Button';
 import { addProject, getProjects } from '../../../actions/projectActions';
 

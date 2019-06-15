@@ -11,7 +11,7 @@ import { isEqual, transform, isObject } from 'lodash';
 import { getSelfInfo, updateUser, updateImage } from '../../../actions/userActions';
 import Button from '../../../utils/Button';
 import Toast from '../../../utils/Toast';
-
+import * as yup from 'yup';
 
 class Options extends React.Component {
   static navigationOptions = {
@@ -24,6 +24,11 @@ class Options extends React.Component {
     this.startObj = {};
 
     this.state = this.startObj;
+
+    this.schema = yup.object().shape({
+      email: yup.string().required("You have to fill up all fields.").email("Your email was in wrong format."),
+      fullName: yup.string().required("You have to fill up all fields.").matches(/\s/, "Full name is in wrong format"),
+    });
   }
 
   componentDidMount() {
@@ -62,10 +67,13 @@ class Options extends React.Component {
   };
 
   checkInputCorrectness = (emailText, fullNameText) => {
-    if (emailText === '' || fullNameText === '') return 'You have to fill up all fields.';
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
-    if (fullNameText.indexOf(' ') === -1) return 'Full name is in wrong format';
+    try {
+      await this.schema.validate({ email: emailText, fullName: fullNameText })
+      return true;
+    } catch(e) {
+      Toast(e.message);
+      return false;
+    };
   };
 
   transform_full_name = (diff) => {
@@ -87,9 +95,8 @@ class Options extends React.Component {
     const { email, full_name } = this.state;
 
     let diff = this.deepComparison();
-    const errors = this.checkInputCorrectness(email, full_name);
-    if (errors) Toast(errors);
-    else {
+    const isValid = this.checkInputCorrectness(email, full_name);
+    if (isValid) {
       if (diff.full_name) diff = this.transform_full_name(diff);
       this.sendDataToServer(diff);
     }

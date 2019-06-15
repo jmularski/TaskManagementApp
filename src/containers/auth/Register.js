@@ -5,11 +5,10 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, SocialIcon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import * as yup from 'yup';
 import { signUp } from '../../actions/authActions';
 import Button from '../../utils/Button';
 import Toast from '../../utils/Toast';
-
-const zxcvbn = require('zxcvbn');
 
 class Register extends React.Component {
   constructor(props) {
@@ -20,31 +19,41 @@ class Register extends React.Component {
       passwordText: '',
       repeatPasswordText: '',
     };
+
+    this.schema = yup.object().shape({
+      email: yup.string().required('You have to fill up all fields.').email('Your email was in wrong format.'),
+      fullName: yup.string().required('You have to fill up all fields.').matches(/\s/, 'Full name is in wrong format'),
+      password: yup.string().required('You have to fill up all fields.').min(8, 'Password is too weak!'),
+      repeatPassword: yup.string().required('You have to fill up all fields.').oneOf([yup.ref('password')], 'Password and repeated password are not the same'),
+    });
   }
 
-  checkPasswordStrength = passwordText => zxcvbn(passwordText).score > 2;
-
-  checkInputCorrectness = (emailText, fullNameText, passwordText, repeatPasswordText) => {
-    if (emailText === '' || fullNameText === '' || passwordText === '' || repeatPasswordText === '') return 'You have to fill up all fields.';
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(emailText).toLowerCase())) return 'Your email was in wrong format.';
-    if (fullNameText.indexOf(' ') === -1) return 'Full name is in wrong format';
-    if (passwordText !== repeatPasswordText) return 'Password and repeated password are not the same';
-    if (!this.checkPasswordStrength(passwordText)) return 'Password is too weak!';
+  checkInputCorrectness = async (emailText, fullNameText, passwordText, repeatPasswordText) => {
+    try {
+      await this.schema.validate({
+        email: emailText,
+        fullName: fullNameText,
+        password: passwordText,
+        repeatPassword: repeatPasswordText,
+      });
+      return true;
+    } catch (e) {
+      Toast(e.message);
+      return false;
+    }
   };
 
-  register = () => {
+  register = async () => {
     const {
       emailText, fullNameText, passwordText, repeatPasswordText,
     } = this.state;
-    const errors = this.checkInputCorrectness(
+    const isValid = await this.checkInputCorrectness(
       emailText,
       fullNameText,
       passwordText,
       repeatPasswordText,
     );
-    if (errors) Toast(errors);
-    else this.sendDataToServer(emailText, fullNameText, passwordText);
+    if (isValid) this.sendDataToServer(emailText, fullNameText, passwordText);
   };
 
   sendDataToServer = (emailText, fullNameText, passwordText) => {
