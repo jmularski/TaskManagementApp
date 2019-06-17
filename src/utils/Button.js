@@ -24,7 +24,6 @@ export default class CustomButton extends React.Component {
         testID={testID}
         onPress={onPress}
         disabled={disabled}
-
       />
     );
   }

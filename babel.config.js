@@ -5,6 +5,9 @@ module.exports = function (api) {
       'module:metro-react-native-babel-preset',
       'module:react-native-dotenv',
     ],
-    plugins: ['@babel/plugin-transform-flow-strip-types'],
+    plugins: [
+      '@babel/plugin-transform-flow-strip-types',
+      ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ],
   };
 };

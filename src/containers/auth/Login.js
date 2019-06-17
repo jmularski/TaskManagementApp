@@ -59,7 +59,8 @@ export default class Login extends React.Component {
       <View style={styles.main}>
         <View style={styles.mainContainer}>
           <Image
-            source={require('../../../assets/img/login/piggy-bank.png')}
+            source={require('../../../assets/img/login/calendar.png')}
+            style={styles.image}
             testID="loginImage"
           />
           <Text
@@ -142,9 +143,13 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: '25%',
+    paddingTop: '15%',
     paddingLeft: '5%',
     paddingRight: '5%',
+  },
+  image: {
+    height: 170,
+    resizeMode: 'contain',
   },
   inputContainerStyle: {
     paddingTop: 3,

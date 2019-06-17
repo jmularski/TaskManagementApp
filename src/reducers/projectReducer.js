@@ -17,11 +17,18 @@ function projectReducer(state = initialState, action) {
       };
     case projectActions.ADD_PROJECT_SUCCESS:
       return {
+        ...state,
         projects: [...state.projects, action.payload],
       };
     case projectActions.GET_PROJECTS_SUCCESS:
       return {
+        ...state,
         projects: [...state.projects, ...action.payload],
+        isFetching: false,
+      };
+    case projectActions.GET_PROJECTS_FAILURE:
+      return {
+        ...state,
         isFetching: false,
       };
     default:

@@ -100,7 +100,7 @@ export default class Projects extends React.Component {
           projects.isFetching
             ? <ActivityIndicator size="large" color="#0000ff" />
             : (
-              <View style={{ height: '15%' }}>
+              <View style={styles.cardListView}>
                 <FlatList
                   horizontal
                   keyExtractor={item => item.id.toString()}
@@ -168,6 +168,10 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     marginTop: '1%',
+  },
+  cardListView: {
+    height: '18%',
+    marginLeft: '-5%',
   },
   roundCardList: {
     borderRadius: 15,
