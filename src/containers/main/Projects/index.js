@@ -7,10 +7,10 @@ import {
 } from 'react-native-elements';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { connect } from 'react-redux';
-import Toast from 'react-native-root-toast';
-import Button from '../../../utils/Button';
 import { addProject, getProjects } from '../../../actions/projectActions';
 import { setCurrentProject } from '../../../actions/taskActions';
+import Toast from '../../../utils/Toast';
+import Button from '../../../utils/Button';
 
 const mapStateToProps = state => ({
   projects: state.projects,

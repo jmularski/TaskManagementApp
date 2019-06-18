@@ -25,6 +25,10 @@ function* addTask({ payload }) {
   }
 }
 
+function* addTaskSuccessSaga({ payload }) {
+  yield call(Toast, 'Added task successfully!');
+}
+
 function* addTaskFailureSaga({ payload }) {
   yield call(Toast, 'Failed to add tasks for this project');
 }
@@ -51,6 +55,7 @@ function* getTaskFailureSaga({ payload }) {
 export default function* taskSaga() {
   yield all([
     takeEvery(taskActions.ADD_TASK, addTask),
+    takeEvery(taskActions.ADD_TASK_SUCCESS, addTaskSuccessSaga)
     takeEvery(taskActions.ADD_TASK_FAILURE, addTaskFailureSaga),
     takeEvery(taskActions.GET_TASKS, getTasks),
     takeEvery(taskActions.GET_TASKS_FAILURE, getTaskFailureSaga),

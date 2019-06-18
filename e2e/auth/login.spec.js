@@ -65,7 +65,7 @@ describe('Login', () => {
     });
     it('should throw error when password is wrong', async () => {
       await element(by.id('loginEmailInput')).replaceText(data.email);
-      await element(by.id('loginPasswordInput')).replaceText('wrong');
+      await element(by.id('loginPasswordInput')).replaceText('wrongpassword');
       await element(by.id('loginButton')).tap();
       await waitFor(element(by.text('Unable to log in with provided credentials.'))).toBeVisible().withTimeout(10000);
       await expect(element(by.text('Unable to log in with provided credentials.'))).toBeVisible();

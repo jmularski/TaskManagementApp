@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import TaskItem from './TaskItem';
 import Button from '../../../utils/Button';
 import { addTask, getTask } from '../../../actions/taskActions';
+import Toast from '../../../utils/Toast';
 
 const mapStateToProps = state => ({
   tasks: state.tasks,
@@ -34,13 +35,16 @@ export default class Tasks extends React.Component {
 
   addTask = () => {
     const { taskText } = this.state;
-
-    this.RBSheet.close();
-    this.props.addTask({
-      name: taskText,
-      description: '',
-    });
-  }
+    if(taskText !== ''){
+      this.RBSheet.close();
+      this.props.addTask({
+        name: taskText,
+        description: '',
+      });
+    } else {
+      Toast('You need to fill all fields!')
+    }
+  };
 
   renderTask = ({ item }) => (
     <TaskItem
@@ -62,15 +66,6 @@ export default class Tasks extends React.Component {
           />
           <Text style={styles.headerText}>Tasks</Text>
         </View>
-        <View style={styles.addButton}>
-          <Button
-            title="+"
-            style={{ borderRadius: 100, width: 40, height: 40 }}
-            onPress={() => {
-              this.RBSheet.open();
-            }}
-          />
-        </View>
         {
           tasks.isFetching
             ? <ActivityIndicator size="large" color="#0000ff" />
@@ -83,6 +78,16 @@ export default class Tasks extends React.Component {
               />
             )
         }
+        <View style={styles.addButton}>
+          <Button
+            title="+"
+            style={{ borderRadius: 100, width: 40, height: 40 }}
+            onPress={() => {
+              this.RBSheet.open();
+            }}
+            testID="addTaskButton"
+          />
+        </View>
         <RBSheet
           ref={ref => this.RBSheet = ref}
           height={50}
@@ -93,12 +98,14 @@ export default class Tasks extends React.Component {
               placeholder="Insert task name"
               value={taskText}
               onChangeText={taskText => this.setState({ taskText })}
+              testID="taskNameInput"
             />
             <Icon
               name="paper-plane"
               type="font-awesome"
               containerStyle={{ marginTop: '2%' }}
               onPress={() => this.addTask()}
+              testID="sendTaskButton"
             />
           </View>
         </RBSheet>

@@ -18,7 +18,7 @@ function* signInUser({ payload }) {
       yield put(authFailure(response.data));
     }
   } catch (e) {
-    yield put(authFailure(Object.values(e.response.data)[0]));
+    yield put(authFailure(Object.values(e.response.data)[0][0]));
   }
 }
 
@@ -31,7 +31,7 @@ function* signUpUser({ payload }) {
       yield put(authFailure(response.data));
     }
   } catch (e) {
-    yield put(authFailure(Object.values(e.response.data)[0]));
+    yield put(authFailure(Object.values(e.response.data)[0][0]));
   }
 }
 

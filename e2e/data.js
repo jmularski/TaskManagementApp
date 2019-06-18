@@ -8,4 +8,5 @@ export default {
   optionsName: `${randomstring.generate()} ${randomstring.generate()}`,
   projectName: `${randomstring.generate()}`,
   projectDesc: `${randomstring.generate()}`,
+  taskName: `${randomstring.generate()}`,
 };
