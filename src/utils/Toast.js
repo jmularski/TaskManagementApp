@@ -7,6 +7,9 @@ const toast = msg => Toast.show(msg, {
   animation: true,
   hideOnPress: true,
   delay: 0,
+  containerStyle: {
+    zIndex: 100000,
+  },
 });
 
 export default toast;

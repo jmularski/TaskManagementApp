@@ -28,8 +28,17 @@ describe('Profile options', () => {
   });
 
   describe('Usage', () => {
+    let email;
     beforeEach(async () => {
-      await navigateToOptions();
+      email = await navigateToOptions();
+    });
+    describe('get data', () => {
+      it('should fetch and show correct email', async () => {
+        await expect(element(by.text(email))).toBeVisible();
+      });
+      it('should fetch and show correct full name', async () => {
+        await expect(element(by.text(data.fullName))).toBeVisible();
+      });
     });
     describe('update', () => {
       it('should throw error when email is empty', async () => {

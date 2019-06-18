@@ -7,9 +7,10 @@ import {
 } from 'react-native-elements';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { connect } from 'react-redux';
-import Toast from 'react-native-root-toast';
-import Button from '../../../utils/Button';
 import { addProject, getProjects } from '../../../actions/projectActions';
+import { setCurrentProject } from '../../../actions/taskActions';
+import Toast from '../../../utils/Toast';
+import Button from '../../../utils/Button';
 
 const mapStateToProps = state => ({
   projects: state.projects,
@@ -18,6 +19,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addProject: (title, description) => dispatch(addProject({ title, description })),
   getProjects: () => dispatch(getProjects()),
+  setCurrentProject: projectId => dispatch(setCurrentProject(projectId)),
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -68,6 +70,9 @@ export default class Projects extends React.Component {
   handleCardClick = (key) => {
     if (key === 0) {
       this.RBSheet.open();
+    } else {
+      this.props.setCurrentProject(key);
+      this.props.navigation.navigate('Task');
     }
   }
 

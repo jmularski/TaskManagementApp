@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
   checkboxStyle: {
     backgroundColor: 'transparent',
     borderColor: 'transparent',
-    marginLeft: '-4%',
   },
   span: {
     flexDirection: 'row',

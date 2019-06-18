@@ -1,12 +1,61 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import {
+  View, StyleSheet, Text, ActivityIndicator, FlatList,
+} from 'react-native';
 import { Input, Icon } from 'react-native-elements';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import { connect } from 'react-redux';
 import TaskItem from './TaskItem';
 import Button from '../../../utils/Button';
+import { addTask, getTask } from '../../../actions/taskActions';
+import Toast from '../../../utils/Toast';
 
+const mapStateToProps = state => ({
+  tasks: state.tasks,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addTask: payload => dispatch(addTask(payload)),
+  getTask: () => dispatch(getTask()),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Tasks extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      taskText: '',
+    };
+  }
+
+  componentDidMount() {
+    this.props.getTask();
+  }
+
+  addTask = () => {
+    const { taskText } = this.state;
+    if(taskText !== ''){
+      this.RBSheet.close();
+      this.props.addTask({
+        name: taskText,
+        description: '',
+      });
+    } else {
+      Toast('You need to fill all fields!')
+    }
+  };
+
+  renderTask = ({ item }) => (
+    <TaskItem
+      text={item.name}
+    />
+  );
+
   render() {
+    const { taskText } = this.state;
+    const { tasks } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.span}>
@@ -17,6 +66,18 @@ export default class Tasks extends React.Component {
           />
           <Text style={styles.headerText}>Tasks</Text>
         </View>
+        {
+          tasks.isFetching
+            ? <ActivityIndicator size="large" color="#0000ff" />
+            : (
+              <FlatList
+                keyExtractor={item => item.id.toString()}
+                data={tasks.tasks}
+                renderItem={this.renderTask}
+                testID="tasksList"
+              />
+            )
+        }
         <View style={styles.addButton}>
           <Button
             title="+"
@@ -24,9 +85,9 @@ export default class Tasks extends React.Component {
             onPress={() => {
               this.RBSheet.open();
             }}
+            testID="addTaskButton"
           />
         </View>
-        <TaskItem text="Hello world" />
         <RBSheet
           ref={ref => this.RBSheet = ref}
           height={50}
@@ -35,12 +96,16 @@ export default class Tasks extends React.Component {
           <View style={styles.span}>
             <Input
               placeholder="Insert task name"
-              ref={ref => this.taskInput = ref}
+              value={taskText}
+              onChangeText={taskText => this.setState({ taskText })}
+              testID="taskNameInput"
             />
             <Icon
               name="paper-plane"
               type="font-awesome"
               containerStyle={{ marginTop: '2%' }}
+              onPress={() => this.addTask()}
+              testID="sendTaskButton"
             />
           </View>
         </RBSheet>
