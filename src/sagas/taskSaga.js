@@ -55,7 +55,7 @@ function* getTaskFailureSaga({ payload }) {
 export default function* taskSaga() {
   yield all([
     takeEvery(taskActions.ADD_TASK, addTask),
-    takeEvery(taskActions.ADD_TASK_SUCCESS, addTaskSuccessSaga)
+    takeEvery(taskActions.ADD_TASK_SUCCESS, addTaskSuccessSaga),
     takeEvery(taskActions.ADD_TASK_FAILURE, addTaskFailureSaga),
     takeEvery(taskActions.GET_TASKS, getTasks),
     takeEvery(taskActions.GET_TASKS_FAILURE, getTaskFailureSaga),
