@@ -21,7 +21,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-Then tunnel it to outside world using ngrok or something simillar and exchange the value of BASE_URL variable in ./src/helpers/api-helper.js
+Then tunnel it to outside world using ngrok or something simillar and exchange the value of BASE_URL variable in ./src/helpers/api-handler.js
 
 If you want to run the tests, you can run unit/integration tests with ```npm test```, E2E tests are written using Detox, to launch them follow the tutorial [here](https://github.com/wix/Detox/blob/master/docs/Introduction.Android.md)
 
