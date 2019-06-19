@@ -14,7 +14,7 @@ export async function navigateToLogin() {
   await waitFor(element(by.id('LoginView')))
     .toBeVisible()
     .withTimeout(2000);
-};
+}
 
 export async function navigateToRegister() {
   await device.reloadReactNative();
@@ -25,7 +25,7 @@ export async function navigateToRegister() {
   await waitFor(element(by.id('RegisterView')))
     .toBeVisible()
     .withTimeout(2000);
-};
+}
 
 export async function login() {
   await navigateToLogin();
@@ -33,7 +33,7 @@ export async function login() {
   await element(by.id('loginPasswordInput')).replaceText(data.password);
   await element(by.id('loginButton')).tap();
   await waitFor(element(by.text('Projects'))).toBeVisible().withTimeout(20000);
-};
+}
 
 export async function register() {
   const email = `${randomstring.generate()}@test.hello`;
@@ -45,7 +45,7 @@ export async function register() {
   await element(by.id('registerButton')).tap();
   await waitFor(element(by.text('Projects'))).toBeVisible().withTimeout(20000);
   return email;
-};
+}
 
 export async function navigateToOptions() {
   const email = await register();
@@ -57,7 +57,7 @@ export async function navigateToOptions() {
     .toBeVisible()
     .withTimeout(2000);
   return email;
-};
+}
 
 export async function createProject() {
   await register();
@@ -68,7 +68,7 @@ export async function createProject() {
   await element(by.id('projectNameInput')).replaceText(data.projectName);
   await element(by.id('projectDescInput')).replaceText(data.projectDesc);
   await element(by.id('addNewProjectButton')).tap();
-};
+}
 
 export async function navigateToTasks() {
   await createProject();
@@ -79,4 +79,4 @@ export async function navigateToTasks() {
   await waitFor(element(by.text('Tasks')))
     .toBeVisible()
     .withTimeout(2000);
-};
+}

@@ -6,9 +6,9 @@ import TaskNavigator from './containers/task/TaskNavigator';
 
 const AppNavigator = createStackNavigator(
   {
+    Task: TaskNavigator,
     Auth: AuthNavigator,
     Main: MainNavigator,
-    Task: TaskNavigator,
   },
   {
     defaultNavigationOptions: {

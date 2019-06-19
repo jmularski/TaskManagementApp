@@ -22,7 +22,7 @@ describe('Projects screen', () => {
   describe('Usage', () => {
     beforeEach(async () => {
       await register();
-    })
+    });
     describe('Add new project', () => {
       it('succeeds when all needed data is given', async () => {
         await element(by.id('card0')).tap();
