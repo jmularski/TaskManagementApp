@@ -3,8 +3,22 @@ import {
   View, StyleSheet, FlatList, Text,
 } from 'react-native';
 import { Input, Icon, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
 import Button from '../../../utils/Button';
+import { getUserInfo } from '../../../actions/userActions';
+import { addInvite } from '../../../actions/invitationActions';
 
+const mapStateToProps = state => ({
+  invitations: state.invitations,
+  user: state.user,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getUserInfo: query => dispatch(getUserInfo(query)),
+  addInvite: payload => dispatch(addInvite(payload)),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Invitations extends React.Component {
   static navigationOptions = {
     title: 'Invite somebody to your project',
@@ -14,45 +28,46 @@ export default class Invitations extends React.Component {
     super(props);
 
     this.state = {
-      data: [
-        {
-          name: 'Amy Farha',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-          subtitle: 'Vice President',
-        },
-        {
-          name: 'Chris Jackson',
-          avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-          subtitle: 'Vice Chairman',
-        },
-      ],
       currentlyInvited: [],
+      findText: '',
     };
   }
 
-  addToInvited = (name) => {
-    if (this.state.currentlyInvited.includes(name)) {
-      this.setState(state => ({
-        currentlyInvited: state.currentlyInvited.filter(stateName => stateName !== name),
-      }));
-    } else this.setState(state => ({ currentlyInvited: [...state.currentlyInvited, name] }));
+  addToInvited = (id) => {
+    this.setState(state => ({
+      currentlyInvited: state.currentlyInvited.filter(stateId => stateId.id !== id),
+    }));
+    this.setState(state => ({ currentlyInvited: [...state.currentlyInvited, { id }] }));
   }
 
-  renderItem = ({ item }) => (
-    <ListItem
-      title={item.name}
-      subtitle={item.subtitle}
-      leftAvatar={{
-        source: item.avatar_url && { uri: item.avatar_url },
-        title: item.name,
-      }}
-      onPress={() => this.addToInvited(item.name)}
-    />
-  )
+  renderItem = ({ item }) => {
+    const profile_img = item.profile_img !== null ? item.profile_img : 'https://via.placeholder.com/300';
+    return (
+      <ListItem
+        title={`${item.first_name} ${item.last_name}`}
+        leftAvatar={{
+          source: profile_img && { uri: profile_img },
+          title: item.first_name,
+        }}
+        onPress={() => this.addToInvited(item.id)}
+      />
+    );
+  }
 
+  findUser = () => {
+    const { findText } = this.state;
+    this.props.getUserInfo(findText);
+  };
+
+  sendInvitations = () => {
+    const { currentlyInvited } = this.state;
+    this.props.addInvite(currentlyInvited);
+  }
 
   render() {
-    const { currentlyInvited, data } = this.state;
+    const { currentlyInvited } = this.state;
+    const { user } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.span}>
@@ -65,6 +80,7 @@ export default class Invitations extends React.Component {
             inputContainerStyle={{
               borderBottomColor: 'rgba(255, 255, 255, 0)',
             }}
+            onChangeText={findText => this.setState({ findText })}
           />
           <Button
             title=""
@@ -76,21 +92,21 @@ export default class Invitations extends React.Component {
                 color="white"
               />
 )}
+            onPress={() => this.findUser()}
           />
         </View>
         <FlatList
           keyExtractor={(item, index) => index.toString()}
-          data={data}
+          data={user.searchedUserData}
           renderItem={this.renderItem}
         />
         {
-            currentlyInvited.length != 0
+            currentlyInvited.length !== 0
               ? (
                 <View style={[styles.span, styles.bottom]}>
                   <Text>
                     {`
                 Currently invited ${currentlyInvited.length} ${currentlyInvited.length === 1 ? 'person' : 'people'}
-                ${currentlyInvited.map(data => data)}
                 `}
                   </Text>
                   <Button
@@ -103,6 +119,7 @@ export default class Invitations extends React.Component {
                       />
 )}
                     style={styles.addButtonStyle}
+                    onPress={() => this.sendInvitations()}
                   />
                 </View>
               )
@@ -132,12 +149,13 @@ const styles = StyleSheet.create({
     width: '120%',
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#A7A7AA',
+    backgroundColor: 'white',
   },
   addButtonStyle: {
     borderRadius: 100,
     width: 50,
     height: 50,
-    marginTop: '3%',
+    marginTop: '1%',
     marginLeft: '45%',
   },
 });

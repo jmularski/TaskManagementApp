@@ -2,7 +2,9 @@ import {
   put, call, takeEvery, all, select,
 } from 'redux-saga/effects';
 
-import { getSelfInfoSuccess, updateUserSuccess, requestFailure } from '../actions/userActions';
+import {
+  getSelfInfoSuccess, updateUserSuccess, requestFailure, getUserInfoSuccess,
+} from '../actions/userActions';
 import { getToken } from '../reducers/authReducer';
 import { userActions } from '../types';
 import UserService from '../services/user.service';
@@ -19,6 +21,20 @@ function* getSelfInfo() {
     }
   } catch (e) {
     yield put(requestFailure(Object.values(e.response.data)[0]));
+  }
+}
+
+function* getUserInfo({ payload }) {
+  try {
+    const token = yield select(getToken);
+    const response = yield call(UserService.getUserData, token, payload);
+    if (response.status === 200 || response.status === 201) {
+      yield put(getUserInfoSuccess(response.data));
+    } else {
+      yield put(requestFailure(response.data));
+    }
+  } catch (e) {
+    yield put(requestFailure('Failed to fetch users!'));
   }
 }
 
@@ -65,6 +81,7 @@ function* requestFailureSaga({ payload }) {
 export default function* userSaga() {
   yield all([
     takeEvery(userActions.GET_SELF_INFO, getSelfInfo),
+    takeEvery(userActions.GET_USER_INFO, getUserInfo),
     takeEvery(userActions.UPDATE_USER, updateUser),
     takeEvery(userActions.UPDATE_USER_SUCCESS, updateUserSuccessSaga),
     takeEvery(userActions.UPDATE_IMAGE, updateImage),

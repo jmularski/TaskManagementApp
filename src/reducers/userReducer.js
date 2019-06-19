@@ -12,6 +12,7 @@ const initialState = {
       email_notifications_on_events: true,
     },
   },
+  searchedUserData: [],
 };
 
 function userReducer(state = initialState, action) {
@@ -54,6 +55,11 @@ function userReducer(state = initialState, action) {
           ...state.userData,
           profile_img: action.payload.profile_img,
         },
+      };
+    case userActions.GET_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        searchedUserData: action.payload,
       };
     case userActions.REQUEST_FAILURE:
       return {

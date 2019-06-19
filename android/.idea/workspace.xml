@@ -7,8 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fec881e-5197-45ba-afe6-f85ddc24aa3d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/RootNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/RootNavigator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/containers/task/Tasks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/task/Tasks/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/actions/userActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/containers/task/Tasks/Invitations.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/containers/task/Tasks/Invitations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/reducers/userReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sagas/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sagas/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sagas/userSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sagas/userSaga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/types/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../src/types/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
