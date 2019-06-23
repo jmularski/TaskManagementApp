@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet, Text, ActivityIndicator, FlatList,
+  View, StyleSheet, ActivityIndicator, FlatList,
 } from 'react-native';
 import { Input, Icon } from 'react-native-elements';
 import RBSheet from 'react-native-raw-bottom-sheet';

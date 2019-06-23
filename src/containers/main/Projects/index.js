@@ -11,15 +11,19 @@ import { addProject, getProjects } from '../../../actions/projectActions';
 import { setCurrentProject } from '../../../actions/taskActions';
 import Toast from '../../../utils/Toast';
 import Button from '../../../utils/Button';
+import { getUserInvites, respondInvitation } from '../../../actions/invitationActions';
 
 const mapStateToProps = state => ({
   projects: state.projects,
+  invitations: state.invitations,
 });
 
 const mapDispatchToProps = dispatch => ({
   addProject: (title, description) => dispatch(addProject({ title, description })),
   getProjects: () => dispatch(getProjects()),
   setCurrentProject: projectId => dispatch(setCurrentProject(projectId)),
+  getUserInvites: () => dispatch(getUserInvites()),
+  respondInvitation: (id, response) => dispatch(respondInvitation({id, response}))
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -40,6 +44,7 @@ export default class Projects extends React.Component {
 
   componentDidMount() {
     this.props.getProjects();
+    this.props.getUserInvites();
   }
 
   componentWillUnmount() {
@@ -66,6 +71,44 @@ export default class Projects extends React.Component {
       />
     </TouchableWithoutFeedback>
   );
+  
+  respondToInvitation = (id, response) => {
+    this.props.respondInvitation(id, response);
+  }
+
+  renderInvitation = ({ item }) => (
+    <ListItem
+      title={item.project.project_name}
+      rightElement={(
+        <View style={styles.span}>
+          <Button
+            title=""
+            style={styles.roundButton}
+            icon={(
+              <Icon
+                name="check"
+                type="font-awesome"
+                color="white"
+              />
+            )}
+            onPress = {() => this.respondToInvitation(item.id, true)}
+          />
+          <Button
+            title=""
+            style={[styles.roundButton, styles.rejectButton]}
+            icon={(
+              <Icon
+                name="times"
+                type="font-awesome"
+                color="white"
+              />
+            )}
+            onPress = {() => this.respondToInvitation(item.id, false)}
+          />
+        </View>
+      )}
+    />
+  );
 
   handleCardClick = (key) => {
     if (key === 0) {
@@ -85,9 +128,8 @@ export default class Projects extends React.Component {
     }
   }
 
-
   render() {
-    const { navigation, projects } = this.props;
+    const { navigation, projects, invitations } = this.props;
 
     return (
       <View style={styles.containerStyle}>
@@ -115,6 +157,22 @@ export default class Projects extends React.Component {
                 />
               </View>
             )
+        }
+
+        <Text style={styles.subheaderText}>Invitations</Text>
+        { invitations.user.isFetching
+          ? <ActivityIndicator size="large" color="#0000ff" />
+          : (
+            <View style={styles.cardListView}>
+              <FlatList
+                horizontal
+                keyExtractor={item => item.id.toString()}
+                data={invitations.user.invitations}
+                renderItem={this.renderInvitation}
+                testID="invitationList"
+              />
+            </View>
+          )
         }
         <Text style={styles.subheaderText}>Notifications feed</Text>
         <FlatList
@@ -199,5 +257,11 @@ const styles = StyleSheet.create({
   },
   margin: {
     margin: 15,
+  },
+  roundButton: {
+    borderRadius: 100,
+    width: 50,
+    height: 50,
+    paddingLeft: '5%',
   },
 });

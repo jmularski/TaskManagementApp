@@ -9,8 +9,35 @@ function addInvite(token, projectId, payload) {
       invitations_list: payload,
     },
   });
+};
+
+function getProjectInvites(token, projectId) {
+  return request({
+    url:`/projects/project/${projectId}/get_invitations/`,
+    method: 'GET',
+    authHeader: token,
+  });
+};
+
+function getUserInvites(token) {
+  return request({
+    url: '/projects/invitations/',
+    method: 'GET',
+    authHeader: token,
+  });
+};
+
+function respondInvitation(token, invitationId, response) {
+  return request({
+    url:`/projects/invitation/${invitationId}/${response ? 'accept' : 'reject'}/`,
+    method: 'GET',
+    authHeader: token,
+  });
 }
 
 export default {
   addInvite,
+  getProjectInvites,
+  getUserInvites,
+  respondInvitation,
 };
