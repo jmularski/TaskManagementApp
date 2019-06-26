@@ -8,6 +8,14 @@ function getSelfData(token) {
   });
 }
 
+function getUserData(token, query) {
+  return request({
+    url: `/user/search/?query=${query}`,
+    method: 'GET',
+    authHeader: token,
+  });
+}
+
 function updateUser(payload, token) {
   return request({
     url: '/user/',
@@ -33,6 +41,7 @@ function updateImage(image, token) {
 
 export default {
   getSelfData,
+  getUserData,
   updateUser,
   updateImage,
 };

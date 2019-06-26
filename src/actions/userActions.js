@@ -9,6 +9,16 @@ export const getSelfInfoSuccess = payload => ({
   payload,
 });
 
+export const getUserInfo = payload => ({
+  type: userActions.GET_USER_INFO,
+  payload,
+});
+
+export const getUserInfoSuccess = payload => ({
+  type: userActions.GET_USER_INFO_SUCCESS,
+  payload,
+});
+
 export const updateUser = payload => ({
   type: userActions.UPDATE_USER,
   payload,

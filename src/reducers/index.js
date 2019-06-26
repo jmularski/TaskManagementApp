@@ -5,6 +5,7 @@ import authReducer from './authReducer';
 import userReducer from './userReducer';
 import projectReducer from './projectReducer';
 import taskReducer from './taskReducer';
+import invitationReducer from './invitationReducer';
 
 const navReducer = createNavigationReducer(AppNavigator);
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   projects: projectReducer,
   tasks: taskReducer,
+  invitations: invitationReducer,
 });
 
 export default rootReducer;

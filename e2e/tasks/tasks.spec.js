@@ -7,19 +7,19 @@ import data from '../data';
 describe('Tasks', () => {
   beforeAll(async () => {
     await navigateToTasks();
-  })
+  });
   describe('Render', () => {
     it('has tasks list', async () => {
       await expect(element(by.id('tasksList'))).toBeVisible();
     });
     it('has add task button', async () => {
       await expect(element(by.id('addTaskButton'))).toBeVisible();
-    })
+    });
   });
   describe('Usage', () => {
     beforeEach(async () => {
       await navigateToTasks();
-    })
+    });
     describe('add task', () => {
       it('succeeds when data is given', async () => {
         await element(by.id('addTaskButton')).tap();

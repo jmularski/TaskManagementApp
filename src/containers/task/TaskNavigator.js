@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import TasksScreen from './Tasks';
+import TasksScreen from './Tasks/SubTaskNavigator';
 import OptionsScreen from './Options';
 
 const TaskNavigator = createBottomTabNavigator({

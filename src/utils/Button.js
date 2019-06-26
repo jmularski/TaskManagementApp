@@ -6,7 +6,7 @@ import { Button } from 'react-native-elements';
 export default class CustomButton extends React.Component {
   render() {
     const {
-      title, testID, onPress, disabled, style,
+      title, testID, onPress, disabled, style, icon,
     } = this.props;
 
     return (
@@ -19,7 +19,7 @@ export default class CustomButton extends React.Component {
         }}
         buttonStyle={[styles.buttonStyle, style]}
         disabledStyle={styles.buttonStyle}
-
+        icon={icon}
         title={title}
         testID={testID}
         onPress={onPress}
