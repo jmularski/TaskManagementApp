@@ -1,7 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 
 import TaskScreen from './Tasks';
-import InvitationScreen from './Invitations/InvitationsNavigator';
+import InvitationScreen from '../Invitations/InvitationsNavigator';
 
 const SubTaskNavigator = createStackNavigator(
   {

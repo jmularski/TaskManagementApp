@@ -76,9 +76,17 @@ function invitationReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          invitations: [...state.slice(0, action.payload), ...state.slice(action.payload + 1)]
+          invitations: [...state.user.invitations.filter(item => item !== action.payload)]
         }
       };
+    case invitationActions.CANCEL_INVITATION_SUCCESS:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          invitations: [...state.project.invitations.filter(item => item !== action.payload)]
+        }
+      }
     default:
       return state;
   }

@@ -21,7 +21,7 @@ function taskReducer(state = initialState, action) {
     case taskActions.GET_TASKS_SUCCESS:
       return {
         ...state,
-        tasks: [...state.tasks, ...action.payload],
+        tasks: action.payload,
         isFetching: false,
       };
     case taskActions.GET_TASKS_FAILURE:

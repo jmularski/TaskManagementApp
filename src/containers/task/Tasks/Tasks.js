@@ -89,7 +89,7 @@ export default class Tasks extends React.Component {
             style={styles.addButtonStyle}
             icon={(
               <Icon
-                name="user-plus"
+                name="user"
                 type="font-awesome"
                 color="white"
               />

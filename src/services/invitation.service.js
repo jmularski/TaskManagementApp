@@ -29,8 +29,16 @@ function getUserInvites(token) {
 
 function respondInvitation(token, invitationId, response) {
   return request({
-    url:`/projects/invitation/${invitationId}/${response ? 'accept' : 'reject'}/`,
+    url: `/projects/invitations/${invitationId}/${response ? 'accept' : 'reject'}/`,
     method: 'GET',
+    authHeader: token,
+  });
+};
+
+function cancelInvitation(token, invitationId) {
+  return request({
+    url: `/projects/invitations/${invitationId}/`,
+    method: 'DELETE',
     authHeader: token,
   });
 }
@@ -40,4 +48,5 @@ export default {
   getProjectInvites,
   getUserInvites,
   respondInvitation,
+  cancelInvitation,
 };

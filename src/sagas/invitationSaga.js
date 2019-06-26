@@ -3,11 +3,11 @@ import {
 } from 'redux-saga/effects';
 import InvitationService from '../services/invitation.service';
 import { invitationActions } from '../types';
-import { addInviteSuccess, addInviteFailure, getProjectInvitesSuccess, getProjectInvitesFailure, getUserInvitesSuccess, getUserInvitesFailure, respondInvitationSuccess, respondInvitationFailure } from '../actions/invitationActions';
-import { addProjectSuccess } from '../actions/projectActions';
+import { addInviteSuccess, addInviteFailure, getProjectInvitesSuccess, getProjectInvitesFailure, getUserInvitesSuccess, getUserInvitesFailure, respondInvitationSuccess, respondInvitationFailure, cancelInvitationFailure, cancelInvitationSuccess } from '../actions/invitationActions';
 import Toast from '../utils/Toast';
 import { getToken } from '../reducers/authReducer';
 import { getCurrentProject } from '../reducers/taskReducer';
+import { addProjectSuccess } from '../actions/projectActions';
 
 function* addInvite({ payload }) {
   try {
@@ -75,19 +75,40 @@ function* respondInvitation({ payload }) {
     const response = yield call(InvitationService.respondInvitation, token, payload.id, payload.response);
     if (response.status === 200 || response.status === 201) {
       yield put(respondInvitationSuccess(response.data));
-      if(payload.response) yield put(addInviteSuccess(response.data));
+      if(payload.response) yield put(addProjectSuccess(response.data));
     } else {
       yield put(respondInvitationFailure());
     }
   } catch (e) {
-    console.log(e);
     yield put(respondInvitationFailure());
   }
 };
 
 function* respondInvitationFailureSaga() {
   yield call(Toast, 'Failed to respond to invitation!');
-}
+};
+
+function* cancelInvitation({ payload }) {
+  try {
+    const token = yield select(getToken);
+    const response = yield call(InvitationService.cancelInvitation, token, payload.id);
+    if (response.status === 200 || response.status === 301) {
+      yield put(cancelInvitationSuccess(payload));
+    } else {
+      yield put(cancelInvitationFailure());
+    }  
+  } catch (e) {
+    yield put(cancelInvitationFailure());
+  }
+};
+
+function* cancelInvitationSuccessSaga() {
+  yield call(Toast, 'Canceling invitation successful!');
+};
+
+function* cancelInvitationFailureSaga() {
+  yield call(Toast, 'Canceling invitation failed!');
+};
 
 export default function* invitationSaga() {
   yield all([
@@ -95,10 +116,13 @@ export default function* invitationSaga() {
     takeEvery(invitationActions.ADD_INVITE_SUCCESS, addInviteSuccessSaga),
     takeEvery(invitationActions.ADD_INVITE_FAILURE, addInviteFailureSaga),
     takeEvery(invitationActions.GET_PROJECT_INVITES, getProjectInvites),
-    takeEvery(invitationActions.GET_PROJECT_INVITES_SUCCESS, getProjectInviteFailureSaga),
+    takeEvery(invitationActions.GET_PROJECT_INVITES_FAILURE, getProjectInviteFailureSaga),
     takeEvery(invitationActions.GET_USER_INVITES, getUserInvites),
     takeEvery(invitationActions.GET_USER_INVITES_FAILURE, getUserInvitesFailureSaga),
     takeEvery(invitationActions.RESPOND_INVITATION, respondInvitation),
     takeEvery(invitationActions.RESPOND_INVITATION_FAILURE, respondInvitationFailureSaga),
+    takeEvery(invitationActions.CANCEL_INVITATION, cancelInvitation),
+    takeEvery(invitationActions.CANCEL_INVITATION_SUCCESS, cancelInvitationSuccessSaga),
+    takeEvery(invitationActions.CANCEL_INVITATION_FAILURE, cancelInvitationFailureSaga),
   ]);
 }

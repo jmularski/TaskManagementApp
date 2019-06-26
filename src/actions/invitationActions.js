@@ -58,3 +58,13 @@ export const cancelInvitation = payload => ({
   type: invitationActions.CANCEL_INVITATION,
   payload,
 });
+
+export const cancelInvitationSuccess = payload => ({
+  type: invitationActions.CANCEL_INVITATION_SUCCESS,
+  payload,
+});
+
+export const cancelInvitationFailure = payload => ({
+  type: invitationActions.CANCEL_INVITATION_FAILURE,
+  payload,
+});
