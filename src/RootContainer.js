@@ -1,19 +1,19 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import {
   createReduxContainer,
-  createReactNavigationReduxMiddleware,
-} from 'react-navigation-redux-helpers';
+  createReactNavigationReduxMiddleware
+} from "react-navigation-redux-helpers";
 
-import RootNavigator from './RootNavigator';
+import RootNavigator from "src/RootNavigator";
 
 export const navMiddleware = createReactNavigationReduxMiddleware(
-  state => state.nav,
+  state => state.nav
 );
 const App = createReduxContainer(RootNavigator);
 
 const mapStateToProps = state => ({
-  state: state.nav,
+  state: state.nav
 });
 
 export default connect(mapStateToProps)(App);

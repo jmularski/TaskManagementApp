@@ -1,26 +1,26 @@
-import request from '../helpers/api-handler';
+import request from "src/helpers/api-handler";
 
 function addTask(token, projectId, payload) {
   return request({
     url: `/projects/project_tasks/${projectId}/tasks/`,
-    method: 'POST',
+    method: "POST",
     authHeader: token,
     data: {
       name: payload.name,
-      description: payload.description,
-    },
+      description: payload.description
+    }
   });
 }
 
 function getTasks(token, projectId) {
   return request({
     url: `/projects/project_tasks/${projectId}/tasks/`,
-    method: 'GET',
-    authHeader: token,
+    method: "GET",
+    authHeader: token
   });
 }
 
 export default {
   addTask,
-  getTasks,
+  getTasks
 };

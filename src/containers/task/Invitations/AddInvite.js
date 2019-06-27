@@ -2,9 +2,9 @@ import React from "react";
 import { View, StyleSheet, FlatList, Text } from "react-native";
 import { Input, Icon, ListItem } from "react-native-elements";
 import { connect } from "react-redux";
-import Button from "../../../utils/Button";
-import { getUserInfo } from "../../../actions/userActions";
-import { addInvite } from "../../../actions/invitationActions";
+import Button from "src/utils/Button";
+import { getUserInfo } from "src/store/User/userActions";
+import { addInvite } from "src/store/Invitation/invitationActions";
 import { differenceBy, findIndex } from "lodash";
 const mapStateToProps = state => ({
   invitations: state.invitations,

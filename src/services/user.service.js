@@ -1,41 +1,41 @@
-import request from '../helpers/api-handler';
+import request from "src/helpers/api-handler";
 
 function getSelfData(token) {
   return request({
-    url: '/user/',
-    method: 'GET',
-    authHeader: token,
+    url: "/user/",
+    method: "GET",
+    authHeader: token
   });
 }
 
 function getUserData(token, query) {
   return request({
     url: `/user/search/?query=${query}`,
-    method: 'GET',
-    authHeader: token,
+    method: "GET",
+    authHeader: token
   });
 }
 
 function updateUser(payload, token) {
   return request({
-    url: '/user/',
-    method: 'PATCH',
+    url: "/user/",
+    method: "PATCH",
     authHeader: token,
     data: {
-      ...payload,
-    },
+      ...payload
+    }
   });
 }
 
 function updateImage(image, token) {
   return request({
-    url: '/user/upload_image/',
-    method: 'POST',
+    url: "/user/upload_image/",
+    method: "POST",
     authHeader: token,
-    customContentType: 'multipart/form-data',
+    customContentType: "multipart/form-data",
     data: {
-      profile_image: image,
-    },
+      profile_image: image
+    }
   });
 }
 
@@ -43,5 +43,5 @@ export default {
   getSelfData,
   getUserData,
   updateUser,
-  updateImage,
+  updateImage
 };
