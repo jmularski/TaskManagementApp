@@ -1,14 +1,14 @@
-import { invitationActions } from '../types';
+import { invitationActions } from "../types";
 
 const initialState = {
   user: {
     isFetching: false,
-    invitations: [],
+    invitations: []
   },
   project: {
     isFetching: false,
-    invitations: [],
-  },
+    invitations: []
+  }
 };
 
 function invitationReducer(state = initialState, action) {
@@ -18,8 +18,8 @@ function invitationReducer(state = initialState, action) {
         ...state,
         project: {
           ...state.project,
-          invitations: [...state.project.invitations, action.payload]
-        },
+          invitations: [...state.project.invitations, ...action.payload]
+        }
       };
     case invitationActions.GET_PROJECT_INVITES:
       return {
@@ -27,7 +27,7 @@ function invitationReducer(state = initialState, action) {
         project: {
           ...state.project,
           isFetching: true
-        },
+        }
       };
     case invitationActions.GET_PROJECT_INVITES_SUCCESS:
       return {
@@ -35,24 +35,24 @@ function invitationReducer(state = initialState, action) {
         project: {
           ...state.project,
           isFetching: false,
-          invitations: action.payload,
-        },
+          invitations: action.payload
+        }
       };
     case invitationActions.GET_PROJECT_INVITES_FAILURE:
       return {
         ...state,
         project: {
           ...state.project,
-          isFetching: false,
-        },
+          isFetching: false
+        }
       };
     case invitationActions.GET_USER_INVITES:
       return {
         ...state,
         user: {
           ...state.user,
-          isFetching: true,
-        },
+          isFetching: true
+        }
       };
     case invitationActions.GET_USER_INVITES_SUCCESS:
       return {
@@ -60,23 +60,25 @@ function invitationReducer(state = initialState, action) {
         user: {
           ...state.user,
           isFetching: false,
-          invitations: action.payload,
-        },
+          invitations: action.payload
+        }
       };
     case invitationActions.GET_PROJECT_INVITES_FAILURE:
       return {
         ...state,
         user: {
           ...state.user,
-          isFetching: false,
-        },
+          isFetching: false
+        }
       };
     case invitationActions.RESPOND_INVITATION_SUCCESS:
       return {
         ...state,
         user: {
           ...state.user,
-          invitations: [...state.user.invitations.filter(item => item !== action.payload)]
+          invitations: [
+            ...state.user.invitations.filter(item => item.id !== action.payload)
+          ]
         }
       };
     case invitationActions.CANCEL_INVITATION_SUCCESS:
@@ -84,9 +86,11 @@ function invitationReducer(state = initialState, action) {
         ...state,
         project: {
           ...state.project,
-          invitations: [...state.project.invitations.filter(item => item !== action.payload)]
+          invitations: [
+            ...state.project.invitations.filter(item => item !== action.payload)
+          ]
         }
-      }
+      };
     default:
       return state;
   }
