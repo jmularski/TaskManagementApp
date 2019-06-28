@@ -1,9 +1,9 @@
 import { put, call, takeEvery, all } from "redux-saga/effects";
-import AuthService from "src/services/auth.service";
-import { authActions } from "src/store/types";
-import { signIn, authSuccess, authFailure } from "src/store/Auth/authActions";
-import Toast from "src/utils/Toast";
-import { setToMainDrawer } from "src/store/actions/navActions";
+import AuthService from "@services/auth.service";
+import { authActions } from "@store/types";
+import { signIn, authSuccess, authFailure } from "@store/Auth/authActions";
+import Toast from "@utils/Toast";
+import { setToMainDrawer } from "@store/nav/navActions";
 
 function* signInUser({ payload }) {
   try {

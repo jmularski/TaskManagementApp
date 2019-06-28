@@ -35,6 +35,7 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
+    "babel-plugin-module-resolver": "^3.2.0",
     "babel-preset-expo": "^5.0.0",
     "detox": "^12.10.2",
     "eslint": "^5.16.0",
@@ -71,6 +72,12 @@
         "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
         "type": "android.emulator",
         "name": "emulator"
+      },
+      "ios.sim.release": {
+        "binaryPath": "ios/build/Build/Products/Release-iphonesimulator/example.app",
+        "build": "xcodebuild -project ios/example.xcodeproj -scheme example -configuration Release -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
       }
     },
     "test-runner": "jest"

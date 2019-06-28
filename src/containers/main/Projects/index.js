@@ -10,14 +10,14 @@ import {
 import { Card, Icon, ListItem, Input } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { connect } from "react-redux";
-import { addProject, getProjects } from "src/store/Project/projectActions";
-import { setCurrentProject } from "src/store/Task/taskActions";
-import Toast from "src/utils/Toast";
-import Button from "src/utils/Button";
+import { addProject, getProjects } from "@store/Project/projectActions";
+import { setCurrentProject } from "@store/Task/taskActions";
+import Toast from "@utils/Toast";
+import Button from "@utils/Button";
 import {
   getUserInvites,
   respondInvitation
-} from "src/store/Invitation/invitationActions";
+} from "@store/Invitation/invitationActions";
 
 const mapStateToProps = state => ({
   projects: state.projects,

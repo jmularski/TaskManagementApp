@@ -1,8 +1,8 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import MainNavigator from "src/containers/main/MainNavigator";
-import AuthNavigator from "src/containers/auth/AuthNavigator";
-import TaskNavigator from "src/containers/task/TaskNavigator";
+import MainNavigator from "./containers/main/MainNavigator";
+import AuthNavigator from "./containers/auth/AuthNavigator";
+import TaskNavigator from "./containers/task/TaskNavigator";
 
 const AppNavigator = createStackNavigator(
   {

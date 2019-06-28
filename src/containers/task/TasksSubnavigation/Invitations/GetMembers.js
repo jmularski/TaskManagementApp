@@ -11,8 +11,8 @@ import { connect } from "react-redux";
 import {
   getProjectInvites,
   cancelInvitation
-} from "src/store/Invitation/invitationActions";
-import Button from "src/utils/Button";
+} from "@store/Invitation/invitationActions";
+import Button from "@utils/Button";
 
 const mapStateToProps = state => ({
   invitations: state.invitations

@@ -4,10 +4,10 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { SocialIcon } from "react-native-elements";
 import { connect } from "react-redux";
 import * as yup from "yup";
-import { signIn } from "src/store/Auth/authActions";
-import Button from "src/utils/Button";
-import Toast from "src/utils/Toast";
-import Input from "src/utils/Input";
+import { signIn } from "@store/Auth/authActions";
+import Button from "@utils/Button";
+import Toast from "@utils/Toast";
+import Input from "@utils/Input";
 
 const mapStateToProps = state => ({
   user: state.user

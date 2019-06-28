@@ -1,4 +1,4 @@
-import { invitationActions } from "src/store/types";
+import { invitationActions } from "@store/types";
 
 export const addInvite = payload => ({
   type: invitationActions.ADD_INVITE,

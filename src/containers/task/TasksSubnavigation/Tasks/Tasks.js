@@ -3,10 +3,10 @@ import { View, StyleSheet, ActivityIndicator, FlatList } from "react-native";
 import { Input, Icon } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { connect } from "react-redux";
-import TaskItem from "src/containers/task/Tasks/TaskItem";
-import Button from "src/utils/Button";
-import { addTask, getTask } from "src/store/Task/taskActions";
-import Toast from "src/utils/Toast";
+import TaskItem from "./TaskItem";
+import Button from "@utils/Button";
+import { addTask, getTask } from "@store/Task/taskActions";
+import Toast from "@utils/Toast";
 
 const mapStateToProps = state => ({
   tasks: state.tasks
@@ -83,6 +83,7 @@ export default class Tasks extends React.Component {
             style={styles.addButtonStyle}
             icon={<Icon name="user" type="font-awesome" color="white" />}
             onPress={() => navigation.navigate("Invitation")}
+            testID="invitationButton"
           />
           <Button
             title=""

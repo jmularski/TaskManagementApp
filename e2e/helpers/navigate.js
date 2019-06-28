@@ -95,3 +95,13 @@ export async function navigateToTasks() {
     .toBeVisible()
     .withTimeout(2000);
 }
+
+export async function navigateToInvitations() {
+  await navigateToTasks();
+  await element(by.id("invitationButton")).tap();
+}
+
+export async function navigateToMembers() {
+  await navigateToInvitations();
+  await element(by.text("Get members")).tap();
+}

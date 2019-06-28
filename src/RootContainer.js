@@ -5,7 +5,7 @@ import {
   createReactNavigationReduxMiddleware
 } from "react-navigation-redux-helpers";
 
-import RootNavigator from "src/RootNavigator";
+import RootNavigator from "./RootNavigator";
 
 export const navMiddleware = createReactNavigationReduxMiddleware(
   state => state.nav

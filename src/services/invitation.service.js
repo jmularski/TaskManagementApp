@@ -1,4 +1,4 @@
-import request from "src/helpers/api-handler";
+import request from "@helpers/api-handler";
 
 function addInvite(token, projectId, payload) {
   return request({

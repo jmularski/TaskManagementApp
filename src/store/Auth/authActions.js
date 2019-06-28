@@ -1,4 +1,4 @@
-import { authActions } from "src/store/types";
+import { authActions } from "@store/types";
 
 export const signIn = (email, password) => ({
   type: authActions.SIGN_IN,

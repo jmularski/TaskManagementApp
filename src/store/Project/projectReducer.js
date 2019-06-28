@@ -1,4 +1,4 @@
-import { projectActions } from "src/store/types";
+import { projectActions } from "@store/types";
 
 const initialState = {
   projects: [

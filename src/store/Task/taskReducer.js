@@ -1,4 +1,4 @@
-import { taskActions } from "src/store/types";
+import { taskActions } from "@store/types";
 
 const initialState = {
   isFetching: false,

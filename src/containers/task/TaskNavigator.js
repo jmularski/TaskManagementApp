@@ -2,8 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import TasksScreen from "src/containers/task/Tasks/SubTaskNavigator";
-import OptionsScreen from "src/containers/task/Options";
+import TasksScreen from "./TasksSubnavigation/SubTaskNavigator";
+import OptionsScreen from "./Options";
 
 const TaskNavigator = createBottomTabNavigator(
   {

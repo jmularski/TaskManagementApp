@@ -1,6 +1,6 @@
-import React from 'react';
-import { Animated, Text, StyleSheet } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import React from "react";
+import { Animated, Text, StyleSheet } from "react-native";
+import { CheckBox } from "react-native-elements";
 
 export default class TaskItem extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ export default class TaskItem extends React.Component {
 
     this.state = {
       animated: new Animated.Value(1),
-      checked: false,
+      checked: false
     };
   }
 
@@ -17,20 +17,19 @@ export default class TaskItem extends React.Component {
 
     const { animated } = this.state;
 
-    Animated.timing(
-      animated,
-      {
-        toValue: 0,
-        duration: 2000,
-      },
-    ).start();
+    Animated.timing(animated, {
+      toValue: 0,
+      duration: 2000
+    }).start();
   };
 
   render() {
     const { checked, animated } = this.state;
     const { text } = this.props;
     return (
-      <Animated.View style={[styles.span, { marginTop: '2%', opacity: animated }]}>
+      <Animated.View
+        style={[styles.span, { marginTop: "2%", opacity: animated }]}
+      >
         <CheckBox
           checked={checked}
           containerStyle={styles.checkboxStyle}
@@ -44,16 +43,16 @@ export default class TaskItem extends React.Component {
 
 const styles = StyleSheet.create({
   checkboxText: {
-    fontFamily: 'Lato-Regular',
+    fontFamily: "Lato-Regular",
     fontSize: 18,
-    color: 'black',
-    marginTop: '4%',
+    color: "black",
+    marginTop: "4%"
   },
   checkboxStyle: {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent',
+    backgroundColor: "transparent",
+    borderColor: "transparent"
   },
   span: {
-    flexDirection: 'row',
-  },
+    flexDirection: "row"
+  }
 });

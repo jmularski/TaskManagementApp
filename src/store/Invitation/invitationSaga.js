@@ -1,6 +1,6 @@
 import { put, call, takeEvery, all, select } from "redux-saga/effects";
-import InvitationService from "src/services/invitation.service";
-import { invitationActions } from "src/store/types";
+import InvitationService from "@services/invitation.service";
+import { invitationActions } from "@store/types";
 import {
   addInviteSuccess,
   addInviteFailure,
@@ -12,11 +12,11 @@ import {
   respondInvitationFailure,
   cancelInvitationFailure,
   cancelInvitationSuccess
-} from "src/store/Invitation/invitationActions";
-import Toast from "src/utils/Toast";
-import { getToken } from "src/store/Auth/authReducer";
-import { getCurrentProject } from "src/store/Task/taskReducer";
-import { addProjectSuccess } from "src/store/Project/projectActions";
+} from "./invitationActions";
+import Toast from "@utils/Toast";
+import { getToken } from "@store/Auth/authReducer";
+import { getCurrentProject } from "@store/Task/taskReducer";
+import { addProjectSuccess } from "@store/Project/projectActions";
 
 function* addInvite({ payload }) {
   try {

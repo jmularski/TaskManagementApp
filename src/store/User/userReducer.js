@@ -1,4 +1,4 @@
-import { userActions } from "src/store/types";
+import { userActions } from "@store/types";
 
 const initialState = {
   isFetching: false,

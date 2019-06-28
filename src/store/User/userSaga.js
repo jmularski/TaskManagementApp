@@ -5,11 +5,11 @@ import {
   updateUserSuccess,
   requestFailure,
   getUserInfoSuccess
-} from "src/store/User/userActions";
-import { getToken } from "src/store/Auth/authReducer";
-import { userActions } from "src/store/types";
-import UserService from "src/services/user.service";
-import Toast from "src/utils/Toast";
+} from "./userActions";
+import { getToken } from "@store/Auth/authReducer";
+import { userActions } from "@store/types";
+import UserService from "@services/user.service";
+import Toast from "@utils/Toast";
 
 function* getSelfInfo() {
   try {

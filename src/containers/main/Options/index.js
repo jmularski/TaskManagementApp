@@ -13,13 +13,9 @@ import ImagePicker from "react-native-image-crop-picker";
 import { connect } from "react-redux";
 import { isEqual, transform, isObject } from "lodash";
 import * as yup from "yup";
-import {
-  getSelfInfo,
-  updateUser,
-  updateImage
-} from "src/store/User/userActions";
-import Button from "src/utils/Button";
-import Toast from "src/utils/Toast";
+import { getSelfInfo, updateUser, updateImage } from "@store/User/userActions";
+import Button from "@utils/Button";
+import Toast from "@utils/Toast";
 
 const mapStateToProps = state => ({
   user: state.user

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Image, StyleSheet } from "react-native";
-import Button from "src/utils/Button";
+import Button from "@utils/Button";
 
 export default class Entry extends Component {
   render() {

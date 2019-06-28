@@ -1,7 +1,7 @@
 import { createMaterialTopTabNavigator } from "react-navigation";
 
-import AddInviteScreen from "src/containers/task/Invitations/AddInvite";
-import GetMembersScreen from "src/containers/task/Invitations/GetMembers";
+import AddInviteScreen from "./AddInvite";
+import GetMembersScreen from "./GetMembers";
 
 const InvitationNavigator = createMaterialTopTabNavigator({
   AddInvite: AddInviteScreen,

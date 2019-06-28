@@ -4,9 +4,9 @@ import { persistStore, persistReducer } from "redux-persist";
 import logger from "redux-logger";
 import createSagaMiddleware from "redux-saga";
 
-import { navMiddleware } from "src/RootContainer";
-import rootSaga from "src/store/sagas";
-import rootReducer from "src/store/reducers";
+import { navMiddleware } from "@root/RootContainer";
+import rootSaga from "./rootSaga";
+import rootReducer from "./rootReducer";
 
 export default function configureStore() {
   const sagaMiddleware = createSagaMiddleware();

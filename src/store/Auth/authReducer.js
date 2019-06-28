@@ -1,4 +1,4 @@
-import { authActions } from "src/store/types";
+import { authActions } from "@store/types";
 
 const initialState = {
   token: ""

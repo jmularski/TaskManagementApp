@@ -5,11 +5,11 @@ import {
   addProjectFailure,
   getProjectsSuccess,
   getProjectsFailure
-} from "src/store/Project/projectActions";
-import { getToken } from "src/store/Auth/authReducer";
-import { projectActions } from "src/store/types";
-import ProjectService from "src/services/project.service";
-import Toast from "src/utils/Toast";
+} from "./projectActions";
+import { getToken } from "@store/Auth/authReducer";
+import { projectActions } from "@store/types";
+import ProjectService from "@services/project.service";
+import Toast from "@utils/Toast";
 
 function* addProject({ payload }) {
   try {

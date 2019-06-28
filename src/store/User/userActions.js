@@ -1,4 +1,4 @@
-import { userActions } from "src/store/types";
+import { userActions } from "@store/types";
 
 export const getSelfInfo = () => ({
   type: userActions.GET_SELF_INFO

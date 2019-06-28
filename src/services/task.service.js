@@ -1,4 +1,4 @@
-import request from "src/helpers/api-handler";
+import request from "@helpers/api-handler";
 
 function addTask(token, projectId, payload) {
   return request({

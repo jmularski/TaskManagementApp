@@ -2,9 +2,9 @@ import React from "react";
 import { View, StyleSheet, FlatList, Text } from "react-native";
 import { Input, Icon, ListItem } from "react-native-elements";
 import { connect } from "react-redux";
-import Button from "src/utils/Button";
-import { getUserInfo } from "src/store/User/userActions";
-import { addInvite } from "src/store/Invitation/invitationActions";
+import Button from "@utils/Button";
+import { getUserInfo } from "@store/User/userActions";
+import { addInvite } from "@store/Invitation/invitationActions";
 import { differenceBy, findIndex } from "lodash";
 const mapStateToProps = state => ({
   invitations: state.invitations,
@@ -111,18 +111,21 @@ export default class AddInvite extends React.Component {
               borderBottomColor: "rgba(255, 255, 255, 0)"
             }}
             onChangeText={findText => this.setState({ findText })}
+            testID="searchInput"
           />
           <Button
             title=""
             style={styles.findButtonStyle}
             icon={<Icon name="search" type="font-awesome" color="white" />}
             onPress={() => this.findUser()}
+            testID="searchButton"
           />
         </View>
         <FlatList
           keyExtractor={(item, index) => index.toString()}
           data={currentlySearched}
           renderItem={this.renderItem}
+          testID="foundUserList"
         />
         {currentlyInvited.length !== 0 ? (
           <View style={[styles.span, styles.bottom]}>
