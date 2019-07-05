@@ -9,11 +9,10 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import { Input, CheckBox } from "react-native-elements";
-import ImagePicker from "react-native-image-crop-picker";
 import { connect } from "react-redux";
 import { isEqual, transform, isObject } from "lodash";
 import * as yup from "yup";
-import { getSelfInfo, updateUser, updateImage } from "@store/User/userActions";
+import { getSelfInfo, updateUser } from "@store/User/userActions";
 import Button from "@utils/Button";
 import Toast from "@utils/Toast";
 
@@ -23,8 +22,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getSelfInfo: () => dispatch(getSelfInfo()),
-  updateUser: data => dispatch(updateUser(data)),
-  updateImage: image => dispatch(updateImage({ image }))
+  updateUser: data => dispatch(updateUser(data))
 });
 
 @connect(
@@ -134,15 +132,6 @@ export default class Options extends React.Component {
     }
   };
 
-  updateImage = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 300
-    }).then(image => {
-      this.props.updateImage(image);
-    });
-  };
-
   renderUpdateForm = () => {
     const {
       email,
@@ -154,7 +143,7 @@ export default class Options extends React.Component {
     return (
       <View>
         <View style={styles.topBar}>
-          <TouchableWithoutFeedback onPress={() => this.updateImage()}>
+          <TouchableWithoutFeedback>
             <Image
               source={{ uri: profile_img }}
               style={{
