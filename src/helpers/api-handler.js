@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-const request = async (options) => {
-  const BASE_URL = 'https://97ab6c18.ngrok.io';
+const request = async options => {
+  const BASE_URL = "https://jmularski.pythonanywhere.com";
 
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json"
   };
 
   if (options.authHeader) {
@@ -12,12 +12,12 @@ const request = async (options) => {
   }
 
   if (options.customContentType) {
-    headers['Content-Type'] = options.customContentType;
+    headers["Content-Type"] = options.customContentType;
   }
 
   const client = axios.create({
     baseURL: BASE_URL,
-    headers,
+    headers
   });
 
   return client(options);
