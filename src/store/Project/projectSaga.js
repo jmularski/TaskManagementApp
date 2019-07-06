@@ -1,15 +1,15 @@
 import { put, call, takeEvery, all, select } from "redux-saga/effects";
 
+import { getToken } from "@store/Auth/authReducer";
+import { projectActions } from "@store/types";
+import ProjectService from "@services/project.service";
+import Toast from "@utils/Toast";
 import {
   addProjectSuccess,
   addProjectFailure,
   getProjectsSuccess,
   getProjectsFailure
 } from "./projectActions";
-import { getToken } from "@store/Auth/authReducer";
-import { projectActions } from "@store/types";
-import ProjectService from "@services/project.service";
-import Toast from "@utils/Toast";
 
 function* addProject({ payload }) {
   try {

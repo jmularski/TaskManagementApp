@@ -91,7 +91,7 @@ export default class Login extends React.Component {
           <Input
             placeholder="Password"
             leftIcon={<Icon name="lock" size={18} color="#4f4f4f" />}
-            secureTextEntry={true}
+            secureTextEntry
             onChangeText={passwordText => this.setState({ passwordText })}
             testID="loginPasswordInput"
           />

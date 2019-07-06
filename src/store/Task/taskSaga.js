@@ -1,15 +1,15 @@
 import { put, call, takeEvery, all, select } from "redux-saga/effects";
 import TaskService from "@services/task.service";
 import { taskActions } from "@store/types";
+import { getToken } from "@store/Auth/authReducer";
+import { getCurrentProject } from "@store/Task/taskReducer";
+import Toast from "@utils/Toast";
 import {
   addTaskSuccess,
   addTaskFailure,
   getTaskSuccess,
   getTaskFailure
 } from "./taskActions";
-import { getToken } from "@store/Auth/authReducer";
-import { getCurrentProject } from "@store/Task/taskReducer";
-import Toast from "@utils/Toast";
 
 function* addTask({ payload }) {
   try {

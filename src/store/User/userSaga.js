@@ -1,15 +1,15 @@
 import { put, call, takeEvery, all, select } from "redux-saga/effects";
 
+import { getToken } from "@store/Auth/authReducer";
+import { userActions } from "@store/types";
+import UserService from "@services/user.service";
+import Toast from "@utils/Toast";
 import {
   getSelfInfoSuccess,
   updateUserSuccess,
   requestFailure,
   getUserInfoSuccess
 } from "./userActions";
-import { getToken } from "@store/Auth/authReducer";
-import { userActions } from "@store/types";
-import UserService from "@services/user.service";
-import Toast from "@utils/Toast";
 
 function* getSelfInfo() {
   try {

@@ -1,6 +1,5 @@
-import { expect, element, by, waitFor } from "detox";
+import { expect, element, by } from "detox";
 import { navigateToInvitations } from "../helpers/navigate";
-import data from "../data";
 
 describe("Add invitation", () => {
   beforeAll(async () => {

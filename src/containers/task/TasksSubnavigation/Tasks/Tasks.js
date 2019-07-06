@@ -3,10 +3,10 @@ import { View, StyleSheet, ActivityIndicator, FlatList } from "react-native";
 import { Input, Icon } from "react-native-elements";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { connect } from "react-redux";
-import TaskItem from "./TaskItem";
 import Button from "@utils/Button";
 import { addTask, getTask } from "@store/Task/taskActions";
 import Toast from "@utils/Toast";
+import TaskItem from "./TaskItem";
 
 const mapStateToProps = state => ({
   tasks: state.tasks

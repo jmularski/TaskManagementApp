@@ -6,6 +6,7 @@ import Button from "@utils/Button";
 import { getUserInfo } from "@store/User/userActions";
 import { addInvite } from "@store/Invitation/invitationActions";
 import { differenceBy, findIndex } from "lodash";
+
 const mapStateToProps = state => ({
   invitations: state.invitations,
   user: state.user
@@ -59,9 +60,8 @@ export default class AddInvite extends React.Component {
             stateId => stateId.id !== id
           )
         };
-      else {
-        return { currentlyInvited: [...state.currentlyInvited, { id }] };
-      }
+
+      return { currentlyInvited: [...state.currentlyInvited, { id }] };
     });
   };
 

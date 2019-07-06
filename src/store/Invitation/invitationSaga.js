@@ -1,6 +1,10 @@
 import { put, call, takeEvery, all, select } from "redux-saga/effects";
 import InvitationService from "@services/invitation.service";
 import { invitationActions } from "@store/types";
+import Toast from "@utils/Toast";
+import { getToken } from "@store/Auth/authReducer";
+import { getCurrentProject } from "@store/Task/taskReducer";
+import { addProjectSuccess } from "@store/Project/projectActions";
 import {
   addInviteSuccess,
   addInviteFailure,
@@ -13,10 +17,6 @@ import {
   cancelInvitationFailure,
   cancelInvitationSuccess
 } from "./invitationActions";
-import Toast from "@utils/Toast";
-import { getToken } from "@store/Auth/authReducer";
-import { getCurrentProject } from "@store/Task/taskReducer";
-import { addProjectSuccess } from "@store/Project/projectActions";
 
 function* addInvite({ payload }) {
   try {
@@ -30,7 +30,7 @@ function* addInvite({ payload }) {
       ids
     );
 
-    //bad hack to avoid another api call
+    // bad hack to avoid another api call
     const addedUserData = payload.map(item => ({ invited: item }));
     if (response.status === 200 || response.status === 201) {
       yield put(addInviteSuccess(addedUserData));
