@@ -103,5 +103,5 @@ export async function navigateToInvitations() {
 
 export async function navigateToMembers() {
   await navigateToInvitations();
-  await element(by.text("Get members")).tap();
+  await element(by.text("GET MEMBERS")).tap();
 }
