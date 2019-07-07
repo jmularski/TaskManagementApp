@@ -78,14 +78,14 @@ describe("Login", () => {
       await element(by.id("loginButton")).tap();
       await waitFor(
         element(by.text("Unable to log in with provided credentials.")).atIndex(
-          1
+          0
         )
       )
         .toBeVisible()
         .withTimeout(10000);
       await expect(
         element(by.text("Unable to log in with provided credentials.")).atIndex(
-          1
+          0
         )
       ).toBeVisible();
     });

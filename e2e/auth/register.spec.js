@@ -138,12 +138,12 @@ describe("Register", () => {
       );
       await element(by.id("registerButton")).tap();
       await waitFor(
-        element(by.text("user with this email already exists.")).atIndex(1)
+        element(by.text("user with this email already exists.")).atIndex(0)
       )
         .toBeVisible()
         .withTimeout(10000);
       await expect(
-        element(by.text("user with this email already exists.")).atIndex(1)
+        element(by.text("user with this email already exists.")).atIndex(0)
       ).toBeVisible();
     });
     it("should direct to project page when is successful", async () => {
